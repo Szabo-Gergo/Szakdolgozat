@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://0yy5ojaw7bko"]
+
+[ext_resource type="Script" path="res://Scenes/my_pussy_hurts.gd" id="1_f15qh"]
+[ext_resource type="Texture2D" uid="uid://ctdaypab2h236" path="res://Spritesheets/Sword.png" id="2_stkiq"]
+[ext_resource type="Script" path="res://Scenes/weapon_trail.gd" id="3_fdc1p"]
+
+[sub_resource type="Curve" id="Curve_4tut2"]
+_data = [Vector2(0, 1), 0.0, 9.46823, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Node2D" type="Node2D"]
+
+[node name="MyPussyHurts" type="Node2D" parent="."]
+script = ExtResource("1_f15qh")
+speed = null
+
+[node name="Weapon" type="Sprite2D" parent="MyPussyHurts"]
+z_index = -1
+texture = ExtResource("2_stkiq")
+
+[node name="Line2D" type="Line2D" parent="MyPussyHurts/Weapon"]
+points = PackedVector2Array(-0.176915, -1.4031)
+width = 5.0
+width_curve = SubResource("Curve_4tut2")
+script = ExtResource("3_fdc1p")
+length = 10
