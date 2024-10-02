@@ -27,7 +27,7 @@ func get_input():
 		dashing = true
 		transition.emit(self, "dash", {"direction" : velocity, "speed" : speed})
 	
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_pressed("attack"):
 		transition.emit(self, "attack", {"mouse_position": mouse_position})
 		
 func animation_update():	
