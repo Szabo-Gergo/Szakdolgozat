@@ -30,7 +30,9 @@ func physics_process(delta: float) -> void:
 		
 		if Input.is_action_pressed("attack"):
 			charge_time += delta
-			if charge_time >= 0.25:
+			if charge_time >= 0.2:
+				animation_tree.set("parameters/conditions/attacking", false)
+				animation_tree.set("parameters/conditions/combo", false)	
 				animation_tree.set("parameters/conditions/charge_up", true)
 						
 			if charge_time >= 2.7:
@@ -39,14 +41,11 @@ func physics_process(delta: float) -> void:
 		
 		if Input.is_action_just_released("attack"):
 			animation_tree.set("parameters/conditions/charge_up", false)
-			
 			if charged_attack:
 				animation_tree.set("parameters/conditions/charged_attack", true)
-			
 			elif animation_tree.get("parameters/conditions/attacking"):
 				animation_tree.set("parameters/conditions/attacking", false)
 				animation_tree.set("parameters/conditions/combo", true)		
-			
 			else:
 				animation_tree.set("parameters/conditions/attacking", true)
 				
@@ -55,9 +54,8 @@ func physics_process(delta: float) -> void:
 			
 			
 func _on_attack_finished(anim_name: StringName) -> void:
-	print("Stop_attack: "+str(animation_tree.get("parameters/conditions/stop_attack")))	
+	animation_tree.set("parameters/conditions/stop_attack", true)
 	if  "ChargeAttack" in anim_name:
-		animation_tree.set("parameters/conditions/stop_attack", true)
 		animation_tree.set("parameters/conditions/charged_attack", false)
 		transition.emit(self, "move") 
 		
