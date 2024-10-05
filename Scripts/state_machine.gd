@@ -6,7 +6,6 @@ var current_state : State
 @export var base_state : State
 @onready var state_label = $"../StateLabel"
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for child in get_children():
 		if child is State:

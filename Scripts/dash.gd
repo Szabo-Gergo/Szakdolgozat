@@ -2,12 +2,13 @@ extends State
 class_name Dash
 
 @onready var character_body = $"../.."
-@onready var character_sprite = %Sprite2D
+
+@onready var character_sprite: Sprite2D = %CharacterSprite
+@onready var character_collision: CollisionShape2D = %CollisionShape2D
 
 @onready var dash_timer = $DurationTimer
 @onready var dash_particle: GPUParticles2D = %DashParticle
 
-@onready var character_collision: CollisionShape2D = %CollisionShape2D
 
 @export var max_dash = Global.max_dash
 @export var dash_speed = 3.0

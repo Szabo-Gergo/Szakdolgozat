@@ -1,10 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://0pn66s5ww7sn"]
+[gd_scene load_steps=8 format=3 uid="uid://0pn66s5ww7sn"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lrprq"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
+[ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_3roj2"]
+[ext_resource type="Texture2D" uid="uid://b0bh2bqhk358v" path="res://Spritesheets/PistolBulletSprite.png" id="1_83snc"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbxnp"]
+size = Vector2(8, 4)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-process_material = SubResource("ParticleProcessMaterial_lrprq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy3wb"]
+atlas = ExtResource("1_83snc")
+region = Rect2(0, 0, 9, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp0fq"]
+atlas = ExtResource("1_83snc")
+region = Rect2(9, 0, 9, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t58pc"]
+atlas = ExtResource("1_83snc")
+region = Rect2(18, 0, 9, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xb7uf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy3wb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp0fq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t58pc")
+}],
+"loop": true,
+"name": &"BulletSpin",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_3roj2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jbxnp")
+debug_color = Color(0.452315, 0, 0.151732, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xb7uf")
+animation = &"BulletSpin"
+frame_progress = 0.826474
+speed_scale = 2.0

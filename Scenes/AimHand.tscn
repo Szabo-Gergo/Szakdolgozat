@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b66ssmufcj31d"]
+
+[ext_resource type="Texture2D" uid="uid://dtqmfjifv8edu" path="res://Spritesheets/Arm.png" id="1_a0udg"]
+[ext_resource type="Texture2D" uid="uid://dqr0jcospxssv" path="res://Spritesheets/Gun.png" id="2_djgua"]
+
+[node name="AimHand" type="Node2D"]
+
+[node name="BulletSpawnPoint" type="Node2D" parent="."]
+position = Vector2(32, -3)
+
+[node name="Hand" type="Sprite2D" parent="."]
+position = Vector2(7, 0.464001)
+scale = Vector2(1.5, 1.154)
+texture = ExtResource("1_a0udg")
+
+[node name="Weapon" type="Sprite2D" parent="."]
+position = Vector2(21, -0.535999)
+scale = Vector2(1.5, 1.154)
+texture = ExtResource("2_djgua")
