@@ -74,7 +74,7 @@ func _on_attack_finished(anim_name: StringName) -> void:
 		animation_tree.set("parameters/conditions/stop_attack", true)
 		animation_tree.set("parameters/conditions/combo", false)
 		transition.emit(self, "move", {"attack_cooldown": attack_cooldown}) 
-	
+
 
 func animation_update():
 	animation_tree.set("parameters/conditions/stop_attack", false)
@@ -82,3 +82,8 @@ func animation_update():
 	animation_tree.set("parameters/Combo/blend_position", mouse_position)
 	animation_tree.set("parameters/ChargeAttack/blend_position", mouse_position)
 	animation_tree.set("parameters/ChargeUp/blend_position", mouse_position)
+
+
+func _on_enemy_hit(body: Node2D) -> void:
+	if Global.ammo < Global.max_ammo:
+		Global.ammo += 1 

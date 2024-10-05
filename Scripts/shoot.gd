@@ -7,7 +7,7 @@ const PISTOL_PROJECTILE = preload("res://Scenes/PistolProjectile.tscn")
 @onready var aim_hand: Node2D = %AimHand
 @onready var animation_tree: AnimationTree = %AnimationTree
 @onready var camera_2d: Camera2D = $"../../Camera2D"
-@onready var bullet_spawn_point: Node2D = $BulletSpawnPoint
+@onready var bullet_spawn_point: Node2D = %BulletSpawnPoint
 
 var mouse_position
 var camera_original_position
@@ -15,12 +15,6 @@ var camera_original_position
 func enter(inputs : Dictionary = {}):
 	aim_hand.visible = true
 	camera_original_position = camera_2d.position 
-
-func exit():
-	pass
-	
-func process(_delta: float):
-	pass
 	
 func physics_process(_delta: float):
 	print(bullet_spawn_point)
@@ -42,13 +36,15 @@ func camera_knockback():
 
 func single_shot():
 	if Input.is_action_just_released("shoot"):
-		var bullet = PISTOL_PROJECTILE.instantiate()
-		get_parent().add_child(bullet)
-		bullet.position = bullet_spawn_point.position
-		bullet.rotation = bullet_spawn_point.rotation
-		
-		
-		camera_knockback()
+		if Global.ammo != 0:
+			var bullet = PISTOL_PROJECTILE.instantiate()
+			get_parent().add_child(bullet)
+			Global.ammo -= 1
+			
+			bullet.position = bullet_spawn_point.global_position
+			bullet.rotation = bullet_spawn_point.global_rotation
+			
+			camera_knockback()
+			
 		aim_hand.visible = false
-		
 		transition.emit(self, "move")

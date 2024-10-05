@@ -1,11 +1,20 @@
 extends Area2D
 
+@export var projectile_speed : int
+@export var range : int
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var traveled_distance : float = 0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	var direction = Vector2.RIGHT.rotated(rotation)
+	position += direction * projectile_speed * delta
+	animated_sprite_2d.play()
+	
+	traveled_distance += projectile_speed * delta
+	print(traveled_distance)
+	if traveled_distance >= range:
+		queue_free()
+	
+func on_hit(body: Node2D) -> void:
+	queue_free()

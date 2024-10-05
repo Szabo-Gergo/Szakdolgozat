@@ -5,9 +5,6 @@
 
 [node name="AimHand" type="Node2D"]
 
-[node name="BulletSpawnPoint" type="Node2D" parent="."]
-position = Vector2(32, -3)
-
 [node name="Hand" type="Sprite2D" parent="."]
 position = Vector2(7, 0.464001)
 scale = Vector2(1.5, 1.154)
