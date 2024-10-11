@@ -6,19 +6,24 @@ class_name PlayerMovement
 @onready var state_machine: Node = $".."
 @export var speed = Global.player_speed
 
-var velocity
-var mouse_position
+var velocity : Vector2
+var mouse_position : Vector2
+var input_direction : Vector2
 var attack_cooldown : float
 
 func enter(inputs : Dictionary = {}):
-	velocity = Vector2.ZERO
 	attack_cooldown = inputs.get("attack_cooldown", 0)
-
-func get_input():
-	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * speed
-	mouse_position = (character_body.global_position - character_body.get_global_mouse_position()).normalized()*-1
 	
+
+func move_player():
+	var input_direction = Input.get_vector("left", "right", "up", "down")
+	velocity = input_direction * speed	
+	character_body.velocity = velocity
+	character_body.move_and_slide()
+
+func handle_transitions():
+	mouse_position = (character_body.global_position - character_body.get_global_mouse_position()).normalized()*-1
+
 	if Input.is_action_just_pressed("dash") and Global.available_dash >= 1 and velocity != Vector2.ZERO:
 		transition.emit(self, "dash", {"direction" : velocity, "speed" : speed})
 	
@@ -28,14 +33,16 @@ func get_input():
 	if Input.is_action_pressed("shoot"):
 		transition.emit(self, "shoot", {"mouse_position": mouse_position})
 	
+	if character_body.velocity == Vector2.ZERO:
+		transition.emit(self, "idle")
+	
 func animation_update():	
-		animation_tree.set("parameters/idle/blend_position", mouse_position)
 		animation_tree.set("parameters/run/blend_position", velocity)
 
 func physics_process(_delta: float):
-	get_input()
+	handle_transitions()
 	animation_update()
+	move_player()
 	attack_cooldown -= _delta
-	character_body.velocity = velocity
-	character_body.move_and_slide()
+	
 	

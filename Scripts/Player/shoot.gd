@@ -17,9 +17,7 @@ func enter(inputs : Dictionary = {}):
 	camera_original_position = player_camera.position 
 	
 func physics_process(_delta: float):
-	print(bullet_spawn_point)
-	mouse_position = (aim_hand.global_position - aim_hand.get_global_mouse_position()).normalized()*-1
-	animation_tree.set("parameters/idle/blend_position", mouse_position)
+	animation_update()
 	
 	if Input.is_action_pressed("shoot"):
 		aim_hand.look_at(aim_hand.get_global_mouse_position())
@@ -32,6 +30,10 @@ func camera_knockback():
 	player_camera.position += mouse_position*-25
 	await get_tree().create_timer(0.025).timeout
 	player_camera.position = camera_original_position
+
+func animation_update():
+	mouse_position = (aim_hand.global_position - aim_hand.get_global_mouse_position()).normalized()*-1
+	animation_tree.set("parameters/Shoot/blend_position", mouse_position)
 
 
 func single_shot():
@@ -46,5 +48,8 @@ func single_shot():
 			
 			camera_knockback()
 			
-		aim_hand.visible = false
-		transition.emit(self, "move")
+		transition.emit(self, "idle")
+
+
+func exit():
+	aim_hand.visible = false

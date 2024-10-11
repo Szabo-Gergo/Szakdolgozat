@@ -38,5 +38,6 @@ func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 	new_state.enter(inputs)
 	
 	current_state = new_state
+	print(current_state.get_name())
 	state_label.text = "State: "+current_state.get_name()+"\nAmmo: "+str(Global.ammo)
 	

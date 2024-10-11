@@ -6,7 +6,7 @@
 [node name="AimHand" type="Node2D"]
 
 [node name="Hand" type="Sprite2D" parent="."]
-position = Vector2(7, 0.464001)
+position = Vector2(6, -0.0719983)
 scale = Vector2(1.5, 1.154)
 texture = ExtResource("1_a0udg")
 
