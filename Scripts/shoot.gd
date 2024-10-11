@@ -6,15 +6,15 @@ const PISTOL_PROJECTILE = preload("res://Scenes/PistolProjectile.tscn")
 
 @onready var aim_hand: Node2D = %AimHand
 @onready var animation_tree: AnimationTree = %AnimationTree
-@onready var camera_2d: Camera2D = $"../../Camera2D"
 @onready var bullet_spawn_point: Node2D = %BulletSpawnPoint
+@onready var player_camera: Camera2D = %PlayerCamera
 
 var mouse_position
 var camera_original_position
 
 func enter(inputs : Dictionary = {}):
 	aim_hand.visible = true
-	camera_original_position = camera_2d.position 
+	camera_original_position = player_camera.position 
 	
 func physics_process(_delta: float):
 	print(bullet_spawn_point)
@@ -29,9 +29,9 @@ func physics_process(_delta: float):
 	
 #Check back later when there are different types of weapons
 func camera_knockback():
-	camera_2d.position += mouse_position*-25
+	player_camera.position += mouse_position*-25
 	await get_tree().create_timer(0.025).timeout
-	camera_2d.position = camera_original_position
+	player_camera.position = camera_original_position
 
 
 func single_shot():

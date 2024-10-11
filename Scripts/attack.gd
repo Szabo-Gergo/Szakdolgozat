@@ -8,24 +8,33 @@ class_name Attack
 @onready var animation_tree = %AnimationTree
 @onready var character_body: CharacterBody2D = $"../.."
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
+@onready var player_camera: Camera2D = %PlayerCamera
+@onready var trail: Sprite2D = %Trail
+
 
 var mouse_position : Vector2
 var charge_time : float
 var attack_cooldown : float = 0.3
+var trail_direction
+var camera_original_position
 
 func enter(inputs : Dictionary = {}):
 	charge_time = 0
 	charged_attack = false
 	mouse_position = inputs.get("mouse_position")
+	trail_direction = trail.get_global_mouse_position()
+	camera_original_position = player_camera.position
 	
-
 func physics_process(delta: float) -> void:
 		animation_update()
-		character_body.velocity = mouse_position*0
+		character_body.velocity = mouse_position*slide_speed
 		character_body.move_and_slide()			
+		trail.look_at(trail_direction)
+		
 		
 		
 		if Input.is_action_pressed("attack"):
+			
 			charge_time += delta
 			if charge_time >= 0.2:
 				animation_tree.set("parameters/conditions/attacking", false)
@@ -37,7 +46,10 @@ func physics_process(delta: float) -> void:
 				charge_time = 0
 		
 		if Input.is_action_just_released("attack"):
+			camera_snap()
 			animation_tree.set("parameters/conditions/charge_up", false)
+			trail_direction = trail.get_global_mouse_position()
+			update_mouse_position()
 			
 			if charged_attack:
 				animation_tree.set("parameters/conditions/charged_attack", true)
@@ -47,8 +59,7 @@ func physics_process(delta: float) -> void:
 			else:
 				animation_tree.set("parameters/conditions/attacking", true)
 				
-			
-				
+		
 		if Input.is_action_just_pressed("dash") and Global.available_dash >= 1 and character_body.velocity != Vector2.ZERO:
 			transition.emit(self, "dash", {"direction" : mouse_position*350})
 			
@@ -87,3 +98,12 @@ func animation_update():
 func _on_enemy_hit(body: Node2D) -> void:
 	if Global.ammo < Global.max_ammo:
 		Global.ammo += 1 
+
+func update_mouse_position():
+		mouse_position = (character_body.global_position - character_body.get_global_mouse_position()).normalized()*-1
+
+func camera_snap():
+	
+	player_camera.position += mouse_position*15
+	await get_tree().create_timer(0.075).timeout
+	player_camera.position = camera_original_position

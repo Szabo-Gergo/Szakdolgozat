@@ -4,7 +4,7 @@ class_name PlayerMovement
 @onready var character_body = $"../.."
 @onready var animation_tree = %AnimationTree
 @onready var state_machine: Node = $".."
-@export var speed = 350
+@export var speed = Global.player_speed
 
 var velocity
 var mouse_position
@@ -38,3 +38,4 @@ func physics_process(_delta: float):
 	attack_cooldown -= _delta
 	character_body.velocity = velocity
 	character_body.move_and_slide()
+	
