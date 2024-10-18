@@ -100,6 +100,7 @@ gravity = Vector3(0, 0, 0)
 scale_max = 2.0
 
 [node name="Training Dummy" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 script = ExtResource("1_qqh32")
 

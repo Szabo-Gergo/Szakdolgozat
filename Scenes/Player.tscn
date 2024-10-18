@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://bvicg58gitoue"]
+[gd_scene load_steps=111 format=3 uid="uid://bvicg58gitoue"]
 
 [ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player.png" id="1_ksx3q"]
 [ext_resource type="PackedScene" uid="uid://b66ssmufcj31d" path="res://Scenes/AimHand.tscn" id="2_7og2s"]
@@ -3347,6 +3347,16 @@ advance_expression = "current_state.get_name() == \"Idle\""
 advance_mode = 2
 advance_expression = "current_state.get_name() == \"Move\""
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1htc5"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Shoot\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sxg5f"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Shoot\""
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0ckd7"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_34btp")
 states/Attack/position = Vector2(13.152, 129)
@@ -3357,14 +3367,14 @@ states/ChargeUp/position = Vector2(439.152, -82)
 states/Combo/node = SubResource("AnimationNodeBlendSpace2D_cwwgj")
 states/Combo/position = Vector2(155.152, -82)
 states/Shoot/node = SubResource("AnimationNodeBlendSpace2D_prdgf")
-states/Shoot/position = Vector2(279.152, 518.593)
+states/Shoot/position = Vector2(330.152, 553.593)
 states/Start/position = Vector2(-51, 358)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_8oeqy")
-states/idle/position = Vector2(155.152, 358)
+states/idle/position = Vector2(74.152, 380)
 states/run/node = SubResource("AnimationNodeBlendSpace2D_0vvr8")
-states/run/position = Vector2(439.152, 358)
-transitions = ["run", "Attack", SubResource("AnimationNodeStateMachineTransition_gyqgp"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_3teqp"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_8t3ux"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ac23f"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_rdhmg"), "ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_6d6bx"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_l8ltc"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_xno7n"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_cmrdp"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_l0e4x"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_t7i16"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_wpcky"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_bc2ly"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_0c2lo"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43")]
-graph_offset = Vector2(-260.848, 18.593)
+states/run/position = Vector2(609.152, 385)
+transitions = ["run", "Attack", SubResource("AnimationNodeStateMachineTransition_gyqgp"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_3teqp"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_8t3ux"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ac23f"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_rdhmg"), "ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_6d6bx"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_l8ltc"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_xno7n"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_cmrdp"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_l0e4x"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_t7i16"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_wpcky"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_bc2ly"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_0c2lo"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43"), "Attack", "Shoot", SubResource("AnimationNodeStateMachineTransition_1htc5"), "Combo", "Shoot", SubResource("AnimationNodeStateMachineTransition_sxg5f")]
+graph_offset = Vector2(-95.848, 106.593)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 1
@@ -3505,6 +3515,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 unique_name_in_owner = true
+zoom = Vector2(0.3, 0.3)
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 

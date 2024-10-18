@@ -12,7 +12,6 @@ func _process(delta: float) -> void:
 	animated_sprite_2d.play()
 	
 	traveled_distance += projectile_speed * delta
-	print(traveled_distance)
 	if traveled_distance >= range:
 		queue_free()
 	

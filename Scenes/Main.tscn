@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4x721xdv1oy3"]
+[gd_scene load_steps=4 format=3 uid="uid://c4x721xdv1oy3"]
 
 [ext_resource type="PackedScene" uid="uid://bvicg58gitoue" path="res://Scenes/Player.tscn" id="1_evire"]
 [ext_resource type="PackedScene" uid="uid://uxdf7rf5w0do" path="res://Scenes/TrainingDummy.tscn" id="2_507lh"]
+[ext_resource type="PackedScene" uid="uid://c8saaqfm137mm" path="res://Scenes/Map.tscn" id="3_cat7x"]
 
 [node name="Main" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_evire")]
-position = Vector2(207, 99)
+[node name="Player" parent="." instance=ExtResource("1_evire")]
+position = Vector2(500, 252)
 
 [node name="Training Dummy" parent="." instance=ExtResource("2_507lh")]
+
+[node name="Map" parent="." instance=ExtResource("3_cat7x")]

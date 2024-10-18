@@ -23,7 +23,6 @@ func physics_process(_delta: float):
 		aim_hand.look_at(aim_hand.get_global_mouse_position())
 	
 	single_shot()
-	#print(abs(rad_to_deg(aim_hand.rotation))/360)
 	
 #Check back later when there are different types of weapons
 func camera_knockback():
