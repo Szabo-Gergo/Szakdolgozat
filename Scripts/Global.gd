@@ -1,6 +1,6 @@
 extends Node
 
-var max_dash = 5
+var max_dash = 100000
 var available_dash = max_dash
 
 var ammo = 6

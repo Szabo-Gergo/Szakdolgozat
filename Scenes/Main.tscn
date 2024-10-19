@@ -12,3 +12,4 @@ position = Vector2(500, 252)
 [node name="Training Dummy" parent="." instance=ExtResource("2_507lh")]
 
 [node name="Map" parent="." instance=ExtResource("3_cat7x")]
+delete_distance = 75

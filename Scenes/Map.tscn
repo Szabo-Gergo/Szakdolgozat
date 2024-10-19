@@ -65,8 +65,9 @@ sources/0 = SubResource("TileSetAtlasSource_4fhkk")
 [node name="Map" type="Node2D"]
 script = ExtResource("1_n2jkw")
 noise_texture = SubResource("NoiseTexture2D_vvgod")
-generation_size = Vector2(50, 50)
-delete_distance = 100
+generation_size = Vector2(25, 25)
+delete_distance = 50
+generation_radius = 1
 
 [node name="Ground_Decorations" type="TileMapLayer" parent="."]
 z_index = -1
