@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b00b6tl4p0et5"
-path="res://.godot/imported/Trees_and_Bushes.png-d7587501d46c972334ee9d4102d1fb88.ctex"
+uid="uid://cjl2ym7askgjq"
+path="res://.godot/imported/Bullet.png-ae250400eb4f29819f8f93b81f3a3b12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Trees_and_Bushes.png"
-dest_files=["res://.godot/imported/Trees_and_Bushes.png-d7587501d46c972334ee9d4102d1fb88.ctex"]
+source_file="res://Spritesheets/Weapon/Bullet.png"
+dest_files=["res://.godot/imported/Bullet.png-ae250400eb4f29819f8f93b81f3a3b12.ctex"]
 
 [params]
 

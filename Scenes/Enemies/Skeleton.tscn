@@ -1,0 +1,307 @@
+[gd_scene load_steps=28 format=3 uid="uid://ngtpcu1w36s5"]
+
+[ext_resource type="Texture2D" uid="uid://cmq3tfef8x3ex" path="res://Spritesheets/Enemies/Sword_Skeleton.png" id="1_5nep8"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/main_stats.gd" id="1_sjipi"]
+[ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="2_1f302"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="3_5f1e7"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="4_koktf"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/attack.gd" id="5_cgaub"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/move.gd" id="6_apmgx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vrcgf"]
+radius = 4.67905
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22qb7"]
+size = Vector2(11, 27)
+
+[sub_resource type="Animation" id="Animation_b8vdq"]
+resource_name = "attack"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox/Hit_shape:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 0.307786),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State Machine/Attack:slide_speed")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [10.0, 100.0]
+}
+
+[sub_resource type="Animation" id="Animation_drqlu"]
+resource_name = "Damaged"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_bicon"]
+resource_name = "Skeleton_Death"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 22, 23, 24]
+}
+
+[sub_resource type="Animation" id="Animation_6xupc"]
+resource_name = "Move"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_5ep0u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBox/Hit_shape:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State Machine/Attack:slide_speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xr4yv"]
+_data = {
+"Attack": SubResource("Animation_b8vdq"),
+"Damaged": SubResource("Animation_drqlu"),
+"Death": SubResource("Animation_bicon"),
+"Move": SubResource("Animation_6xupc"),
+"RESET": SubResource("Animation_5ep0u")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xokia"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4dlq1"]
+animation = &"Damaged"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qj0jl"]
+animation = &"Death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gw4he"]
+animation = &"Move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_08iho"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ri1l3"]
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Death\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6x2so"]
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Attack\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jkanx"]
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Damaged\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_be02m"]
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Damaged\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hudjk"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Move\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_na0v4"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Move\""
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_66yhb"]
+states/Attack/node = SubResource("AnimationNodeAnimation_xokia")
+states/Attack/position = Vector2(380, 44)
+states/Damaged/node = SubResource("AnimationNodeAnimation_4dlq1")
+states/Damaged/position = Vector2(574, 44)
+states/Death/node = SubResource("AnimationNodeAnimation_qj0jl")
+states/Death/position = Vector2(574, 161)
+states/End/position = Vector2(902, 173)
+states/Move/node = SubResource("AnimationNodeAnimation_gw4he")
+states/Move/position = Vector2(380, 166)
+states/Start/position = Vector2(201, 166)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_08iho"), "Damaged", "Death", SubResource("AnimationNodeStateMachineTransition_ri1l3"), "Move", "Attack", SubResource("AnimationNodeStateMachineTransition_6x2so"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_jkanx"), "Move", "Damaged", SubResource("AnimationNodeStateMachineTransition_be02m"), "Attack", "Move", SubResource("AnimationNodeStateMachineTransition_hudjk"), "Damaged", "Move", SubResource("AnimationNodeStateMachineTransition_na0v4")]
+graph_offset = Vector2(-70, -13)
+
+[node name="Skeleton" type="CharacterBody2D"]
+scale = Vector2(1.3, 1.3)
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_sjipi")
+speed = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.769231, 12.3077)
+shape = SubResource("CircleShape2D_vrcgf")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 9
+
+[node name="Hurt_shape" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-0.5, 2.5)
+shape = SubResource("RectangleShape2D_22qb7")
+disabled = true
+debug_color = Color(0.219764, 0.639022, 7.70092e-07, 0.42)
+
+[node name="HitBox" type="Area2D" parent="."]
+visible = false
+position = Vector2(-2.84217e-14, -1.13687e-13)
+scale = Vector2(-1, -1)
+collision_layer = 2
+input_pickable = false
+
+[node name="Hit_shape" type="CollisionPolygon2D" parent="HitBox"]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-1.66893e-06, 5.96046e-08)
+polygon = PackedVector2Array(-7, 0, -11, 17, -16, 15, -20, 12, -23, 6, -24, 0, -23, -6, -20, -12, -16, -15, -11, -17)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xr4yv")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_66yhb")
+advance_expression_base_node = NodePath("../State Machine")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Skeleton_Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_5nep8")
+hframes = 18
+vframes = 2
+frame = 17
+
+[node name="State Machine" parent="." node_paths=PackedStringArray("base_state") instance=ExtResource("2_1f302")]
+base_state = NodePath("Move")
+
+[node name="Damaged" type="Node" parent="State Machine"]
+script = ExtResource("3_5f1e7")
+
+[node name="Death" type="Node" parent="State Machine"]
+script = ExtResource("4_koktf")
+
+[node name="Attack" type="Node" parent="State Machine"]
+script = ExtResource("5_cgaub")
+
+[node name="Move" type="Node" parent="State Machine"]
+script = ExtResource("6_apmgx")
+
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -10.0
+offset_top = -25.3846
+offset_right = 61.0
+offset_bottom = 23.6154
+rotation = -0.00548292
+scale = Vector2(0.277273, 0.292554)
+text = "Move"
+max_lines_visible = 2
+metadata/_edit_use_anchors_ = true
+
+[connection signal="area_entered" from="HurtBox" to="State Machine/Move" method="_on_hurtbox_area_entered"]
+[connection signal="area_exited" from="HurtBox" to="State Machine/Attack" method="_on_hurtbox_area_exited"]
+[connection signal="area_entered" from="HitBox" to="State Machine/Move" method="_on_hit_box_area_entered"]
+[connection signal="area_exited" from="HitBox" to="State Machine/Attack" method="_on_hit_box_area_exited"]
+[connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_attack_finished"]
+[connection signal="transition" from="State Machine/Damaged" to="State Machine" method="on_state_transition"]
+[connection signal="transition" from="State Machine/Death" to="State Machine" method="on_state_transition"]
+[connection signal="transition" from="State Machine/Attack" to="State Machine" method="on_state_transition"]
+[connection signal="transition" from="State Machine/Move" to="State Machine" method="on_state_transition"]

@@ -1,16 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://b66ssmufcj31d"]
 
-[ext_resource type="Texture2D" uid="uid://dtqmfjifv8edu" path="res://Spritesheets/Arm.png" id="1_a0udg"]
-[ext_resource type="Texture2D" uid="uid://dqr0jcospxssv" path="res://Spritesheets/Gun.png" id="2_djgua"]
+[ext_resource type="Texture2D" uid="uid://dtqmfjifv8edu" path="res://Spritesheets/Player/Arm.png" id="1_a0udg"]
+[ext_resource type="Texture2D" uid="uid://dqr0jcospxssv" path="res://Spritesheets/Weapon/Gun.png" id="2_djgua"]
 
 [node name="AimHand" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Hand" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(6, -0.0719983)
 scale = Vector2(1.5, 1.154)
 texture = ExtResource("1_a0udg")
 
 [node name="Weapon" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(21, -0.535999)
 scale = Vector2(1.5, 1.154)
 texture = ExtResource("2_djgua")

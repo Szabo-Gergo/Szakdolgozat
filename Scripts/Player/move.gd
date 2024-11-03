@@ -4,7 +4,8 @@ class_name PlayerMovement
 @onready var character_body = $"../.."
 @onready var animation_tree = %AnimationTree
 @onready var state_machine: Node = $".."
-@export var speed = Global.player_speed
+
+var speed = Global.player_speed
 
 var velocity : Vector2
 var mouse_position : Vector2
@@ -16,7 +17,7 @@ func enter(inputs : Dictionary = {}):
 	
 
 func move_player():
-	var input_direction = Input.get_vector("left", "right", "up", "down")
+	input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed	
 	character_body.velocity = velocity
 	character_body.move_and_slide()
@@ -33,16 +34,16 @@ func handle_transitions():
 	if Input.is_action_pressed("shoot"):
 		transition.emit(self, "shoot", {"mouse_position": mouse_position})
 	
-	if character_body.velocity == Vector2.ZERO:
+	if character_body.velocity == Vector2.ZERO and input_direction == Vector2.ZERO:
 		transition.emit(self, "idle")
 	
 func animation_update():	
 		animation_tree.set("parameters/run/blend_position", velocity)
 
 func physics_process(_delta: float):
+	move_player()
 	handle_transitions()
 	animation_update()
-	move_player()
 	attack_cooldown -= _delta
 	
 	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtqmfjifv8edu"
-path="res://.godot/imported/Arm.png-da55d88a181017d553fd9a8751815586.ctex"
+uid="uid://65nmn58iqgpl"
+path="res://.godot/imported/Wizard_Skeleton.png-20f18c9a3f172c28184937b09913842a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Arm.png"
-dest_files=["res://.godot/imported/Arm.png-da55d88a181017d553fd9a8751815586.ctex"]
+source_file="res://Spritesheets/Enemies/Wizard_Skeleton.png"
+dest_files=["res://.godot/imported/Wizard_Skeleton.png-20f18c9a3f172c28184937b09913842a.ctex"]
 
 [params]
 

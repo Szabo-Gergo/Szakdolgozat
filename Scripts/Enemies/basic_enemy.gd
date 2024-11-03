@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var flash_timer: Timer = $FlashTimer
 		
 
-func _on_hurtbox_entered(area: Area2D) -> void:
+func _on_hurtbox_entered(_area: Area2D) -> void:
 	flash()
 	animation_player.stop(true)
 	animation_player.play("GotSlammed")

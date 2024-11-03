@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw05c3h4dtm00"
-path="res://.godot/imported/Trail.png-e0bbbbf8d01df61b0d333ea443d35a4f.ctex"
+uid="uid://sejc2oub5drn"
+path="res://.godot/imported/Ground_Decoration.png-e58a67d912ecbaba240015a2f9dd87ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Trail.png"
-dest_files=["res://.godot/imported/Trail.png-e0bbbbf8d01df61b0d333ea443d35a4f.ctex"]
+source_file="res://Spritesheets/Enviroment/Ground_Decoration.png"
+dest_files=["res://.godot/imported/Ground_Decoration.png-e58a67d912ecbaba240015a2f9dd87ea.ctex"]
 
 [params]
 

@@ -1,18 +1,22 @@
-[gd_scene load_steps=111 format=3 uid="uid://bvicg58gitoue"]
+[gd_scene load_steps=112 format=3 uid="uid://bvicg58gitoue"]
 
-[ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player.png" id="1_ksx3q"]
-[ext_resource type="PackedScene" uid="uid://b66ssmufcj31d" path="res://Scenes/AimHand.tscn" id="2_7og2s"]
+[ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player/Player.png" id="1_ksx3q"]
+[ext_resource type="PackedScene" uid="uid://b66ssmufcj31d" path="res://Scenes/Player/AimHand.tscn" id="2_7og2s"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="3_cv635"]
-[ext_resource type="PackedScene" uid="uid://3rvyikqwuq7c" path="res://Scenes/Dash.tscn" id="4_fflmd"]
+[ext_resource type="PackedScene" uid="uid://3rvyikqwuq7c" path="res://Scenes/Player/Dash.tscn" id="4_fflmd"]
 [ext_resource type="Script" path="res://Scripts/Player/move.gd" id="4_w13ut"]
 [ext_resource type="Script" path="res://Scripts/Player/shoot.gd" id="6_1b0pb"]
 [ext_resource type="Script" path="res://Scripts/Player/idle.gd" id="6_lyoey"]
-[ext_resource type="PackedScene" uid="uid://dtybtb2pcw8ce" path="res://Scenes/Attack.tscn" id="6_qoo4h"]
-[ext_resource type="Texture2D" uid="uid://bw05c3h4dtm00" path="res://Spritesheets/Trail.png" id="7_m8oyo"]
-[ext_resource type="Texture2D" uid="uid://cuqi404slb28u" path="res://Spritesheets/Sword_With_Charge.png" id="7_qb72i"]
+[ext_resource type="PackedScene" uid="uid://dtybtb2pcw8ce" path="res://Scenes/Player/Attack.tscn" id="6_qoo4h"]
+[ext_resource type="Texture2D" uid="uid://bw05c3h4dtm00" path="res://Spritesheets/Weapon/Trail.png" id="7_m8oyo"]
+[ext_resource type="Texture2D" uid="uid://cuqi404slb28u" path="res://Spritesheets/Weapon/Sword_With_Charge.png" id="7_qb72i"]
 [ext_resource type="Script" path="res://Scripts/Player/attack_combo.gd" id="10_x566i"]
 [ext_resource type="Script" path="res://Scripts/Player/attack_charge_up.gd" id="11_3ygyj"]
 [ext_resource type="Script" path="res://Scripts/Player/charge_attack.gd" id="12_gl7jl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31quj"]
+radius = 9.84457
+height = 19.757
 
 [sub_resource type="Curve" id="Curve_hwksw"]
 _data = [Vector2(0, 0.497554), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.132562, 0.0, 0, 0]
@@ -39,12 +43,9 @@ alpha_curve = SubResource("CurveTexture_jnukn")
 turbulence_enabled = true
 turbulence_noise_strength = 18.74
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31quj"]
-radius = 9.84457
-height = 19.757
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4k7d"]
-size = Vector2(14, 33)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1i0f"]
+radius = 5.0
+height = 10.0
 
 [sub_resource type="Animation" id="Animation_jkag0"]
 resource_name = "DownSlash"
@@ -125,26 +126,26 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Trail/Area2D/CollisionShape2D:disabled")
+tracks/6/path = NodePath("Sword:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Sword:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Trail/HitBox/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_ega6r"]
@@ -158,10 +159,10 @@ tracks/0/path = NodePath("Sword:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.35714),
+"times": PackedFloat32Array(0, 2.38),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(11, -1), Vector2(9, -7)]
+"values": [Vector2(11, -2), Vector2(8, -7)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -170,10 +171,10 @@ tracks/1/path = NodePath("Sword:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.35714),
+"times": PackedFloat32Array(0, 2.38),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [1.09017, 0.429081]
+"values": [1.09017, 0.528788]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -245,7 +246,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [-1]
+"values": [0]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -471,12 +472,12 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 100.0]
+"values": [0.0, 75.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Trail/Area2D/CollisionShape2D:disabled")
+tracks/6/path = NodePath("Trail/HitBox/CollisionShape2D:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -719,7 +720,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Trail/Area2D/CollisionShape2D:disabled")
+tracks/6/path = NodePath("Trail/HitBox/CollisionShape2D:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1053,12 +1054,12 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 100.0]
+"values": [0.0, 75.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Trail/Area2D/CollisionShape2D:disabled")
+tracks/6/path = NodePath("Trail/HitBox/CollisionShape2D:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1348,7 +1349,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Trail/Area2D/CollisionShape2D:disabled")
+tracks/8/path = NodePath("Trail/HitBox/CollisionShape2D:disabled")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1497,26 +1498,26 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Trail/Area2D/CollisionShape2D:disabled")
+tracks/6/path = NodePath("Sword:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Sword:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Trail/HitBox/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_ekrr5"]
@@ -1526,74 +1527,74 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sword:position")
+tracks/0/path = NodePath("Trail:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-12, 0), Vector2(-13, -5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sword:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.335103, 0.0244346]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Trail:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CharacterSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [39]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CharacterSprite:flip_h")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterSprite:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [false]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sword/SwordSprite:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sword/SwordSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.21429, 2.35714),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sword:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-11, 5), Vector2(-13, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sword:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.70693, -1.36659]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1618,6 +1619,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sword:z_index")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
 }
 
 [sub_resource type="Animation" id="Animation_wmhb3"]
@@ -1819,12 +1832,12 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 100.0]
+"values": [0.0, 75.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Trail/Area2D/CollisionShape2D:disabled")
+tracks/6/path = NodePath("Trail/HitBox/CollisionShape2D:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -2222,7 +2235,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [-1]
+"values": [0]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -2346,7 +2359,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [-1]
+"values": [0]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -2446,7 +2459,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [-1]
+"values": [0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -2540,7 +2553,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Trail/Area2D/CollisionShape2D:disabled")
+tracks/6/path = NodePath("Trail/HitBox/CollisionShape2D:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -2874,12 +2887,12 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 100.0]
+"values": [0.0, 75.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Trail/Area2D/CollisionShape2D:disabled")
+tracks/7/path = NodePath("Trail/HitBox/CollisionShape2D:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -3376,9 +3389,44 @@ states/run/position = Vector2(609.152, 385)
 transitions = ["run", "Attack", SubResource("AnimationNodeStateMachineTransition_gyqgp"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_3teqp"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_8t3ux"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ac23f"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_rdhmg"), "ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_6d6bx"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_l8ltc"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_xno7n"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_cmrdp"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_l0e4x"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_t7i16"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_wpcky"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_bc2ly"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_0c2lo"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43"), "Attack", "Shoot", SubResource("AnimationNodeStateMachineTransition_1htc5"), "Combo", "Shoot", SubResource("AnimationNodeStateMachineTransition_sxg5f")]
 graph_offset = Vector2(-95.848, 106.593)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptvar"]
+size = Vector2(12, 31)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 1
+y_sort_enabled = true
+collision_mask = 6
+
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+texture = ExtResource("1_ksx3q")
+hframes = 87
+frame = 10
+region_rect = Rect2(7, 2, 790, 99)
+
+[node name="Trail" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+y_sort_enabled = true
+texture_filter = 1
+rotation = 1.56877
+scale = Vector2(1.27048, 1.32462)
+texture = ExtResource("7_m8oyo")
+offset = Vector2(11.5556, 7.15256e-07)
+hframes = 9
+frame = 2
+
+[node name="HitBox" type="Area2D" parent="Trail"]
+rotation = 1.5708
 collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trail/HitBox"]
+position = Vector2(-2.23731, -14.1726)
+scale = Vector2(2.14734, 2.78891)
+shape = SubResource("CapsuleShape2D_31quj")
+disabled = true
+debug_color = Color(0.780392, 0, 0.168627, 0.6)
 
 [node name="DashParticle" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
@@ -3389,48 +3437,27 @@ lifetime = 0.35
 randomness = 1.0
 fixed_fps = 60
 
-[node name="CharacterSprite" type="Sprite2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("1_ksx3q")
-hframes = 87
-frame = 10
-region_rect = Rect2(7, 2, 790, 99)
-
-[node name="Trail" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-visible = false
+z_index = 1
 texture_filter = 1
-rotation = 1.56877
-scale = Vector2(1.27048, 1.32462)
-texture = ExtResource("7_m8oyo")
-offset = Vector2(11.5556, 7.15256e-07)
-hframes = 9
-frame = 2
-
-[node name="Area2D" type="Area2D" parent="Trail"]
-visible = false
-rotation = 1.5708
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Trail/Area2D"]
-visible = false
-position = Vector2(-2.23731, -14.1726)
-scale = Vector2(2.14734, 2.78891)
-shape = SubResource("CapsuleShape2D_31quj")
-disabled = true
-debug_color = Color(0.780392, 0, 0.168627, 0.6)
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_t1i0f")
+debug_color = Color(9.62615e-07, 0.385506, 0.980678, 0.113725)
 
 [node name="Sword" type="Node2D" parent="."]
 unique_name_in_owner = true
 z_index = -2
+y_sort_enabled = true
 position = Vector2(13, 5)
 rotation = 1.72465
 scale = Vector2(-1, 1)
 
 [node name="SwordSprite" type="Sprite2D" parent="Sword"]
 z_index = 1
+y_sort_enabled = true
 position = Vector2(-1.57085e-07, 4.5022e-07)
-rotation = 0.30723
+rotation = 0.0391551
 texture = ExtResource("7_qb72i")
 hframes = 12
 frame = 1
@@ -3446,14 +3473,6 @@ scale = Vector2(1e-05, 1e-05)
 unique_name_in_owner = true
 visible = false
 position = Vector2(32, -3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-unique_name_in_owner = true
-z_index = 1
-texture_filter = 1
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_u4k7d")
-debug_color = Color(9.62615e-07, 0.385506, 0.980678, 0.113725)
 
 [node name="State Machine" parent="." node_paths=PackedStringArray("base_state") instance=ExtResource("3_cv635")]
 base_state = NodePath("Idle")
@@ -3494,7 +3513,7 @@ root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeStateMachine_0ckd7")
 advance_expression_base_node = NodePath("../State Machine")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Attack/blend_position = Vector2(-0.71985, -0.185185)
+parameters/Attack/blend_position = Vector2(-0.995976, -0.00659347)
 parameters/ChargeAttack/blend_position = Vector2(-0.00102562, -0.946903)
 parameters/ChargeUp/blend_position = Vector2(-0.00502515, 0.995604)
 parameters/Combo/blend_position = Vector2(-0.998502, 0.0106382)
@@ -3518,9 +3537,17 @@ unique_name_in_owner = true
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 
-[connection signal="body_entered" from="Trail/Area2D" to="State Machine/Attack" method="_on_enemy_hit"]
-[connection signal="body_entered" from="Trail/Area2D" to="State Machine/AttackCombo" method="_on_enemy_hit"]
-[connection signal="body_entered" from="Trail/Area2D" to="State Machine/ChargeAttack" method="_on_enemy_hit"]
+[node name="HurtBox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="Hurt_shape" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ptvar")
+debug_color = Color(0, 0.6401, 0.354982, 0.42)
+
+[connection signal="body_entered" from="Trail/HitBox" to="State Machine/Attack" method="_on_enemy_hit"]
+[connection signal="body_entered" from="Trail/HitBox" to="State Machine/AttackCombo" method="_on_enemy_hit"]
+[connection signal="body_entered" from="Trail/HitBox" to="State Machine/ChargeAttack" method="_on_enemy_hit"]
 [connection signal="transition" from="State Machine/Idle" to="State Machine" method="on_state_transition"]
 [connection signal="transition" from="State Machine/Move" to="State Machine" method="on_state_transition"]
 [connection signal="transition" from="State Machine/Dash" to="State Machine" method="on_state_transition"]

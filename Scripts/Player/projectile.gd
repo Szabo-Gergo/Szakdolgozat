@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var projectile_speed : int
-@export var range : int
+@export var projectile_range : int
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var traveled_distance : float = 0
@@ -12,8 +12,8 @@ func _process(delta: float) -> void:
 	animated_sprite_2d.play()
 	
 	traveled_distance += projectile_speed * delta
-	if traveled_distance >= range:
+	if traveled_distance >= projectile_range:
 		queue_free()
 	
-func on_hit(body: Node2D) -> void:
+func on_hit(_body: Node2D) -> void:
 	queue_free()

@@ -2,7 +2,7 @@ extends State
 class_name Shoot
 
 
-const PISTOL_PROJECTILE = preload("res://Scenes/PistolProjectile.tscn")
+const PISTOL_PROJECTILE = preload("res://Scenes/Player/PistolProjectile.tscn")
 
 @onready var aim_hand: Node2D = %AimHand
 @onready var animation_tree: AnimationTree = %AnimationTree
@@ -12,7 +12,7 @@ const PISTOL_PROJECTILE = preload("res://Scenes/PistolProjectile.tscn")
 var mouse_position
 var camera_original_position
 
-func enter(inputs : Dictionary = {}):
+func enter(_inputs : Dictionary = {}):
 	aim_hand.visible = true
 	camera_original_position = player_camera.position 
 	

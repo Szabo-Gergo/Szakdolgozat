@@ -20,7 +20,6 @@ func _process(delta: float) -> void:
 		current_state.process(delta)
 		
 func _physics_process(delta: float) -> void:
-	
 	if current_state:
 		current_state.physics_process(delta)
 
@@ -39,4 +38,3 @@ func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 	
 	current_state = new_state
 	state_label.text = "State: "+current_state.get_name()+"\nAmmo: "+str(Global.ammo)
-	

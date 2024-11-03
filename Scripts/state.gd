@@ -3,7 +3,7 @@ class_name State
 signal transition
 
 
-func enter(inputs : Dictionary = {}):
+func enter(_inputs : Dictionary = {}):
 	pass
 	
 func exit():

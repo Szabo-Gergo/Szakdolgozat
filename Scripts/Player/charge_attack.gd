@@ -1,7 +1,7 @@
 extends Attack
 class_name ChargeAttack
 
-func enter(inputs : Dictionary = {}):
+func enter(_inputs : Dictionary = {}):
 	update_trail_position()
 	
 func physics_process(_delta: float):
@@ -11,5 +11,5 @@ func _on_charge_attack_finished(anim_name: StringName) -> void:
 	if  "ChargeAttack" in anim_name:
 		transition.emit(self, "idle") 
 
-func _on_enemy_hit(body: Node2D) -> void:
+func _on_enemy_hit(_body: Node2D) -> void:
 	pass

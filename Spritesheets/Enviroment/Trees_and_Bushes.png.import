@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuqi404slb28u"
-path="res://.godot/imported/Sword_With_Charge.png-9d8cfb73d06d843bca28c208cdcc4eff.ctex"
+uid="uid://b00b6tl4p0et5"
+path="res://.godot/imported/Trees_and_Bushes.png-f3347cdd29f6db06dc29c99999361f91.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Sword_With_Charge.png"
-dest_files=["res://.godot/imported/Sword_With_Charge.png-9d8cfb73d06d843bca28c208cdcc4eff.ctex"]
+source_file="res://Spritesheets/Enviroment/Trees_and_Bushes.png"
+dest_files=["res://.godot/imported/Trees_and_Bushes.png-f3347cdd29f6db06dc29c99999361f91.ctex"]
 
 [params]
 

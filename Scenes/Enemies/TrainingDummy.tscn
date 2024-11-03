@@ -1,16 +1,15 @@
 [gd_scene load_steps=13 format=3 uid="uid://uxdf7rf5w0do"]
 
 [ext_resource type="Shader" path="res://Shaders/Flash.gdshader" id="1_qf4w4"]
-[ext_resource type="Script" path="res://Scripts/basic_enemy.gd" id="1_qqh32"]
-[ext_resource type="Texture2D" uid="uid://bedue0ofo6ub3" path="res://Spritesheets/Training Dummy Sprite Sheet.png" id="1_tuvqi"]
+[ext_resource type="Script" path="res://Scripts/Enemies/basic_enemy.gd" id="1_qqh32"]
+[ext_resource type="Texture2D" uid="uid://bedue0ofo6ub3" path="res://Spritesheets/Enemies/Training Dummy Sprite Sheet.png" id="1_tuvqi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rlkee"]
 size = Vector2(26, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lcd8b"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7esq"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yx5oi"]
 shader = ExtResource("1_qf4w4")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_opacity = 0.0
@@ -114,7 +113,7 @@ shape = SubResource("RectangleShape2D_rlkee")
 shape = SubResource("RectangleShape2D_lcd8b")
 
 [node name="DummySprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_w7esq")
+material = SubResource("ShaderMaterial_yx5oi")
 texture = ExtResource("1_tuvqi")
 hframes = 8
 vframes = 3
