@@ -20,9 +20,6 @@
 radius = 9.84457
 height = 19.757
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptvar"]
-size = Vector2(12, 11)
-
 [sub_resource type="Curve" id="Curve_hwksw"]
 _data = [Vector2(0, 0.497554), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.132562, 0.0, 0, 0]
 point_count = 2
@@ -3394,12 +3391,15 @@ states/run/position = Vector2(609.152, 385)
 transitions = ["run", "Attack", SubResource("AnimationNodeStateMachineTransition_gyqgp"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_3teqp"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_8t3ux"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ac23f"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_rdhmg"), "ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_6d6bx"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_l8ltc"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_xno7n"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_cmrdp"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_l0e4x"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_t7i16"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_wpcky"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_bc2ly"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_0c2lo"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43"), "Attack", "Shoot", SubResource("AnimationNodeStateMachineTransition_1htc5"), "Combo", "Shoot", SubResource("AnimationNodeStateMachineTransition_sxg5f")]
 graph_offset = Vector2(-95.848, 106.593)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptvar"]
+size = Vector2(12, 31)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
 collision_mask = 6
 script = ExtResource("1_tssnm")
-base_stats = ExtResource("2_076ji")
+Main_Stats = ExtResource("2_076ji")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -3432,14 +3432,6 @@ shape = SubResource("CapsuleShape2D_31quj")
 disabled = true
 debug_color = Color(0.780392, 0, 0.168627, 0.6)
 
-[node name="HurtBox" type="Area2D" parent="."]
-collision_mask = 2
-
-[node name="Hurt_shape" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, 9.5)
-shape = SubResource("RectangleShape2D_ptvar")
-debug_color = Color(0, 0.6401, 0.354982, 0.42)
-
 [node name="DashParticle" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 emitting = false
@@ -3451,6 +3443,7 @@ fixed_fps = 60
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+z_index = 1
 texture_filter = 1
 position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_t1i0f")
@@ -3465,6 +3458,7 @@ rotation = 1.72465
 scale = Vector2(-1, 1)
 
 [node name="SwordSprite" type="Sprite2D" parent="Sword"]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(-1.57085e-07, 4.5022e-07)
 rotation = 0.0391551
@@ -3492,7 +3486,6 @@ script = ExtResource("6_lyoey")
 
 [node name="Move" type="Node" parent="State Machine"]
 script = ExtResource("4_w13ut")
-stat_sheet = ExtResource("2_076ji")
 
 [node name="Dash" parent="State Machine" instance=ExtResource("4_fflmd")]
 dash_duration = 0.15
@@ -3547,6 +3540,14 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="Hurt_shape" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ptvar")
+debug_color = Color(0, 0.6401, 0.354982, 0.42)
 
 [connection signal="body_entered" from="Trail/HitBox" to="State Machine/Attack" method="_on_enemy_hit"]
 [connection signal="body_entered" from="Trail/HitBox" to="State Machine/AttackCombo" method="_on_enemy_hit"]

@@ -5,19 +5,19 @@ class_name Dash
 
 @onready var character_sprite: Sprite2D = %CharacterSprite
 @onready var character_collision: CollisionShape2D = %CollisionShape2D
-
+@onready var player: CharacterBody2D = $"../.."
 @onready var dash_timer = $DurationTimer
 @onready var dash_particle: GPUParticles2D = %DashParticle
 
-
-@export var max_dash = Global.max_dash
 @export var dash_speed = 3.0
 @export var dash_duration = 0.15
 
+var max_dash 
 var dash_velocity
 
 func enter(inputs : Dictionary = {}):
 	particle_setup()
+	max_dash = player.max_dash
 	character_collision.disabled = true
 	var dash_direction = inputs.get("direction")
 	dash_velocity = dash_direction * dash_speed
@@ -25,7 +25,7 @@ func enter(inputs : Dictionary = {}):
 	dash_timer.start()
 	
 func end_dash():
-	Global.available_dash -= 1
+	player.available_dash -= 1
 	character_collision.disabled = false
 	dash_particle.emitting = false
 	transition.emit(self, "move")

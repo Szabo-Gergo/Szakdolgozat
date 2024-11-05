@@ -8,6 +8,7 @@ const PISTOL_PROJECTILE = preload("res://Scenes/Player/PistolProjectile.tscn")
 @onready var animation_tree: AnimationTree = %AnimationTree
 @onready var bullet_spawn_point: Node2D = %BulletSpawnPoint
 @onready var player_camera: Camera2D = %PlayerCamera
+@onready var player: CharacterBody2D = $"../.."
 
 var mouse_position
 var camera_original_position
@@ -37,18 +38,17 @@ func animation_update():
 
 func single_shot():
 	if Input.is_action_just_released("shoot"):
-		if Global.ammo != 0:
+		if player.ammo != 0:
 			var bullet = PISTOL_PROJECTILE.instantiate()
 			get_parent().add_child(bullet)
-			Global.ammo -= 1
-			
+			player.ammo -= 1
+			print(bullet)
 			bullet.position = bullet_spawn_point.global_position
 			bullet.rotation = bullet_spawn_point.global_rotation
 			
 			camera_knockback()
 			
 		transition.emit(self, "idle")
-
 
 func exit():
 	aim_hand.visible = false

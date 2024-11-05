@@ -4,7 +4,7 @@ var states : Dictionary = {}
 var current_state : State
 
 @export var base_state : State
-@onready var state_label = $"../StateLabel"
+@onready var state_label: Label = $"../StateLabel"
 
 func _ready() -> void:
 	for child in get_children():
@@ -25,7 +25,6 @@ func _physics_process(delta: float) -> void:
 
 
 func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
-	
 	if state != current_state:
 		return
 		
@@ -35,6 +34,6 @@ func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 		
 	current_state.exit()
 	new_state.enter(inputs)
-	
 	current_state = new_state
-	state_label.text = "State: "+current_state.get_name()+"\nAmmo: "+str(Global.ammo)
+	
+	state_label.text = current_state.name

@@ -1,15 +1,16 @@
-[gd_scene load_steps=28 format=3 uid="uid://ngtpcu1w36s5"]
+[gd_scene load_steps=31 format=3 uid="uid://ngtpcu1w36s5"]
 
 [ext_resource type="Texture2D" uid="uid://cmq3tfef8x3ex" path="res://Spritesheets/Enemies/Sword_Skeleton.png" id="1_5nep8"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/main_stats.gd" id="1_sjipi"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="2_1f302"]
+[ext_resource type="Resource" uid="uid://dcla0uorl72kc" path="res://Resources/Skeleton_Warrior.tres" id="2_pv5gp"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="3_5f1e7"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="4_koktf"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/attack.gd" id="5_cgaub"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/move.gd" id="6_apmgx"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vrcgf"]
-radius = 4.67905
+[sub_resource type="CircleShape2D" id="CircleShape2D_x281a"]
+radius = 4.67904
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_22qb7"]
 size = Vector2(11, 27)
@@ -36,7 +37,7 @@ tracks/1/path = NodePath("HitBox/Hit_shape:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 0.307786),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 0, 0, 1)]
@@ -44,26 +45,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HitBox:visible")
+tracks/2/path = NodePath("State Machine/Attack:slide_speed")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.824539, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false]
+"values": [10.0, 75.0, 150.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("State Machine/Attack:slide_speed")
+tracks/3/path = NodePath("HitBox:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.9),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [10.0, 100.0]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_drqlu"]
@@ -135,22 +136,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HitBox:visible")
+tracks/1/path = NodePath("State Machine/Attack:slide_speed")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("State Machine/Attack:slide_speed")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -181,13 +170,18 @@ animation = &"Move"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_08iho"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ri1l3"]
-advance_mode = 2
-advance_expression = "current_state.get_name() == \"Death\""
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6x2so"]
 advance_mode = 2
 advance_expression = "current_state.get_name() == \"Attack\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hudjk"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Move\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ri1l3"]
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Death\""
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jkanx"]
 advance_mode = 2
@@ -197,15 +191,19 @@ advance_expression = "current_state.get_name() == \"Damaged\""
 advance_mode = 2
 advance_expression = "current_state.get_name() == \"Damaged\""
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hudjk"]
-switch_mode = 2
-advance_mode = 2
-advance_expression = "current_state.get_name() == \"Move\""
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_na0v4"]
 switch_mode = 2
 advance_mode = 2
 advance_expression = "current_state.get_name() == \"Move\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jym0f"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Attack\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eatfw"]
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"Death\""
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_66yhb"]
 states/Attack/node = SubResource("AnimationNodeAnimation_xokia")
@@ -218,28 +216,31 @@ states/End/position = Vector2(902, 173)
 states/Move/node = SubResource("AnimationNodeAnimation_gw4he")
 states/Move/position = Vector2(380, 166)
 states/Start/position = Vector2(201, 166)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_08iho"), "Damaged", "Death", SubResource("AnimationNodeStateMachineTransition_ri1l3"), "Move", "Attack", SubResource("AnimationNodeStateMachineTransition_6x2so"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_jkanx"), "Move", "Damaged", SubResource("AnimationNodeStateMachineTransition_be02m"), "Attack", "Move", SubResource("AnimationNodeStateMachineTransition_hudjk"), "Damaged", "Move", SubResource("AnimationNodeStateMachineTransition_na0v4")]
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_08iho"), "Move", "Attack", SubResource("AnimationNodeStateMachineTransition_6x2so"), "Attack", "Move", SubResource("AnimationNodeStateMachineTransition_hudjk"), "Damaged", "Death", SubResource("AnimationNodeStateMachineTransition_ri1l3"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_jkanx"), "Move", "Damaged", SubResource("AnimationNodeStateMachineTransition_be02m"), "Damaged", "Move", SubResource("AnimationNodeStateMachineTransition_na0v4"), "Damaged", "Attack", SubResource("AnimationNodeStateMachineTransition_jym0f"), "Move", "Death", SubResource("AnimationNodeStateMachineTransition_eatfw")]
 graph_offset = Vector2(-70, -13)
 
 [node name="Skeleton" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 scale = Vector2(1.3, 1.3)
 collision_layer = 2
 collision_mask = 7
+platform_floor_layers = 0
 script = ExtResource("1_sjipi")
-speed = 50.0
+base_stats = ExtResource("2_pv5gp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.769231, 12.3077)
-shape = SubResource("CircleShape2D_vrcgf")
+visible = false
+position = Vector2(-0.769231, 11.5385)
+shape = SubResource("CircleShape2D_x281a")
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
-collision_mask = 9
 
 [node name="Hurt_shape" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_22qb7")
-disabled = true
 debug_color = Color(0.219764, 0.639022, 7.70092e-07, 0.42)
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -252,7 +253,7 @@ input_pickable = false
 [node name="Hit_shape" type="CollisionPolygon2D" parent="HitBox"]
 self_modulate = Color(1, 1, 1, 0)
 position = Vector2(-1.66893e-06, 5.96046e-08)
-polygon = PackedVector2Array(-7, 0, -11, 17, -16, 15, -20, 12, -23, 6, -24, 0, -23, -6, -20, -12, -16, -15, -11, -17)
+polygon = PackedVector2Array(0, 0, -9, 18, -17, 15, -22, 12, -25, 6, -26, 0, -25, -6, -22, -12, -17, -15, -9, -17)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -296,10 +297,14 @@ text = "Move"
 max_lines_visible = 2
 metadata/_edit_use_anchors_ = true
 
+[connection signal="area_entered" from="HurtBox" to="State Machine/Damaged" method="_on_hurt_box_area_entered"]
+[connection signal="area_entered" from="HurtBox" to="State Machine/Attack" method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="HurtBox" to="State Machine/Move" method="_on_hurtbox_area_entered"]
 [connection signal="area_exited" from="HurtBox" to="State Machine/Attack" method="_on_hurtbox_area_exited"]
+[connection signal="area_entered" from="HitBox" to="State Machine/Attack" method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="HitBox" to="State Machine/Move" method="_on_hit_box_area_entered"]
 [connection signal="area_exited" from="HitBox" to="State Machine/Attack" method="_on_hit_box_area_exited"]
+[connection signal="animation_finished" from="AnimationTree" to="State Machine/Damaged" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_attack_finished"]
 [connection signal="transition" from="State Machine/Damaged" to="State Machine" method="on_state_transition"]
 [connection signal="transition" from="State Machine/Death" to="State Machine" method="on_state_transition"]

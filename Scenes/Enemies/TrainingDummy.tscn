@@ -107,9 +107,12 @@ script = ExtResource("1_qqh32")
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+visible = false
 shape = SubResource("RectangleShape2D_rlkee")
+debug_color = Color(0, 0.640378, 0.350803, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_lcd8b")
 
 [node name="DummySprite" type="Sprite2D" parent="."]

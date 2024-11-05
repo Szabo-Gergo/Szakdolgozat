@@ -15,5 +15,6 @@ func _process(delta: float) -> void:
 	if traveled_distance >= projectile_range:
 		queue_free()
 	
-func on_hit(_body: Node2D) -> void:
-	queue_free()
+func _on_area_entered(area: Area2D) -> void:
+	if area.name == "HurtBox":
+		queue_free()

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cjl2ym7askgjq" path="res://Spritesheets/Weapon/Bullet.png" id="2_63abs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbxnp"]
-size = Vector2(8, 4)
+size = Vector2(11, 7)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8e4c"]
 atlas = ExtResource("2_63abs")
@@ -28,21 +28,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Area2D" type="Area2D"]
-collision_layer = 9
+[node name="ProjectileHitBox" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_3roj2")
-projectile_speed = 1000
-range = 300
+projectile_speed = 100
+projectile_range = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_jbxnp")
 debug_color = Color(0.452315, 0, 0.151732, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6n22f")
-frame_progress = 0.916871
+frame = 1
+frame_progress = 0.73175
 speed_scale = 2.0
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="on_hit"]
