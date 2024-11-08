@@ -42,7 +42,6 @@ func single_shot():
 			var bullet = PISTOL_PROJECTILE.instantiate()
 			get_parent().add_child(bullet)
 			player.ammo -= 1
-			print(bullet)
 			bullet.position = bullet_spawn_point.global_position
 			bullet.rotation = bullet_spawn_point.global_rotation
 			

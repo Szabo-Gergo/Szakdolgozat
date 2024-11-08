@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4x721xdv1oy3"]
 
 [ext_resource type="PackedScene" uid="uid://bvicg58gitoue" path="res://Scenes/Player/Player.tscn" id="1_evire"]
-[ext_resource type="PackedScene" uid="uid://ngtpcu1w36s5" path="res://Scenes/Enemies/Skeleton.tscn" id="2_5t7cd"]
 [ext_resource type="PackedScene" uid="uid://uxdf7rf5w0do" path="res://Scenes/Enemies/TrainingDummy.tscn" id="2_507lh"]
 [ext_resource type="PackedScene" uid="uid://c8saaqfm137mm" path="res://Scenes/Map.tscn" id="3_cat7x"]
+[ext_resource type="PackedScene" uid="uid://dqe2e6ldqles1" path="res://Scenes/Enemies/SkeletonMage.tscn" id="5_eucth"]
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
@@ -12,10 +12,10 @@ y_sort_enabled = true
 unique_name_in_owner = true
 position = Vector2(89, -8)
 
-[node name="Skeleton" parent="." instance=ExtResource("2_5t7cd")]
-position = Vector2(179, -100)
-
 [node name="Training Dummy" parent="." instance=ExtResource("2_507lh")]
+
+[node name="Skeleton_Mage" parent="." instance=ExtResource("5_eucth")]
+position = Vector2(125, -258)
 
 [node name="Map" parent="." instance=ExtResource("3_cat7x")]
 delete_distance = 75

@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/Player/projectile.gd" id="1_3roj2"]
 [ext_resource type="Texture2D" uid="uid://cjl2ym7askgjq" path="res://Spritesheets/Weapon/Bullet.png" id="2_63abs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbxnp"]
-size = Vector2(11, 7)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sudav"]
+radius = 3.0
+height = 10.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8e4c"]
 atlas = ExtResource("2_63abs")
@@ -28,15 +29,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="ProjectileHitBox" type="Area2D"]
+[node name="ProjectileHitBox" type="Area2D" groups=["Player_Projectile_HitBox"]]
 collision_mask = 2
 script = ExtResource("1_3roj2")
 projectile_speed = 100
 projectile_range = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_jbxnp")
+visible = false
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_sudav")
 debug_color = Color(0.452315, 0, 0.151732, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

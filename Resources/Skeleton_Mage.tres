@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BaseStats" load_steps=2 format=3 uid="uid://u6m8mrq1l8e1"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="1_22kbi"]
+
+[resource]
+script = ExtResource("1_22kbi")
+damage = 10
+max_health = 100
+speed = 100.0

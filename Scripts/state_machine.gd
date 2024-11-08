@@ -25,6 +25,8 @@ func _physics_process(delta: float) -> void:
 
 
 func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
+	current_state.exit()
+	
 	if state != current_state:
 		return
 		
@@ -32,8 +34,5 @@ func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 	if !new_state:
 		return
 		
-	current_state.exit()
 	new_state.enter(inputs)
 	current_state = new_state
-	
-	state_label.text = current_state.name

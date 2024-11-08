@@ -13,12 +13,12 @@ var mouse_position : Vector2
 var trail_direction
 var camera_original_position
 var charge_transition_limit : float
+var stats : BaseStats
 
 func enter(_inputs : Dictionary = {}):
 	update_trail_position()
 	charge_transition_limit = 0
 	camera_original_position = player_camera.position
-
 	
 func physics_process(delta: float) -> void:
 	
@@ -35,8 +35,8 @@ func physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		transition.emit(self, "AttackCombo")
 		
-	if Input.is_action_just_pressed("dash") and Global.available_dash >= 1 and player.velocity != Vector2.ZERO:
-		transition.emit(self, "Dash", {"direction" : mouse_position*Global.player_speed})
+	if Input.is_action_just_pressed("dash") and player.available_dash >= 1 and player.velocity != Vector2.ZERO:
+		transition.emit(self, "Dash", {"direction" : mouse_position*player.get("base_stats")._get_speed()})
 		
 
 func _on_attack_finished(anim_name: StringName) -> void:
@@ -46,9 +46,9 @@ func _on_attack_finished(anim_name: StringName) -> void:
 func animation_update():
 	animation_tree.set("parameters/Attack/blend_position", mouse_position)
 	
-func _on_enemy_hit(_body: Node2D) -> void:
-	if player.ammo < player.max_ammo:
-		player.ammo += 1 
+func _on_enemy_hit(_area: Area2D) -> void:
+	if _area.is_in_group("Enemy_HurtBox"):
+		player._add_ammo() 
 
 func update_trail_position():
 		mouse_position = (player.global_position - player.get_global_mouse_position()).normalized()*-1

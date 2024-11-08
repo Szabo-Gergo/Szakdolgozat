@@ -1,47 +1,50 @@
 extends State
+class_name Basic_Enemy_Damaged
+
 
 @onready var player: CharacterBody2D = get_node("/root/Main/Player")
-@onready var skeleton: CharacterBody2D = $"../.."
 @onready var animation_tree: AnimationTree = $"../../AnimationTree"
 @onready var skeleton_sprite: Sprite2D = $"../../Skeleton_Sprite"
+@onready var state_label: Label = $"../../StateLabel"
+@onready var skeleton: Base_Enemy = $"../.."
 
-var playback
-var stats : BaseStats
 var state_origin : String
-var damage : int
+var base_damage : int
 var damaged_again : bool
 
 func enter(_inputs : Dictionary = {}):
 	damaged_again = true
-	stats = skeleton.get("base_stats")
-	stats.connect("entity_died", _enemy_died)
 	state_origin = _inputs["state_origin"]
-	damage = _inputs["damage"]
-	deal_damage()
+	base_damage = _inputs["damage"]
+	deal_damage(base_damage)
 
-func exit():
-	damaged_again = false
+
+func deal_damage(damage):
+	skeleton._add_health(-damage)
+	state_label.text = "HP "+str(skeleton.health)
 	
-func _enemy_died():
-	print("DIED")
-	transition.emit(self, "Death")
-	
-func deal_damage():
-	stats._add_health(-damage)
-	print("Skeleton health: "+str(stats._get_health()))
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Damaged" and stats._get_health() > 0:
+	if anim_name == "Damaged":
+		damaged_again = false
 		if state_origin == "Move":
 			transition.emit(self, state_origin)
 		else:
 			var direction = skeleton.global_position.direction_to(Vector2i(player.position))
 			transition.emit(self, state_origin, {"direction" : direction})
-	else:
-		_enemy_died()
 		
+		
+func check_health():
+	if skeleton.health == 0: 
+		transition.emit(self, "Death")
+
+
+#If damaged while in the same state reset animation and check collision
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-	if area.name == "HitBox" and damaged_again:
+	if damaged_again:
 		animation_tree.set("active", false)
 		animation_tree.set("active", true)
-		deal_damage()
+		if area.is_in_group("Player_Melee_HitBox"):
+				deal_damage(player.get("base_stats")._get_damage())
+		elif area.is_in_group("Player_Projectile_HitBox"):
+				deal_damage(player.get("projectile_damage"))
