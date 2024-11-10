@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ffxbe324ceub"]
+
+[ext_resource type="Texture2D" uid="uid://bu8ls3ee3gd7c" path="res://Spritesheets/Misc/hit_particle_texture.png" id="1_upd2m"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_51k4m"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+spread = 50.0
+initial_velocity_min = 70.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.5
+
+[node name="Hit_Particle" type="GPUParticles2D"]
+rotation = 0.00163311
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_51k4m")
+texture = ExtResource("1_upd2m")
+lifetime = 0.36
+one_shot = true
+explosiveness = 0.9

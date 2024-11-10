@@ -11,15 +11,20 @@ var available_dash : int
 var ammo = 6
 var health : int 
 
+const CURSOR = preload("res://Spritesheets/Misc/cursor.png")
+const AIM_CURSOR = preload("res://Spritesheets/Misc/aim_cursor.png")
+
 func _ready() -> void:
 	available_dash = max_dash
 	ammo = 6
 	health = base_stats._get_max_health()
 
+	
 
 func _physics_process(delta: float) -> void:
 	if (available_dash < max_dash):
 		available_dash += 0.7 * delta
+
 
 func _add_health(new_health):
 	health += new_health

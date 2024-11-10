@@ -10,7 +10,7 @@ class_name Dash
 @onready var dash_particle: GPUParticles2D = %DashParticle
 
 @export var dash_speed = 3.0
-@export var dash_duration = 0.15
+@export var dash_duration = 0.3
 
 var max_dash 
 var dash_velocity

@@ -5,8 +5,8 @@ class_name Basic_Enemy_Move
 @onready var skeleton: CharacterBody2D = $"../.."
 @onready var player: CharacterBody2D = get_node("/root/Main/Player")
 @onready var hitbox: Area2D = $"../../HitBox"
-
 @onready var skeleton_sprite: Sprite2D = $"../../Skeleton_Sprite"
+@onready var hit_particle: GPUParticles2D = $"../../Hit_Particle"
 
 var speed : float
 var direction : Vector2
@@ -30,17 +30,18 @@ func physics_process(_delta: float):
 #	Flip sprite based on player direction
 func flip_sprite():
 	if direction.x < 0:
-		skeleton_sprite.flip_h = false
+		skeleton_sprite.scale.x = 1
 	else:
-		skeleton_sprite.flip_h = true
+		skeleton_sprite.scale.x = -1
 	
 	
 func update_hitbox():
 	hitbox.look_at(player.global_position)
-	
+
 	
 func update_movement():
 	direction = skeleton.global_position.direction_to(Vector2i(player.position))
+	
 	skeleton.velocity = direction * speed
 	skeleton.move_and_slide()	
 

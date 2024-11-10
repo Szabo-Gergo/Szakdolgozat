@@ -16,5 +16,5 @@ func _process(delta: float) -> void:
 		queue_free()
 	
 func _on_area_entered(area: Area2D) -> void:
-	if area.name == "HurtBox":
+	if area.is_in_group("Enemy_HurtBox"):
 		queue_free()

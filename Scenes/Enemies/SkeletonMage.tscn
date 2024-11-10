@@ -1,10 +1,13 @@
-[gd_scene load_steps=32 format=3 uid="uid://dqe2e6ldqles1"]
+[gd_scene load_steps=37 format=3 uid="uid://dqe2e6ldqles1"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Mage/main_stats.gd" id="1_m05gr"]
 [ext_resource type="Resource" uid="uid://u6m8mrq1l8e1" path="res://Resources/Skeleton_Mage.tres" id="2_eexms"]
+[ext_resource type="Shader" path="res://Shaders/Flash.gdshader" id="3_8f1ro"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="3_kqiry"]
 [ext_resource type="Texture2D" uid="uid://65nmn58iqgpl" path="res://Spritesheets/Enemies/Wizard_Skeleton.png" id="3_rem3e"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="4_fmm1i"]
+[ext_resource type="Shader" path="res://Shaders/Silhouette.gdshader" id="4_i2x5q"]
+[ext_resource type="Script" path="res://Scripts/Misc/silhouette.gd" id="4_ijvo1"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="5_psr1m"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/attack.gd" id="7_qbyq7"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Mage/move.gd" id="8_67g3n"]
@@ -18,6 +21,16 @@ size = Vector2(11, 27)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_554ol"]
 radius = 19.0263
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wvjyl"]
+shader = ExtResource("3_8f1ro")
+shader_parameter/flash_color = Color(0.930546, 0, 0.13068, 1)
+shader_parameter/flash_opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqpeq"]
+shader = ExtResource("4_i2x5q")
+shader_parameter/color = Color(0.853355, 0.0274216, 5.77569e-07, 0.5)
+shader_parameter/treshold = 0.4
 
 [sub_resource type="Animation" id="Animation_b6nao"]
 resource_name = "Attack"
@@ -38,7 +51,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Wand_Charge_Particle:emitting")
+tracks/1/path = NodePath("Skeleton_Sprite/Wand_Charge_Particle:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -50,71 +63,59 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Wand_Charge_Particle:position")
+tracks/2/path = NodePath("HitBox/Hit_shape:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(-11, -3), Vector2(-12, -4)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("HitBox/Hit_shape:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 1.4),
 "transitions": PackedFloat32Array(1, 0.307786),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 0, 0, 1)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("HitBox/Hit_shape:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.5),
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox/Hit_shape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("HitBox:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 1.5),
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitBox:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("State Machine/Attack:slide_speed")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("State Machine/Attack:slide_speed")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("HitBox/Hit_shape:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 1.5),
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitBox/Hit_shape:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(2, 2)]
@@ -157,6 +158,18 @@ tracks/2/path = NodePath("HitBox/Hit_shape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox/Hit_shape:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -275,7 +288,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Wand_Charge_Particle:emitting")
+tracks/1/path = NodePath("Skeleton_Sprite/Wand_Charge_Particle:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -287,19 +300,19 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Wand_Charge_Particle:position")
+tracks/2/path = NodePath("HurtBox/Hurt_shape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-12, -4)]
+"update": 1,
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HurtBox/Hurt_shape:disabled")
+tracks/3/path = NodePath("CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -311,7 +324,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/path = NodePath("HitBox/Hit_shape:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -323,50 +336,50 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("HitBox/Hit_shape:disabled")
+tracks/5/path = NodePath("HitBox:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("HitBox:visible")
+tracks/6/path = NodePath("State Machine/Attack:slide_speed")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [0.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("State Machine/Attack:slide_speed")
+tracks/7/path = NodePath("HitBox/Hit_shape:scale")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(1, 1)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("HitBox/Hit_shape:scale")
+tracks/8/path = NodePath("HitBox/Hit_shape:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gektt"]
@@ -438,9 +451,11 @@ states/Start/position = Vector2(203, 166)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_08iho"), "Move", "Attack", SubResource("AnimationNodeStateMachineTransition_6x2so"), "Attack", "Move", SubResource("AnimationNodeStateMachineTransition_hudjk"), "Damaged", "Death", SubResource("AnimationNodeStateMachineTransition_ri1l3"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_jkanx"), "Move", "Damaged", SubResource("AnimationNodeStateMachineTransition_be02m"), "Damaged", "Move", SubResource("AnimationNodeStateMachineTransition_na0v4"), "Damaged", "Attack", SubResource("AnimationNodeStateMachineTransition_jym0f")]
 graph_offset = Vector2(-70, -13)
 
-[node name="Skeleton_Mage" type="CharacterBody2D"]
+[node name="Skeleton_Mage" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 1
 y_sort_enabled = true
+collision_layer = 2
+collision_mask = 7
 platform_floor_layers = 0
 script = ExtResource("1_m05gr")
 range = 120
@@ -469,13 +484,30 @@ input_pickable = false
 
 [node name="Hit_shape" type="CollisionShape2D" parent="HitBox"]
 modulate = Color(0, 0, 0, 1)
+z_index = -1
 shape = SubResource("CircleShape2D_554ol")
 debug_color = Color(0.631365, 0, 0.235924, 0.42)
 
-[node name="Skeleton_Sprite" type="Sprite2D" parent="."]
+[node name="Skeleton_Sprite" type="Sprite2D" parent="." node_paths=PackedStringArray("silhouette_node")]
+material = SubResource("ShaderMaterial_wvjyl")
 texture = ExtResource("3_rem3e")
 hframes = 22
 frame = 1
+script = ExtResource("4_ijvo1")
+silhouette_node = NodePath("Silhouette")
+
+[node name="Silhouette" type="Sprite2D" parent="Skeleton_Sprite"]
+z_index = 100
+material = SubResource("ShaderMaterial_xqpeq")
+
+[node name="Wand_Charge_Particle" type="GPUParticles2D" parent="Skeleton_Sprite"]
+light_mask = 0
+position = Vector2(-12, -4)
+rotation = -0.0117404
+amount = 20
+process_material = ExtResource("9_7rqlp")
+lifetime = 0.5
+explosiveness = 1.0
 
 [node name="State Machine" parent="." node_paths=PackedStringArray("base_state") instance=ExtResource("3_kqiry")]
 base_state = NodePath("Move")
@@ -512,14 +544,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_7tvb5")
 advance_expression_base_node = NodePath("../State Machine")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="Wand_Charge_Particle" type="GPUParticles2D" parent="."]
-position = Vector2(-12, -4)
-amount = 20
-process_material = ExtResource("9_7rqlp")
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
 
 [connection signal="area_entered" from="HurtBox" to="State Machine/Damaged" method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="HurtBox" to="State Machine/Attack" method="_on_hurt_box_area_entered"]

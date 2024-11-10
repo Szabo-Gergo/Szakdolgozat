@@ -44,7 +44,7 @@ func _on_attack_finished(anim_name: StringName) -> void:
 
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-	if area.name == "HitBox":
+	if area.is_in_group("Player_Melee_HitBox"):
 		transition.emit(self, "Damaged", {"state_origin" : "Attack", "damage" : player.base_stats._get_damage()})
-	elif area.name == "ProjectileHitBox":
+	elif area.is_in_group("Player_Projectile_HitBox"):
 		transition.emit(self, "Damaged", {"state_origin" : "Attack", "damage" : player.projectile_damage})

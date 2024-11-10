@@ -27,6 +27,7 @@ Player_Melee_HitBox=""
 Player_Projectile_HitBox=""
 Player_HurtBox=""
 Enemy_HurtBox=""
+Enemy=""
 
 [input]
 

@@ -1,14 +1,13 @@
-[gd_scene load_steps=116 format=3 uid="uid://bvicg58gitoue"]
+[gd_scene load_steps=114 format=3 uid="uid://bvicg58gitoue"]
 
 [ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player/Player.png" id="1_ksx3q"]
 [ext_resource type="Script" path="res://Scripts/Player/main_stats.gd" id="1_tssnm"]
 [ext_resource type="PackedScene" uid="uid://b66ssmufcj31d" path="res://Scenes/Player/AimHand.tscn" id="2_7og2s"]
 [ext_resource type="Resource" uid="uid://5wotaqm6apj7" path="res://Resources/Player.tres" id="2_076ji"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="3_cv635"]
-[ext_resource type="Script" path="res://Scripts/Misc/silhouette.gd" id="4_6f3fl"]
+[ext_resource type="Script" path="res://Scripts/silhouette.gd" id="4_6f3fl"]
 [ext_resource type="PackedScene" uid="uid://3rvyikqwuq7c" path="res://Scenes/Player/Dash.tscn" id="4_fflmd"]
 [ext_resource type="Script" path="res://Scripts/Player/move.gd" id="4_w13ut"]
-[ext_resource type="Shader" path="res://Shaders/Silhouette.gdshader" id="5_ljbpw"]
 [ext_resource type="Script" path="res://Scripts/Player/shoot.gd" id="6_1b0pb"]
 [ext_resource type="Script" path="res://Scripts/Player/idle.gd" id="6_lyoey"]
 [ext_resource type="PackedScene" uid="uid://dtybtb2pcw8ce" path="res://Scenes/Player/Attack.tscn" id="6_qoo4h"]
@@ -17,11 +16,6 @@
 [ext_resource type="Script" path="res://Scripts/Player/attack_combo.gd" id="10_x566i"]
 [ext_resource type="Script" path="res://Scripts/Player/attack_charge_up.gd" id="11_3ygyj"]
 [ext_resource type="Script" path="res://Scripts/Player/charge_attack.gd" id="12_gl7jl"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qirqo"]
-shader = ExtResource("5_ljbpw")
-shader_parameter/color = Color(0, 0, 0, 0.5)
-shader_parameter/treshold = 0.1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptvar"]
 size = Vector2(12, 11)
@@ -3489,7 +3483,7 @@ script = ExtResource("1_tssnm")
 base_stats = ExtResource("2_076ji")
 max_ammo = 1000
 
-[node name="CharacterSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("silhouette_node")]
+[node name="CharacterSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 y_sort_enabled = true
 texture = ExtResource("1_ksx3q")
@@ -3497,11 +3491,9 @@ hframes = 87
 frame = 10
 region_rect = Rect2(7, 2, 790, 99)
 script = ExtResource("4_6f3fl")
-silhouette_node = NodePath("Silhouette")
 
 [node name="Silhouette" type="Sprite2D" parent="CharacterSprite"]
 z_index = 100
-material = SubResource("ShaderMaterial_qirqo")
 
 [node name="Trail" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -3516,7 +3508,6 @@ hframes = 9
 frame = 2
 
 [node name="HitBox" type="Area2D" parent="Trail" groups=["Player_Melee_HitBox"]]
-visible = false
 rotation = 1.5708
 collision_mask = 2
 

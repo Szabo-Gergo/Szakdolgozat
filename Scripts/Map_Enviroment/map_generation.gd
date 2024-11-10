@@ -20,7 +20,6 @@ extends Node2D
 
 #Chunk handler variables
 var loaded_chunks : Array
-var player_tile_position : Vector2i
 
 # Atlas coords
 var ground_tile_atlas_coords : Array
@@ -54,7 +53,7 @@ func _ready() -> void:
 	
 
 func _process(_delta: float) -> void:
-	var gen_position : Vector2 = ground_decorations.local_to_map(player.position/generation_size)
+	var gen_position : Vector2 = ground.local_to_map(player.position/generation_size)
 	for y in range(-generation_radius, generation_radius + 1):
 		for x in range(-generation_radius, generation_radius + 1):
 			if (gen_position+Vector2(x,y))*generation_size not in loaded_chunks:
@@ -71,7 +70,6 @@ func generation(pos):
 			ground_gen(x,y)
 			ground_decoration_gen(x,y)
 			tree_gen(x,y)
-
 	if pos not in loaded_chunks:
 		loaded_chunks.append(pos)
 
@@ -86,16 +84,12 @@ func ground_decoration_gen(x,y):
 		ground_decorations.set_cell(Vector2(x,y), 0, random_decor)
 	
 
-
-var array = []
-
 func tree_gen(x,y):
 	var tree_noise_val = generation_noise.noise.get_noise_2d(x,y)
 	var random_tree_tile = tree_tile_atlas_coords[randi()%tree_tile_atlas_coords.size()]
-	array.append(tree_noise_val)
+	
 	if tree_noise_val > tree_range:
 		trees.set_cell(Vector2(x,y), 0, random_tree_tile)
-
 
 
 func deload(pos : Vector2):
@@ -103,6 +97,7 @@ func deload(pos : Vector2):
 		if pos.distance_to(chunk) > delete_distance:
 			clear_chunk(chunk)
 			loaded_chunks.erase(chunk)
+			
 			
 func clear_chunk(pos):
 	for y in range(pos.y,pos.y+generation_size.y):

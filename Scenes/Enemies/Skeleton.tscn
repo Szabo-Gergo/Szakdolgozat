@@ -1,11 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://ngtpcu1w36s5"]
+[gd_scene load_steps=35 format=3 uid="uid://ngtpcu1w36s5"]
 
 [ext_resource type="Texture2D" uid="uid://cmq3tfef8x3ex" path="res://Spritesheets/Enemies/Sword_Skeleton.png" id="1_5nep8"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/main_stats.gd" id="1_sjipi"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="2_1f302"]
 [ext_resource type="Resource" uid="uid://dcla0uorl72kc" path="res://Resources/Skeleton_Warrior.tres" id="2_1xrwo"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="3_5f1e7"]
+[ext_resource type="Shader" path="res://Shaders/Flash.gdshader" id="3_8e2u4"]
+[ext_resource type="Shader" path="res://Shaders/Silhouette.gdshader" id="4_j4ssv"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="4_koktf"]
+[ext_resource type="Script" path="res://Scripts/Misc/silhouette.gd" id="4_qwxlf"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/move.gd" id="6_apmgx"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/attack.gd" id="7_3mr68"]
 
@@ -61,10 +64,10 @@ tracks/3/path = NodePath("HitBox:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [true]
+"values": [true, false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -120,6 +123,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_bicon"]
@@ -190,7 +205,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [true]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -337,20 +352,31 @@ states/Start/position = Vector2(203, 166)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_08iho"), "Move", "Attack", SubResource("AnimationNodeStateMachineTransition_6x2so"), "Attack", "Move", SubResource("AnimationNodeStateMachineTransition_hudjk"), "Damaged", "Death", SubResource("AnimationNodeStateMachineTransition_ri1l3"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_jkanx"), "Move", "Damaged", SubResource("AnimationNodeStateMachineTransition_be02m"), "Damaged", "Move", SubResource("AnimationNodeStateMachineTransition_na0v4"), "Damaged", "Attack", SubResource("AnimationNodeStateMachineTransition_jym0f")]
 graph_offset = Vector2(-70, -13)
 
-[node name="Skeleton" type="CharacterBody2D"]
-visible = false
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_25s4i"]
+shader = ExtResource("3_8e2u4")
+shader_parameter/flash_color = Color(0.929412, 0, 0.129412, 1)
+shader_parameter/flash_opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mv8vh"]
+shader = ExtResource("4_j4ssv")
+shader_parameter/color = Color(0.854902, 0.027451, 0, 0.501961)
+shader_parameter/treshold = 0.4
+
+[node name="Skeleton" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 1
 y_sort_enabled = true
 scale = Vector2(1.3, 1.3)
 collision_layer = 2
-collision_mask = 7
+collision_mask = 3
+motion_mode = 1
+platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_sjipi")
 base_stats = ExtResource("2_1xrwo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-0.769231, 11.5385)
+position = Vector2(0, 12)
 shape = SubResource("CircleShape2D_x281a")
 
 [node name="HurtBox" type="Area2D" parent="." groups=["Enemy_HurtBox"]]
@@ -384,11 +410,18 @@ tree_root = SubResource("AnimationNodeStateMachine_66yhb")
 advance_expression_base_node = NodePath("../State Machine")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="Skeleton_Sprite" type="Sprite2D" parent="."]
+[node name="Skeleton_Sprite" type="Sprite2D" parent="." node_paths=PackedStringArray("silhouette_node")]
+material = SubResource("ShaderMaterial_25s4i")
 texture = ExtResource("1_5nep8")
 hframes = 18
 vframes = 2
-frame = 14
+frame = 16
+script = ExtResource("4_qwxlf")
+silhouette_node = NodePath("Silhouette")
+
+[node name="Silhouette" type="Sprite2D" parent="Skeleton_Sprite"]
+z_index = 100
+material = SubResource("ShaderMaterial_mv8vh")
 
 [node name="State Machine" parent="." node_paths=PackedStringArray("base_state") instance=ExtResource("2_1f302")]
 base_state = NodePath("Move")
@@ -418,7 +451,7 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="area_entered" from="HurtBox" to="State Machine/Damaged" method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="HurtBox" to="State Machine/Attack" method="_on_hurt_box_area_entered"]
-[connection signal="area_entered" from="HurtBox" to="State Machine/Move" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="HurtBox" to="State Machine/Move" method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="HitBox" to="State Machine/Attack" method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="HitBox" to="State Machine/Move" method="_on_hit_box_area_entered"]
 [connection signal="area_exited" from="HitBox" to="State Machine/Attack" method="_on_hit_box_area_exited"]
