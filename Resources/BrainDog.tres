@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseStats" load_steps=2 format=3 uid="uid://bhdlnyet8fsnm"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="1_e4own"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_e4own")
+damage = 0
+max_health = 1
+max_armor = 1
+speed = 100.0

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://hcingjk6e582"]
+
+[ext_resource type="Script" path="res://health_bar.gd" id="1_7di70"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxsp7"]
+bg_color = Color(0, 0, 0, 0.364706)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.635294)
+
+[node name="Health_bar" type="Panel"]
+visible = false
+offset_right = 7.0
+offset_bottom = 7.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hxsp7")
+script = ExtResource("1_7di70")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 5.0
+offset_bottom = 5.0
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 10

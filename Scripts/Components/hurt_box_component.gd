@@ -1,0 +1,20 @@
+extends Area2D
+
+@export var root : CharacterBody2D
+@export var health_component : Health_Component
+@export var state_machine : StateMachine
+
+func _on_area_entered(area: Area2D) -> void:
+	var is_melee_hitbox = area.is_in_group("Player_Melee_HitBox")
+	var is_projectile_hitbox = area.is_in_group("Player_Projectile_HitBox")
+	var damage = 0
+		
+	if is_melee_hitbox:
+		damage = root.player.base_stats.damage
+	elif is_projectile_hitbox:
+		damage = root.player.projectile_damage
+			
+	if health_component.can_stagger and (is_melee_hitbox or is_projectile_hitbox):
+		state_machine.on_state_transition(state_machine.current_state, "Damaged", {"state_origin": state_machine.current_state.name, "damage": damage})
+	elif is_melee_hitbox or is_projectile_hitbox:
+		health_component.deal_damage(damage)

@@ -6,4 +6,5 @@
 script = ExtResource("1_22kbi")
 damage = 10
 max_health = 20
+max_armor = 3
 speed = 100.0

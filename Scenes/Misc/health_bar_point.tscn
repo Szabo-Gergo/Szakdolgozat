@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://2yxq8uo3m2na"]
+
+[node name="health_bar_point" type="ColorRect"]
+y_sort_enabled = true
+custom_minimum_size = Vector2(3, 3)
+offset_right = 3.0
+offset_bottom = 3.0

@@ -1,10 +1,10 @@
 [gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://dyatf8nfelvug"]
 
-[sub_resource type="Gradient" id="Gradient_xcl4y"]
+[sub_resource type="Gradient" id="Gradient_kxb61"]
 colors = PackedColorArray(0, 1, 1, 1, 0, 0.352941, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4igsn"]
-gradient = SubResource("Gradient_xcl4y")
+gradient = SubResource("Gradient_kxb61")
 
 [resource]
 resource_local_to_scene = true

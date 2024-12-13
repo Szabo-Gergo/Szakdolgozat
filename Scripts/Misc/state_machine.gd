@@ -1,10 +1,11 @@
 extends Node
+class_name StateMachine
 
 var states : Dictionary = {}
 var current_state : State
-
 @export var base_state : State
-@onready var state_label: Label = $"../StateLabel"
+@export var root : CharacterBody2D
+@onready var label: Label = $"../Label"
 
 func _ready() -> void:
 	for child in get_children():
@@ -14,7 +15,8 @@ func _ready() -> void:
 	if base_state:
 		base_state.enter()
 		current_state = base_state
-			
+	
+	
 func _process(delta: float) -> void:
 	if current_state:
 		current_state.process(delta)
@@ -23,10 +25,9 @@ func _physics_process(delta: float) -> void:
 	if current_state:
 		current_state.physics_process(delta)
 
-
 func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 	current_state.exit()
-	
+
 	if state != current_state:
 		return
 		
@@ -36,3 +37,4 @@ func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 		
 	new_state.enter(inputs)
 	current_state = new_state
+	label.text = current_state.name

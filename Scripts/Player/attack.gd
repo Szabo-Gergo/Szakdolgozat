@@ -36,7 +36,7 @@ func physics_process(delta: float) -> void:
 		transition.emit(self, "AttackCombo")
 		
 	if Input.is_action_just_pressed("dash") and player.available_dash >= 1 and player.velocity != Vector2.ZERO:
-		transition.emit(self, "Dash", {"direction" : mouse_position*player.get("base_stats")._get_speed()})
+		transition.emit(self, "Dash", {"direction" : mouse_position*player.get("base_stats").speed})
 		
 
 func _on_attack_finished(anim_name: StringName) -> void:

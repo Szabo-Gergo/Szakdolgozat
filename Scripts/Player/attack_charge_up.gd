@@ -13,6 +13,7 @@ func enter(inputs : Dictionary = {}):
 	mouse_position = (character_body.global_position - character_body.get_global_mouse_position()).normalized()*-1
 	
 func physics_process(_delta: float):
+	mouse_position = (character_body.global_position - character_body.get_global_mouse_position()).normalized()*-1
 
 	if Input.is_action_pressed("attack"):
 			charge_time += _delta
