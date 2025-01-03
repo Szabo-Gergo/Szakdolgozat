@@ -1,5 +1,6 @@
 extends Node2D
 class_name Health_Component
+signal death
 
 @export_category("Component")
 @export var stat_sheet : BaseStats
@@ -42,10 +43,10 @@ func deal_damage(damage):
 	health = max(health, 0)
 	armor = max(armor, 0)
 
+	check_health()
 	health_bar.update_health_points()
 	damage_pop_up(damage)
 	flash(0.2)
-	check_health()
 	
 func flash(time):
 	sprite.material.set("shader_parameter/flash_opacity", 1)
@@ -58,5 +59,4 @@ func damage_pop_up(damage: int):
 func check_health():	
 	health_bar.visible = true
 	if health + armor <= 0: 
-		state_machine.current_state.transition.emit(state_machine.current_state, "Death")
-		
+		state_machine.current_state.request_transition("Death")

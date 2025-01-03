@@ -15,7 +15,9 @@ func _ready() -> void:
 	if base_state:
 		base_state.enter()
 		current_state = base_state
-	
+		
+	print(self)
+
 	
 func _process(delta: float) -> void:
 	if current_state:
@@ -27,7 +29,6 @@ func _physics_process(delta: float) -> void:
 
 func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 	current_state.exit()
-
 	if state != current_state:
 		return
 		
@@ -38,3 +39,4 @@ func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 	new_state.enter(inputs)
 	current_state = new_state
 	label.text = current_state.name
+	print(str(current_state))

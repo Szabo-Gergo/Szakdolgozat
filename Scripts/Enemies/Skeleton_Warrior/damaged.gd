@@ -7,10 +7,10 @@ class_name Basic_Enemy_Damaged
 @export var damage_number_component : Node2D
 @export var health_component : Health_Component
 
-
 var state_origin : String
 var base_damage : int
 var damaged_again : bool
+var dead : bool
 
 func enter(_inputs : Dictionary = {}):
 	if _inputs["state_origin"] != self.name:
@@ -19,17 +19,10 @@ func enter(_inputs : Dictionary = {}):
 	health_component.deal_damage(base_damage)
 	damaged_again = true
 
-func _on_damaged_finished(anim_name: StringName) -> void:
-	if anim_name == "Damaged":
-		damaged_again = false
-		handle_transition()
-
-
 func handle_transition():
-	if health_component.armor + health_component.health <= 0:
-		transition.emit(self, "Death")
+	health_component.check_health()
 	
-	if state_origin == "Move":
+	if state_origin == "Move" or state_origin == "Death":
 		transition.emit(self, state_origin)
 	else:
 		var direction = root.global_position.direction_to(Vector2i(root.player.position))

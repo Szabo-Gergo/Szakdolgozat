@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b2i5e808mgsap"]
+[gd_scene load_steps=40 format=3 uid="uid://b2i5e808mgsap"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/main_stats.gd" id="1_6kyvp"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="1_60pjm"]
@@ -13,9 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://bexq54sbkhv2o" path="res://Scenes/Misc/damage_number.tscn" id="10_swuh6"]
 [ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/health_bar.tscn" id="11_8x6ke"]
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="12_roijo"]
+[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="14_mkvps"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_15b24"]
-radius = 0.0
+radius = 25.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gj4lb"]
 radius = 15.0333
@@ -317,6 +318,14 @@ states/Move/position = Vector2(336, 142)
 states/Start/position = Vector2(198, 142)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_drofm"), "Move", "Attack", SubResource("AnimationNodeStateMachineTransition_tkw2l"), "Move", "Damaged", SubResource("AnimationNodeStateMachineTransition_mp2a4"), "Damaged", "Death", SubResource("AnimationNodeStateMachineTransition_ylm4m"), "Attack", "Damaged", SubResource("AnimationNodeStateMachineTransition_4hgj0"), "Attack", "Move", SubResource("AnimationNodeStateMachineTransition_iawac"), "Damaged", "Move", SubResource("AnimationNodeStateMachineTransition_focpq"), "Move", "Death", SubResource("AnimationNodeStateMachineTransition_si6yw"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_y73ve"), "Damaged", "Attack", SubResource("AnimationNodeStateMachineTransition_cyx3q")]
 
+[sub_resource type="Resource" id="Resource_ee8b4"]
+resource_local_to_scene = true
+script = ExtResource("14_mkvps")
+damage = 10
+max_health = 40
+max_armor = 0
+speed = 100.0
+
 [node name="Slime" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 1
 y_sort_enabled = true
@@ -420,7 +429,7 @@ offset_bottom = 23.1539
 health_component = NodePath("../HealthComponent")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "damage_number_component", "state_machine") instance=ExtResource("12_roijo")]
-stat_sheet = ExtResource("2_t2o0q")
+stat_sheet = SubResource("Resource_ee8b4")
 health_bar = NodePath("../Health_bar")
 sprite = NodePath("../SlimeSprite")
 damage_number_component = NodePath("../DamageNumberComponent")

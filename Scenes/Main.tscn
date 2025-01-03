@@ -1,12 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4x721xdv1oy3"]
+[gd_scene load_steps=7 format=3 uid="uid://c4x721xdv1oy3"]
 
 [ext_resource type="PackedScene" uid="uid://bvicg58gitoue" path="res://Scenes/Player/Player.tscn" id="1_evire"]
-[ext_resource type="PackedScene" uid="uid://ngtpcu1w36s5" path="res://Scenes/Enemies/Skeleton.tscn" id="1_uql0a"]
-[ext_resource type="PackedScene" uid="uid://b2i5e808mgsap" path="res://Scenes/Enemies/Slime.tscn" id="3_2mys1"]
+[ext_resource type="PackedScene" uid="uid://swhynvv1nbu7" path="res://Scenes/Misc/enemy_spawner.tscn" id="1_gir3m"]
 [ext_resource type="PackedScene" uid="uid://c8saaqfm137mm" path="res://Scenes/Map.tscn" id="3_cat7x"]
-[ext_resource type="PackedScene" uid="uid://dqe2e6ldqles1" path="res://Scenes/Enemies/SkeletonMage.tscn" id="3_ydc88"]
-[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="4_qt8d4"]
-[ext_resource type="PackedScene" uid="uid://col4sqayg6e2p" path="res://Scenes/Enemies/BrainDog.tscn" id="5_6qnq0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xyca7"]
 
@@ -20,24 +16,10 @@ seamless_blend_skirt = 0.0
 normalize = false
 noise = SubResource("FastNoiseLite_3qoqj")
 
-[sub_resource type="Resource" id="Resource_jngbw"]
-resource_local_to_scene = true
-script = ExtResource("4_qt8d4")
-damage = 10
-max_health = 40
-max_armor = 0
-speed = 100.0
-
-[sub_resource type="Resource" id="Resource_por2m"]
-resource_local_to_scene = true
-script = ExtResource("4_qt8d4")
-damage = 0
-max_health = 1
-max_armor = 1
-speed = 100.0
-
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
+
+[node name="Enemy_Spawner" parent="." instance=ExtResource("1_gir3m")]
 
 [node name="Map" parent="." instance=ExtResource("3_cat7x")]
 material = SubResource("ShaderMaterial_xyca7")
@@ -48,13 +30,3 @@ delete_distance = 75
 [node name="Player" parent="." instance=ExtResource("1_evire")]
 unique_name_in_owner = true
 position = Vector2(89, -8)
-
-[node name="Slime" parent="." instance=ExtResource("3_2mys1")]
-base_stats = SubResource("Resource_jngbw")
-
-[node name="BrainDog" parent="." instance=ExtResource("5_6qnq0")]
-base_stats = SubResource("Resource_por2m")
-
-[node name="Skeleton" parent="." instance=ExtResource("1_uql0a")]
-
-[node name="Skeleton_Mage" parent="." instance=ExtResource("3_ydc88")]

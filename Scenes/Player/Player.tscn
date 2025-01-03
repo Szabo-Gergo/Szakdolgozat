@@ -3875,15 +3875,15 @@ graph_offset = Vector2(-105.848, -273.407)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
-y_sort_enabled = true
+z_as_relative = false
 collision_mask = 4
 script = ExtResource("1_tssnm")
 base_stats = ExtResource("2_076ji")
-max_ammo = 1000
+max_dash = 10
+max_ammo = 10
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-y_sort_enabled = true
 texture = ExtResource("1_ksx3q")
 hframes = 87
 region_rect = Rect2(7, 2, 790, 99)

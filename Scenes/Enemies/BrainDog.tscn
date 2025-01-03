@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/BrainDog/attached.gd" id="12_y6ops"]
 [ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/health_bar.tscn" id="13_7pm7j"]
 
-[sub_resource type="Resource" id="Resource_1uhkl"]
+[sub_resource type="Resource" id="Resource_e2u8n"]
 resource_local_to_scene = true
 script = ExtResource("4_bynd6")
 damage = 0
@@ -482,7 +482,7 @@ script = ExtResource("1_66eyl")
 base_stats = ExtResource("2_21px5")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "damage_number_component", "state_machine") instance=ExtResource("3_qwmat")]
-stat_sheet = SubResource("Resource_1uhkl")
+stat_sheet = SubResource("Resource_e2u8n")
 health_bar = NodePath("../Health_bar")
 sprite = NodePath("../Sprite")
 damage_number_component = NodePath("../DamageNumberComponent")

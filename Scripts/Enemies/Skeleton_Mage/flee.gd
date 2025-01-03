@@ -12,12 +12,10 @@ func _ready() -> void:
 
 func enter(_inputs : Dictionary = {}):
 	super()
-	correcting_signal = true
 	timer.start()
 
 func exit():
 	super()
-	correcting_signal = false
 
 func update_movement():
 	var direction = (root.global_position - root.player.global_position).normalized() 
