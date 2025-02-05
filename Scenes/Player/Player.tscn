@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="3_cv635"]
 [ext_resource type="PackedScene" uid="uid://3rvyikqwuq7c" path="res://Scenes/Player/Dash.tscn" id="4_fflmd"]
 [ext_resource type="Script" path="res://Scripts/Player/move.gd" id="4_w13ut"]
-[ext_resource type="Shader" path="res://Shaders/Silhouette.gdshader" id="5_ljbpw"]
 [ext_resource type="Script" path="res://Scripts/Player/shoot.gd" id="6_1b0pb"]
 [ext_resource type="Script" path="res://Scripts/Player/idle.gd" id="6_lyoey"]
 [ext_resource type="PackedScene" uid="uid://dtybtb2pcw8ce" path="res://Scenes/Player/Attack.tscn" id="6_qoo4h"]
@@ -17,11 +16,8 @@
 [ext_resource type="Script" path="res://Scripts/Player/attack_combo.gd" id="10_x566i"]
 [ext_resource type="Script" path="res://Scripts/Player/attack_charge_up.gd" id="11_3ygyj"]
 [ext_resource type="Script" path="res://Scripts/Player/charge_attack.gd" id="12_gl7jl"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qirqo"]
-shader = ExtResource("5_ljbpw")
-shader_parameter/color = Color(0, 0, 0, 0.5)
-shader_parameter/treshold = 0.1
+[ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="17_eyexp"]
+[ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="17_ktqi0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptvar"]
 size = Vector2(12, 11)
@@ -3877,6 +3873,7 @@ graph_offset = Vector2(-105.848, -273.407)
 z_index = 1
 z_as_relative = false
 collision_mask = 4
+platform_floor_layers = 4278190080
 script = ExtResource("1_tssnm")
 base_stats = ExtResource("2_076ji")
 max_dash = 10
@@ -3884,19 +3881,15 @@ max_ammo = 10
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, 13)
 texture = ExtResource("1_ksx3q")
+offset = Vector2(0, -13)
 hframes = 87
 region_rect = Rect2(7, 2, 790, 99)
-
-[node name="Silhouette" type="Sprite2D" parent="CharacterSprite"]
-visible = false
-z_index = 100
-material = SubResource("ShaderMaterial_qirqo")
 
 [node name="Trail" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
-y_sort_enabled = true
 texture_filter = 1
 rotation = 3.14159
 scale = Vector2(1.27048, 1.32462)
@@ -3985,7 +3978,7 @@ script = ExtResource("4_w13ut")
 stat_sheet = ExtResource("2_076ji")
 
 [node name="Dash" parent="State Machine" instance=ExtResource("4_fflmd")]
-dash_duration = 0.3
+dash_speed = 5
 
 [node name="Attack" parent="State Machine" instance=ExtResource("6_qoo4h")]
 
@@ -4039,6 +4032,16 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
+
+[node name="BasicHealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("17_ktqi0")]
+health_component = NodePath("../HealthComponent")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "state_machine") instance=ExtResource("17_eyexp")]
+visible = false
+stat_sheet = ExtResource("2_076ji")
+health_bar = NodePath("../BasicHealthBar")
+sprite = NodePath("../CharacterSprite")
+state_machine = NodePath("../State Machine")
 
 [connection signal="area_entered" from="Trail/HitBox" to="State Machine/Attack" method="_on_enemy_hit"]
 [connection signal="area_entered" from="Trail/HitBox" to="State Machine/AttackCombo" method="_on_enemy_hit"]

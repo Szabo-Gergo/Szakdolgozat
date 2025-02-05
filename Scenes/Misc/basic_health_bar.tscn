@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://dlbc4k4o4iwv3"]
+
+[ext_resource type="Script" path="res://basic_health_bar.gd" id="1_c0flx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cfl2r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axjoa"]
+bg_color = Color(7.55653e-06, 0.60507, 0.24026, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ve23o"]
+bg_color = Color(0.145098, 0.141176, 0.129412, 0.294118)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.313726)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6gjr"]
+bg_color = Color(0.894922, 0.894922, 0.894922, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vypne"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmt0k"]
+bg_color = Color(0.0162903, 0.535157, 0.855781, 1)
+
+[node name="BasicHealthBar" type="ProgressBar"]
+z_index = 2
+y_sort_enabled = true
+offset_right = 23.0
+offset_bottom = 3.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_cfl2r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_axjoa")
+max_value = 150.0
+value = 50.0
+show_percentage = false
+script = ExtResource("1_c0flx")
+
+[node name="DamageBar" type="ProgressBar" parent="."]
+z_index = -2
+y_sort_enabled = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ve23o")
+theme_override_styles/fill = SubResource("StyleBoxFlat_q6gjr")
+value = 75.0
+show_percentage = false
+
+[node name="ShieldBar" type="ProgressBar" parent="."]
+z_index = -1
+y_sort_enabled = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_vypne")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jmt0k")
+value = 60.0
+show_percentage = false
+
+[node name="Damage_Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Visibility_Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Damage_Timer" to="." method="_on_damage_timer_timeout"]
+[connection signal="timeout" from="Visibility_Timer" to="." method="_on_visibility_timer_timeout"]

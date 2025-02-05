@@ -7,7 +7,7 @@ extends Node
 @export var max_ammo : int = 6
 @export var projectile_damage : int = 1
 
-var available_dash : int 
+var available_dash : float 
 var ammo : int
 var health : int 
 var reversed : int
@@ -26,6 +26,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if (available_dash < max_dash):
+		print(available_dash)
 		available_dash += 0.7 * delta
 
 
@@ -36,6 +37,7 @@ func _add_health(new_health):
 		health = max_health
 	elif health <= 0:
 		health = 0
+		
 
 func _add_ammo():
 	if ammo < max_ammo:

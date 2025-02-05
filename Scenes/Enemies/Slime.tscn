@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="4_dafm1"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="5_yo73s"]
 [ext_resource type="PackedScene" uid="uid://bexq54sbkhv2o" path="res://Scenes/Misc/damage_number.tscn" id="10_swuh6"]
-[ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/health_bar.tscn" id="11_8x6ke"]
+[ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/point_based_health_bar.tscn" id="11_8x6ke"]
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="12_roijo"]
 [ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="14_mkvps"]
 

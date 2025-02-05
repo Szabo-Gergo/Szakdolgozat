@@ -10,18 +10,13 @@ class_name Basic_Enemy_Attack
 
 var player_direction : Vector2
 var hit_shape
-var correcting_signal : bool
 
 func _ready() -> void:
 	hit_shape = hitbox.get_child(0)
 	
 
-func exit():
-	correcting_signal = false
-
 func enter(_inputs : Dictionary = {}):
 	attacking = true
-	correcting_signal = true
 	player_direction = root.global_position.direction_to(Vector2i(root.player.position))
 
 

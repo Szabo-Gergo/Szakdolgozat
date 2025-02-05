@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var Enemies = {
 	"Base_Skeleton": preload("res://Scenes/Enemies/Skeleton.tscn"),
@@ -7,16 +7,13 @@ var Enemies = {
 	"Brain_Dog":  preload("res://Scenes/Enemies/BrainDog.tscn")
 }
 
+@export var TURNED_ON = true
 
 var viewport_size = self.get_viewport()
 @onready var camera_position = get_node("/root/Main/Player/PlayerCamera").global_position
 
 var current_enemies = 0
 var max_enemies = 50
-
-func _ready() -> void:
-	print(self)
-
 
 func get_spawn_position():
 	var viewport_size = get_viewport().size
@@ -50,8 +47,7 @@ func get_spawn_position():
 
 
 func _on_timer_timeout() -> void:
-	
-	if current_enemies <= max_enemies:
+	if current_enemies <= max_enemies and TURNED_ON:
 		spawn_enemy("Base_Skeleton")
 	
 	
@@ -68,3 +64,4 @@ func spawn_enemy(enemy_key):
 	enemy_instance.global_position = get_spawn_position()
 
 	current_enemies += 1
+	print(current_enemies)

@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="7_ya58m"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="8_uu44h"]
 [ext_resource type="PackedScene" uid="uid://bexq54sbkhv2o" path="res://Scenes/Misc/damage_number.tscn" id="9_6twkj"]
-[ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/health_bar.tscn" id="10_1a3rf"]
+[ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/point_based_health_bar.tscn" id="10_1a3rf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_df0ce"]
 

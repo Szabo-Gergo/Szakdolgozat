@@ -20,6 +20,9 @@ noise = SubResource("FastNoiseLite_3qoqj")
 y_sort_enabled = true
 
 [node name="Enemy_Spawner" parent="." instance=ExtResource("1_gir3m")]
+z_index = 1
+y_sort_enabled = true
+TURNED_ON = true
 
 [node name="Map" parent="." instance=ExtResource("3_cat7x")]
 material = SubResource("ShaderMaterial_xyca7")

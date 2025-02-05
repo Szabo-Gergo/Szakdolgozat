@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="4_aj8jv"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="5_akt7t"]
 [ext_resource type="PackedScene" uid="uid://bexq54sbkhv2o" path="res://Scenes/Misc/damage_number.tscn" id="6_h8hxd"]
-[ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/health_bar.tscn" id="12_lt1ew"]
+[ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/point_based_health_bar.tscn" id="12_lt1ew"]
 
 [sub_resource type="Resource" id="Resource_oatmy"]
 resource_local_to_scene = true

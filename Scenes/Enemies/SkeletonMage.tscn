@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Mage/damaged.gd" id="9_0ry3q"]
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="12_u6gb2"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Mage/flee.gd" id="13_1cjsv"]
-[ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/health_bar.tscn" id="13_wl150"]
+[ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/point_based_health_bar.tscn" id="13_wl150"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hikxw"]
 radius = 4.67904
