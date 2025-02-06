@@ -14,7 +14,6 @@ var armor : int
 var can_stagger : bool
 
 func _ready() -> void:
-	# Get the parent node
 	var parent = get_parent()
 
 	health = stat_sheet.max_health

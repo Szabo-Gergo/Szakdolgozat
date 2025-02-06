@@ -1,34 +1,44 @@
-extends Node
-@export_category("Base Stats")
-@export var base_stats : BaseStats
+extends CharacterBody2D
 
-@export_category("Side Stats")
-@export var max_dash : int = 100000
-@export var max_ammo : int = 6
-@export var projectile_damage : int = 1
+
+@onready var state_machine: StateMachine = $"State Machine"
+@onready var animation_tree = %AnimationTree
+
+@export_category("Stats")
+@export var base_stats : BaseStats
+@export var max_dash : int 
+@export var max_ammo : int 
+@export var projectile_damage : int
 
 var available_dash : float 
 var ammo : int
 var health : int 
 var reversed : int
 var can_dash : bool
+var can_attack : bool
+var can_combo : bool
 
-const CURSOR = preload("res://Spritesheets/Misc/cursor.png")
-const AIM_CURSOR = preload("res://Spritesheets/Misc/aim_cursor.png")
+var speed : int
+var mouse_position : Vector2
+var input_direction : Vector2
+var attack_cooldown : float
 
 func _ready() -> void:
+	speed = base_stats.speed
 	can_dash = true
 	available_dash = max_dash
 	ammo = max_ammo
 	health = base_stats.max_health
 	reversed = 1
-	
 
 func _physics_process(delta: float) -> void:
 	if (available_dash < max_dash):
-		print(available_dash)
 		available_dash += 0.7 * delta
-
+	
+	attack_cooldown -= delta
+	move_player()
+	handle_transitions()
+	animation_update()
 
 func _add_health(new_health):
 	health += new_health
@@ -42,3 +52,42 @@ func _add_health(new_health):
 func _add_ammo():
 	if ammo < max_ammo:
 		ammo += 1
+		
+
+func move_player():
+	input_direction = Input.get_vector("left", "right", "up", "down")
+	velocity = input_direction * speed	* reversed
+	move_and_slide()
+
+
+var i = 0
+func handle_transitions():
+	mouse_position = (global_position - get_global_mouse_position()).normalized()*-1
+
+	const ACTION_STATES = ["Attack", "Idle", "AttackCombo", "Shoot", "Dash", "AttackChargeUp", "ChargeAttack"]
+
+	if Input.is_action_just_pressed("dash") and available_dash >= 1 and velocity != Vector2.ZERO and can_dash:
+		state_machine.on_state_transition(state_machine.current_state, "dash", {"direction": velocity, "speed": base_stats.speed})
+
+	if Input.is_action_just_pressed("attack") and can_attack:
+		var new_state = "attackcombo" if can_combo and state_machine.current_state.name != "AttackCombo" else "attack"
+		state_machine.on_state_transition(state_machine.current_state, new_state, {"mouse_position": mouse_position})
+
+	if Input.is_action_pressed("shoot") and state_machine.current_state.name != "Shoot":
+		state_machine.on_state_transition(state_machine.current_state, "shoot", {"mouse_position": mouse_position})
+
+# Transition to Idle only if not moving and not in an active action state
+	if velocity == Vector2.ZERO and input_direction == Vector2.ZERO and state_machine.current_state.name not in ACTION_STATES:
+		state_machine.on_state_transition(state_machine.current_state, "idle")
+
+	
+func animation_update():	
+		animation_tree.set("parameters/run/blend_position", velocity)
+
+
+func attack_cooldown_timeout() -> void:
+	can_attack = true
+
+
+func combo_timer_timeout() -> void:
+	can_combo = false

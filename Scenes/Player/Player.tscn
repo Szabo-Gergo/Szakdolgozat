@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://bvicg58gitoue"]
+[gd_scene load_steps=123 format=3 uid="uid://bvicg58gitoue"]
 
 [ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player/Player.png" id="1_ksx3q"]
 [ext_resource type="Script" path="res://Scripts/Player/main_stats.gd" id="1_tssnm"]
@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://5wotaqm6apj7" path="res://Resources/Player.tres" id="2_076ji"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="3_cv635"]
 [ext_resource type="PackedScene" uid="uid://3rvyikqwuq7c" path="res://Scenes/Player/Dash.tscn" id="4_fflmd"]
-[ext_resource type="Script" path="res://Scripts/Player/move.gd" id="4_w13ut"]
 [ext_resource type="Script" path="res://Scripts/Player/shoot.gd" id="6_1b0pb"]
 [ext_resource type="Script" path="res://Scripts/Player/idle.gd" id="6_lyoey"]
 [ext_resource type="PackedScene" uid="uid://dtybtb2pcw8ce" path="res://Scenes/Player/Attack.tscn" id="6_qoo4h"]
@@ -18,6 +17,11 @@
 [ext_resource type="Script" path="res://Scripts/Player/charge_attack.gd" id="12_gl7jl"]
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="17_eyexp"]
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="17_ktqi0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olbmv"]
+shader = ExtResource("7_iouf4")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptvar"]
 size = Vector2(12, 11)
@@ -150,94 +154,82 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("State Machine/Attack:slide_speed")
+tracks/5/path = NodePath("Sword:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Sword:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Trail/HitBox/CollisionPolygon2D:disabled")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Trail/HitBox/CollisionPolygon2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Trail/HitBox/CollisionPolygon2D:scale")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Trail/HitBox/CollisionPolygon2D:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2(2.20894, 2.62151)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sword:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(10, -8), Vector2(11, 1), Vector2(-10, 15), Vector2(-21, -4), Vector2(-21, -4)]
+}
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Sword:position")
+tracks/9/path = NodePath("Sword:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0, 0.075, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(10, -8), Vector2(11, 1), Vector2(-10, 15), Vector2(-21, -4), Vector2(-21, -4)]
+"values": [-5.45101, -4.84332, -2.81167, -1.48505, -1.48505]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Sword:rotation")
+tracks/10/path = NodePath("Sword:z_index")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.1, 0.15, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [-5.45101, -4.84332, -2.81167, -1.48505, -1.48505]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Sword:z_index")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Sword:scale")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Sword:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -3751,7 +3743,7 @@ advance_expression = "current_state.get_name() == \"Attack\""
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3teqp"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "current_state.get_name() == \"Move\""
+advance_expression = "player.velocity.length() > 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8t3ux"]
 switch_mode = 2
@@ -3769,7 +3761,7 @@ advance_expression = "current_state.get_name() == \"AttackChargeUp\""
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wwfdq"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "current_state.get_name() == \"Move\""
+advance_expression = "player.velocity.length() > 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6d6bx"]
 advance_mode = 2
@@ -3780,11 +3772,11 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3p8ue"]
 advance_mode = 2
-advance_expression = "current_state.get_name() == \"Move\""
+advance_expression = "player.velocity.length() > 0 and current_state.get_name() == \"Idle\""
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_naq6q"]
 advance_mode = 2
-advance_expression = "current_state.get_name() == \"Idle\""
+advance_expression = "player.velocity.length() == 0 and current_state.get_name() == \"Idle\""
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xno7n"]
 advance_mode = 2
@@ -3812,7 +3804,7 @@ advance_expression = "current_state.get_name() == \"AttackCombo\""
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wpcky"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "current_state.get_name() == \"Move\""
+advance_expression = "player.velocity.length() > 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bc2ly"]
 switch_mode = 2
@@ -3834,11 +3826,11 @@ advance_expression = "current_state.get_name() == \"Shoot\""
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x3pcy"]
 advance_mode = 2
-advance_expression = "current_state.get_name() == \"Idle\""
+advance_expression = "player.velocity == Vector2.ZERO"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ipa43"]
 advance_mode = 2
-advance_expression = "current_state.get_name() == \"Move\""
+advance_expression = "player.velocity.length() > 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1htc5"]
 switch_mode = 2
@@ -3849,6 +3841,10 @@ advance_expression = "current_state.get_name() == \"Shoot\""
 switch_mode = 2
 advance_mode = 2
 advance_expression = "current_state.get_name() == \"Shoot\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ur286"]
+advance_mode = 2
+advance_expression = "current_state.get_name() == \"AttackCombo\""
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0ckd7"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_34btp")
@@ -3866,8 +3862,8 @@ states/idle/node = SubResource("AnimationNodeBlendSpace2D_8oeqy")
 states/idle/position = Vector2(74.152, 380)
 states/run/node = SubResource("AnimationNodeBlendSpace2D_0vvr8")
 states/run/position = Vector2(609.152, 385)
-transitions = ["run", "Attack", SubResource("AnimationNodeStateMachineTransition_gyqgp"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_3teqp"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_8t3ux"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ac23f"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_rdhmg"), "ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_6d6bx"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_l8ltc"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_xno7n"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_cmrdp"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_l0e4x"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_t7i16"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_wpcky"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_bc2ly"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_0c2lo"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43"), "Attack", "Shoot", SubResource("AnimationNodeStateMachineTransition_1htc5"), "Combo", "Shoot", SubResource("AnimationNodeStateMachineTransition_sxg5f")]
-graph_offset = Vector2(-105.848, -273.407)
+transitions = ["run", "Attack", SubResource("AnimationNodeStateMachineTransition_gyqgp"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_3teqp"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_8t3ux"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ac23f"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_rdhmg"), "ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_6d6bx"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_l8ltc"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_xno7n"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_cmrdp"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_l0e4x"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_t7i16"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_wpcky"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_bc2ly"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_0c2lo"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43"), "Attack", "Shoot", SubResource("AnimationNodeStateMachineTransition_1htc5"), "Combo", "Shoot", SubResource("AnimationNodeStateMachineTransition_sxg5f"), "run", "Combo", SubResource("AnimationNodeStateMachineTransition_ur286")]
+graph_offset = Vector2(-97.848, -97.407)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -3878,9 +3874,11 @@ script = ExtResource("1_tssnm")
 base_stats = ExtResource("2_076ji")
 max_dash = 10
 max_ammo = 10
+projectile_damage = 1
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_olbmv")
 position = Vector2(0, 13)
 texture = ExtResource("1_ksx3q")
 offset = Vector2(0, -13)
@@ -3930,6 +3928,7 @@ fixed_fps = 60
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+visible = false
 texture_filter = 1
 shape = SubResource("CapsuleShape2D_t1i0f")
 debug_color = Color(9.62615e-07, 0.385506, 0.980678, 0.113725)
@@ -3973,17 +3972,26 @@ base_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="State Machine"]
 script = ExtResource("6_lyoey")
 
-[node name="Move" type="Node" parent="State Machine"]
-script = ExtResource("4_w13ut")
-stat_sheet = ExtResource("2_076ji")
-
 [node name="Dash" parent="State Machine" instance=ExtResource("4_fflmd")]
-dash_speed = 5
+dash_speed = 4.0
+dash_duration = 0.15
+
+[node name="Dash_Timer" type="Timer" parent="State Machine/Dash"]
+one_shot = true
 
 [node name="Attack" parent="State Machine" instance=ExtResource("6_qoo4h")]
+slow_percent = 50.0
+
+[node name="CooldownTimer" type="Timer" parent="State Machine/Attack"]
+wait_time = 0.3
+one_shot = true
 
 [node name="AttackCombo" type="Node" parent="State Machine"]
 script = ExtResource("10_x566i")
+slow_percent = 50.0
+
+[node name="ComboTimer" type="Timer" parent="State Machine/AttackCombo"]
+one_shot = true
 
 [node name="AttackChargeUp" type="Node" parent="State Machine"]
 script = ExtResource("11_3ygyj")
@@ -4026,7 +4034,6 @@ rotation = -0.00548292
 scale = Vector2(0.277273, 0.292554)
 text = "Move"
 max_lines_visible = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -4034,6 +4041,11 @@ position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 
 [node name="BasicHealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("17_ktqi0")]
+offset_left = -11.0
+offset_top = -20.0
+offset_right = 12.0
+offset_bottom = -17.0
+scale = Vector2(1, 0.36)
 health_component = NodePath("../HealthComponent")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "state_machine") instance=ExtResource("17_eyexp")]
@@ -4047,10 +4059,12 @@ state_machine = NodePath("../State Machine")
 [connection signal="area_entered" from="Trail/HitBox" to="State Machine/AttackCombo" method="_on_enemy_hit"]
 [connection signal="area_entered" from="Trail/HitBox" to="State Machine/ChargeAttack" method="_on_enemy_hit"]
 [connection signal="transition" from="State Machine/Idle" to="State Machine" method="on_state_transition"]
-[connection signal="transition" from="State Machine/Move" to="State Machine" method="on_state_transition"]
 [connection signal="transition" from="State Machine/Dash" to="State Machine" method="on_state_transition"]
+[connection signal="timeout" from="State Machine/Dash/Dash_Timer" to="State Machine/Dash" method="end_dash"]
 [connection signal="transition" from="State Machine/Attack" to="State Machine" method="on_state_transition"]
+[connection signal="timeout" from="State Machine/Attack/CooldownTimer" to="." method="attack_cooldown_timeout"]
 [connection signal="transition" from="State Machine/AttackCombo" to="State Machine" method="on_state_transition"]
+[connection signal="timeout" from="State Machine/AttackCombo/ComboTimer" to="." method="combo_timer_timeout"]
 [connection signal="transition" from="State Machine/AttackChargeUp" to="State Machine" method="on_state_transition"]
 [connection signal="transition" from="State Machine/ChargeAttack" to="State Machine" method="on_state_transition"]
 [connection signal="transition" from="State Machine/Shoot" to="State Machine" method="on_state_transition"]

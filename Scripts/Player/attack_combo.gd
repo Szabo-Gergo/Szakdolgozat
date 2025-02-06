@@ -9,7 +9,8 @@ func enter(_inputs : Dictionary = {}):
 
 func physics_process(delta: float) -> void:
 		animation_update()
-		slide_player()
+		player.velocity *= 1.0 - (slow_percent / 100)
+
 				
 #	If the attack is held transition to the charge up
 		if Input.is_action_pressed("attack"):
