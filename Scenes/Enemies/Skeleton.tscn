@@ -412,7 +412,7 @@ texture = ExtResource("1_5nep8")
 offset = Vector2(0, -13.0769)
 hframes = 18
 vframes = 2
-frame = 17
+frame = 16
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

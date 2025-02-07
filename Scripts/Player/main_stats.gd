@@ -14,8 +14,8 @@ var available_dash : float
 var ammo : int
 var health : int 
 var reversed : int
-var can_dash : bool
-var can_attack : bool
+var can_dash : bool = true
+var can_attack : bool = true
 var can_combo : bool
 
 var speed : int
@@ -23,9 +23,12 @@ var mouse_position : Vector2
 var input_direction : Vector2
 var attack_cooldown : float
 
+#Array of action states that can happen while running
+const ACTION_STATES = ["Attack", "Idle", "AttackCombo", "Shoot", "AttackChargeUp", "ChargeAttack"]
+
+
 func _ready() -> void:
 	speed = base_stats.speed
-	can_dash = true
 	available_dash = max_dash
 	ammo = max_ammo
 	health = base_stats.max_health
@@ -63,17 +66,16 @@ func move_player():
 var i = 0
 func handle_transitions():
 	mouse_position = (global_position - get_global_mouse_position()).normalized()*-1
-
-	const ACTION_STATES = ["Attack", "Idle", "AttackCombo", "Shoot", "Dash", "AttackChargeUp", "ChargeAttack"]
+ 	
 
 	if Input.is_action_just_pressed("dash") and available_dash >= 1 and velocity != Vector2.ZERO and can_dash:
 		state_machine.on_state_transition(state_machine.current_state, "dash", {"direction": velocity, "speed": base_stats.speed})
 
-	if Input.is_action_just_pressed("attack") and can_attack:
+	if Input.is_action_just_pressed("attack") and can_attack and state_machine.current_state.name != "Dash":
 		var new_state = "attackcombo" if can_combo and state_machine.current_state.name != "AttackCombo" else "attack"
 		state_machine.on_state_transition(state_machine.current_state, new_state, {"mouse_position": mouse_position})
 
-	if Input.is_action_pressed("shoot") and state_machine.current_state.name != "Shoot":
+	if Input.is_action_pressed("shoot") and state_machine.current_state.name != "Shoot"  and state_machine.current_state.name != "Dash":
 		state_machine.on_state_transition(state_machine.current_state, "shoot", {"mouse_position": mouse_position})
 
 # Transition to Idle only if not moving and not in an active action state

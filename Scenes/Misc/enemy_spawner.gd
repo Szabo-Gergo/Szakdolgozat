@@ -64,4 +64,3 @@ func spawn_enemy(enemy_key):
 	enemy_instance.global_position = get_spawn_position()
 
 	current_enemies += 1
-	print(current_enemies)
