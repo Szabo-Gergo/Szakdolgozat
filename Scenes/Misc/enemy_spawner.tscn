@@ -1,13 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://swhynvv1nbu7"]
 
-[ext_resource type="Script" path="res://Scenes/Misc/enemy_spawner.gd" id="1_16bc4"]
+[ext_resource type="Script" path="res://Scripts/Misc/Spawner/new_enemy_spawner.gd" id="1_m40g1"]
 
 [node name="Enemy_Spawner" type="Node2D"]
-script = ExtResource("1_16bc4")
-TURNED_ON = false
+script = ExtResource("1_m40g1")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.25
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Timer GUI" type="CanvasLayer" parent="."]

@@ -2,7 +2,7 @@ extends State
 class_name Shoot
 
 
-const PISTOL_PROJECTILE = preload("res://Scenes/Player/PistolProjectile.tscn")
+const PISTOL_PROJECTILE = 	preload("res://Projectiles/PistolProjectile.tscn")
 
 @export var aim_hand: Node2D
 @export var bullet_spawn_point: Node2D

@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="7_dlimd"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="8_6clqr"]
 [ext_resource type="Script" path="res://Scripts/Enemies/BrainDog/detach.gd" id="8_acqdw"]
-[ext_resource type="Script" path="res://Scenes/Enemies/Brain_Dog_Attack.gd" id="11_ppci5"]
+[ext_resource type="Script" path="res://Scripts/Enemies/BrainDog/Brain_Dog_Attack.gd" id="11_ppci5"]
 [ext_resource type="Script" path="res://Scripts/Enemies/BrainDog/attached.gd" id="12_y6ops"]
 [ext_resource type="PackedScene" uid="uid://hcingjk6e582" path="res://Scenes/Misc/point_based_health_bar.tscn" id="13_7pm7j"]
 

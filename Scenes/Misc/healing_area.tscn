@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://biywcgvmgbbja"]
+
+[ext_resource type="Script" path="res://healing_area_component.gd" id="1_ri0gr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rl0d1"]
+radius = 40.0
+
+[node name="Healing_Area" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_ri0gr")
+
+[node name="HealShape" type="CollisionShape2D" parent="."]
+light_mask = 0
+shape = SubResource("CircleShape2D_rl0d1")
+debug_color = Color(0.02, 0.6, 0.2, 0.18)
+
+[node name="HealTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]

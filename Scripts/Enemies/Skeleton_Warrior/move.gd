@@ -6,23 +6,22 @@ class_name Basic_Enemy_Move
 @export var sprite: Sprite2D
 @export var health_component : Health_Component
 
-var speed : float
 var direction : Vector2
 var correcting_signal : bool
 
-func _ready() -> void:
-	speed = root.get("base_stats").speed
-
+	
 func enter(_inputs : Dictionary = {}):
 	hitbox.get_child(0).disabled = false
-	correcting_signal = true
 
-func exit():
-	correcting_signal = false
-	
+var frame_count = 0
+
+func process(_delta: float):
+	if frame_count % 5 == 0:  
+		update_hitbox()
+
+		
 func physics_process(_delta: float):
 	update_movement()
-	update_hitbox()
 	flip_sprite(sprite, direction)
 	
 	
@@ -40,7 +39,7 @@ func update_hitbox():
 	
 func update_movement():
 	direction = root.global_position.direction_to(Vector2i(root.player.position))
-	root.velocity = direction * speed
+	root.velocity = direction * root.get("base_stats").speed
 	root.move_and_slide()	
 
 

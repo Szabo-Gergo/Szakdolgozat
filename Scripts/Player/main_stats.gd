@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var max_dash : int 
 @export var max_ammo : int 
 @export var projectile_damage : int
+@export var charge_attack_damage_multiplier : float
 
 var available_dash : float 
 var ammo : int
@@ -25,7 +26,6 @@ var attack_cooldown : float
 
 #Array of action states that can happen while running
 const ACTION_STATES = ["Attack", "Idle", "AttackCombo", "Shoot", "AttackChargeUp", "ChargeAttack"]
-
 
 func _ready() -> void:
 	speed = base_stats.speed

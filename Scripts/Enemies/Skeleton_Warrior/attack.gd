@@ -22,7 +22,7 @@ func enter(_inputs : Dictionary = {}):
 
 func physics_process(_delta: float):
 	if slide_speed != 0:
-		root.velocity = player_direction * slide_speed
+		root.velocity = player_direction * root.base_stats.speed*0.35
 		root.move_and_slide()
 
 	
@@ -39,6 +39,5 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 func _on_attack_finished(anim_name: StringName) -> void:
 	if anim_name == "Attack" and attacking and !hit_on_collision:
 		root.player._add_health(-root.base_stats.damage)
-		print("Player health: "+str(root.player.health))		
 	transition.emit(self, "Move")
 	

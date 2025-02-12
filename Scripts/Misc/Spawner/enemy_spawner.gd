@@ -8,12 +8,12 @@ var Enemies = {
 }
 
 @export var TURNED_ON = true
+@export var max_enemies = 1
 
 var viewport_size = self.get_viewport()
 @onready var camera_position = get_node("/root/Main/Player/PlayerCamera").global_position
 
 var current_enemies = 0
-var max_enemies = 50
 
 func get_spawn_position():
 	var viewport_size = get_viewport().size

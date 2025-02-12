@@ -22,7 +22,7 @@ func enter(_inputs : Dictionary = {}):
 func handle_transition():
 	health_component.check_health()
 	
-	if state_origin == "Move" or state_origin == "Death":
+	if state_origin == "Move":
 		transition.emit(self, state_origin)
 	else:
 		var direction = root.global_position.direction_to(Vector2i(root.player.position))

@@ -44,17 +44,31 @@ func deal_damage(damage):
 
 	check_health()
 	health_bar.update_health_points()
-	damage_pop_up(damage)
+	number_pop_up(damage, false)
 	flash(0.2)
+
+func healing(healing_amount):
+	if health == stat_sheet.max_health or health == 0 or healing_amount < 0:
+		return
+		
+	health += healing_amount
 	
+	if health > stat_sheet.max_health:
+		healing_amount = healing_amount - (health - stat_sheet.max_health)
+		health = stat_sheet.max_health
+	
+	health_bar.update_health_points()
+	number_pop_up(healing_amount, true)
+	
+
 func flash(time):
 	sprite.material.set("shader_parameter/flash_opacity", 1)
 	await get_tree().create_timer(time).timeout
 	sprite.material.set("shader_parameter/flash_opacity", 0)
 
-func damage_pop_up(damage: int):
+func number_pop_up(value: int, is_healing: bool):
 	if damage_number_component != null:
-		damage_number_component.display_damage(damage, false)
+		damage_number_component.display_damage(value, is_healing)
 	
 func check_health():	
 	if health + armor <= 0: 

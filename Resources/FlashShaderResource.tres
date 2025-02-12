@@ -5,5 +5,5 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_b6o7k")
-shader_parameter/flash_color = Color(0.929412, 0, 0.129412, 1)
+shader_parameter/flash_color = Color(0.603963, 0, 0.0631262, 0.737255)
 shader_parameter/flash_opacity = 0.0

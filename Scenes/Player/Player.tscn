@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://bvicg58gitoue"]
+[gd_scene load_steps=126 format=3 uid="uid://bvicg58gitoue"]
 
 [ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player/Player.png" id="1_ksx3q"]
 [ext_resource type="Script" path="res://Scripts/Player/main_stats.gd" id="1_tssnm"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/charge_attack.gd" id="12_gl7jl"]
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="17_eyexp"]
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="17_ktqi0"]
+[ext_resource type="PackedScene" uid="uid://biywcgvmgbbja" path="res://Scenes/Misc/healing_area.tscn" id="18_x8tiv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olbmv"]
 shader = ExtResource("7_iouf4")
@@ -3872,18 +3873,20 @@ states/idle/position = Vector2(74.152, 380)
 states/run/node = SubResource("AnimationNodeBlendSpace2D_0vvr8")
 states/run/position = Vector2(609.152, 385)
 transitions = ["run", "Attack", SubResource("AnimationNodeStateMachineTransition_gyqgp"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_3teqp"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_8t3ux"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ac23f"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_rdhmg"), "ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_6d6bx"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_l8ltc"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_xno7n"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_cmrdp"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_l0e4x"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_wpcky"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_bc2ly"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_0c2lo"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43"), "Attack", "Shoot", SubResource("AnimationNodeStateMachineTransition_1htc5"), "Combo", "Shoot", SubResource("AnimationNodeStateMachineTransition_sxg5f"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_t7i16"), "run", "Combo", SubResource("AnimationNodeStateMachineTransition_ur286"), "idle", "Combo", SubResource("AnimationNodeStateMachineTransition_xhmyh"), "Combo", "Attack", SubResource("AnimationNodeStateMachineTransition_fxa36")]
-graph_offset = Vector2(45.152, 64.593)
+graph_offset = Vector2(-73.848, -152.407)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 z_as_relative = false
 collision_mask = 4
-platform_floor_layers = 4278190080
+platform_on_leave = 2
+platform_floor_layers = 0
 script = ExtResource("1_tssnm")
 base_stats = ExtResource("2_076ji")
 max_dash = 100
 max_ammo = 10
 projectile_damage = 1
+charge_attack_damage_multiplier = 2.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -3902,19 +3905,17 @@ rotation = 3.14159
 scale = Vector2(1.27048, 1.32462)
 texture = ExtResource("7_m8oyo")
 offset = Vector2(11.5556, 7.15256e-07)
-flip_v = true
 hframes = 9
 frame = 2
 
 [node name="HitBox" type="Area2D" parent="Trail" groups=["Player_Melee_HitBox"]]
-visible = false
 rotation = 1.5708
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Trail/HitBox"]
 visible = false
 position = Vector2(0.0198491, -10.2323)
-scale = Vector2(-2.209, 2.622)
+scale = Vector2(1e-05, 1e-05)
 polygon = PackedVector2Array(-4.79436, 4.19497, -7.19637, 8.39419, -9.23312, 2.38559, -8.53646, -3.31791, -5.79338, -7.21628, -1.34493, -9.61036, 2.0727, -9.60429, 5.82794, -7.79612, 8.21267, -4.48914, 9.57143, -0.883738, 9.56244, 3.01948, 5.88168, 1.6245, 3.61541, 2.76502, -0.00898581, 3.90322)
 disabled = true
 
@@ -3990,7 +3991,7 @@ dash_duration = 0.15
 one_shot = true
 
 [node name="Attack" parent="State Machine" instance=ExtResource("6_qoo4h")]
-slow_percent = 75.0
+slow_percent = 50.0
 
 [node name="CooldownTimer" type="Timer" parent="State Machine/Attack"]
 wait_time = 0.3
@@ -4064,6 +4065,11 @@ health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../CharacterSprite")
 state_machine = NodePath("../State Machine")
 
+[node name="Healing_Area" parent="." instance=ExtResource("18_x8tiv")]
+range = 40
+rate = 1
+amount = 3
+
 [connection signal="area_entered" from="Trail/HitBox" to="State Machine/Attack" method="_on_enemy_hit"]
 [connection signal="area_entered" from="Trail/HitBox" to="State Machine/AttackCombo" method="_on_enemy_hit"]
 [connection signal="area_entered" from="Trail/HitBox" to="State Machine/ChargeAttack" method="_on_enemy_hit"]
@@ -4080,3 +4086,4 @@ state_machine = NodePath("../State Machine")
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_attack_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/AttackCombo" method="_on_attack_combo_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/ChargeAttack" method="_on_charge_attack_finished"]
+[connection signal="area_entered" from="Healing_Area" to="." method="_on_healing_area_area_entered"]
