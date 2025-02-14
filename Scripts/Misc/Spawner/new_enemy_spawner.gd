@@ -6,7 +6,7 @@ extends Node2D
 @export var max_enemies: int = 50
 @export var waves: Array[WaveResource]  # List of waves
 @export var filler_wave: WaveResource  # Used when main wave ends early
-
+@export var On : bool = true
 var elite_modifier: EliteModifiers
 var active_wave: WaveResource
 var enemies: Array[Node2D] = []
@@ -20,14 +20,13 @@ func _ready():
 func _process(delta):
 	if !active_wave:
 		return
-
 	wave_timer += delta
-
-	if enemies.is_empty() and wave_timer < active_wave.duration and !active_wave.is_filler_wave:
-		activate_filler_wave()
-
-	if wave_timer >= active_wave.duration and enemies.is_empty():
-		start_next_wave()
+	
+	if On:
+		if enemies.is_empty() and wave_timer < active_wave.duration and !active_wave.is_filler_wave:
+			activate_filler_wave()
+		if wave_timer >= active_wave.duration and enemies.is_empty():
+			start_next_wave()
 
 func start_next_wave():
 	if current_wave_index >= waves.size():

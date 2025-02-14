@@ -17,7 +17,7 @@
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="14_7dj2w"]
 [ext_resource type="Texture2D" uid="uid://bmo0oks3fdkua" path="res://Spritesheets/Misc/elite_crown.png" id="15_bnq6x"]
 
-[sub_resource type="Resource" id="Resource_0817s"]
+[sub_resource type="Resource" id="Resource_2ek08"]
 resource_local_to_scene = true
 script = ExtResource("4_258s0")
 damage = 10
@@ -399,7 +399,7 @@ animation_tree = NodePath("AnimationTree")
 elite_crown = NodePath("EliteCrown")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "damage_number_component", "state_machine") instance=ExtResource("3_iu5ss")]
-stat_sheet = SubResource("Resource_0817s")
+stat_sheet = SubResource("Resource_2ek08")
 health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../Skeleton_Sprite")
 damage_number_component = NodePath("../DamageNumberComponent")

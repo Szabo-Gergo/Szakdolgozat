@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://hcingjk6e582"]
 
-[ext_resource type="Script" path="res://Scripts/Misc/point_based_health_bar.gd" id="1_7di70"]
+[ext_resource type="Script" path="res://Scripts/Misc/Health/point_based_health_bar.gd" id="1_7di70"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxsp7"]
 bg_color = Color(0, 0, 0, 0.364706)

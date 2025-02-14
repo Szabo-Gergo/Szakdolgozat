@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4x721xdv1oy3"]
+[gd_scene load_steps=19 format=3 uid="uid://c4x721xdv1oy3"]
 
 [ext_resource type="PackedScene" uid="uid://bvicg58gitoue" path="res://Scenes/Player/Player.tscn" id="1_evire"]
 [ext_resource type="PackedScene" uid="uid://swhynvv1nbu7" path="res://Scenes/Misc/enemy_spawner.tscn" id="1_gir3m"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8saaqfm137mm" path="res://Scenes/Map.tscn" id="3_cat7x"]
 [ext_resource type="Script" path="res://Scripts/Misc/Spawner/enemy_spawn_info.gd" id="3_vtvkn"]
 [ext_resource type="PackedScene" uid="uid://ngtpcu1w36s5" path="res://Scenes/Enemies/Skeleton.tscn" id="4_3ao8h"]
-[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="5_0mdko"]
+[ext_resource type="PackedScene" uid="uid://cmff58ldtn20y" path="res://Scenes/experience.tscn" id="7_1em76"]
 
 [sub_resource type="Resource" id="Resource_0ptn2"]
 script = ExtResource("3_vtvkn")
@@ -73,14 +73,6 @@ seamless_blend_skirt = 0.0
 normalize = false
 noise = SubResource("FastNoiseLite_3qoqj")
 
-[sub_resource type="Resource" id="Resource_1uub1"]
-resource_local_to_scene = true
-script = ExtResource("5_0mdko")
-damage = 10
-max_health = 5
-max_armor = 4
-speed = 100.0
-
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 
@@ -89,6 +81,7 @@ z_index = 1
 player = NodePath("../Player")
 waves = Array[ExtResource("2_232c0")]([SubResource("Resource_xiitg"), SubResource("Resource_ofqlc")])
 filler_wave = SubResource("Resource_qg37n")
+On = false
 
 [node name="Player" parent="." instance=ExtResource("1_evire")]
 unique_name_in_owner = true
@@ -104,5 +97,33 @@ delete_distance = 75
 
 [node name="Dev_UI" type="CanvasLayer" parent="."]
 
-[node name="Skeleton" parent="." instance=ExtResource("4_3ao8h")]
-base_stats = SubResource("Resource_1uub1")
+[node name="EXP" parent="." instance=ExtResource("7_1em76")]
+position = Vector2(-48, -66)
+xp_amount = 10
+
+[node name="EXP2" parent="." instance=ExtResource("7_1em76")]
+position = Vector2(-85, 1)
+xp_amount = 20
+
+[node name="EXP3" parent="." instance=ExtResource("7_1em76")]
+position = Vector2(-54, 60)
+xp_amount = 40
+
+[node name="EXP4" parent="." instance=ExtResource("7_1em76")]
+position = Vector2(-7, 49)
+xp_amount = 60
+
+[node name="EXP6" parent="." instance=ExtResource("7_1em76")]
+position = Vector2(-61, -18)
+xp_amount = 80
+
+[node name="EXP5" parent="." instance=ExtResource("7_1em76")]
+position = Vector2(-34, 6)
+xp_amount = 100
+
+[node name="EXP7" parent="." instance=ExtResource("7_1em76")]
+position = Vector2(-28, -34)
+
+[node name="EXP8" parent="." instance=ExtResource("7_1em76")]
+position = Vector2(-76, 30)
+xp_amount = 160

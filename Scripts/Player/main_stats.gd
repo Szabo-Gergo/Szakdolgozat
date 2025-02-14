@@ -11,6 +11,10 @@ extends CharacterBody2D
 @export var projectile_damage : int
 @export var charge_attack_damage_multiplier : float
 
+var level : int = 1
+var required_xp : int = 10
+var current_xp : int = 0
+
 var available_dash : float 
 var ammo : int
 var health : int 
@@ -93,3 +97,14 @@ func attack_cooldown_timeout() -> void:
 
 func combo_timer_timeout() -> void:
 	can_combo = false
+	
+func xp_gained(amount: int) -> void:
+	current_xp += amount
+
+	while current_xp >= required_xp:  # Handle multiple level-ups
+		current_xp -= required_xp
+		level += 1
+		print("LEVEL UP! New Level: %d" % level) 
+		required_xp = ceil(required_xp * 1.5)  # Convert to int to avoid decimal values
+
+	print("Current XP: %d / %d" % [current_xp, required_xp])

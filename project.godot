@@ -28,6 +28,8 @@ Player_Projectile_HitBox=""
 Player_HurtBox=""
 Enemy_HurtBox=""
 Enemy=""
+XP=""
+Player_Pickup_Area=""
 
 [input]
 
