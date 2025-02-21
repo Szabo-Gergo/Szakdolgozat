@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://bvicg58gitoue"]
+[gd_scene load_steps=127 format=3 uid="uid://bvicg58gitoue"]
 
 [ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player/Player.png" id="1_ksx3q"]
 [ext_resource type="Script" path="res://Scripts/Player/main_stats.gd" id="1_tssnm"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/attack_combo.gd" id="10_x566i"]
 [ext_resource type="Script" path="res://Scripts/Player/attack_charge_up.gd" id="11_3ygyj"]
 [ext_resource type="Script" path="res://Scripts/Player/charge_attack.gd" id="12_gl7jl"]
+[ext_resource type="Script" path="res://Scripts/Player/player_death.gd" id="16_4ffkt"]
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="17_eyexp"]
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="17_ktqi0"]
 
@@ -3877,7 +3878,7 @@ graph_offset = Vector2(-73.848, -152.407)
 [sub_resource type="CircleShape2D" id="CircleShape2D_3mym3"]
 radius = 68.67
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
 z_index = 1
 z_as_relative = false
 collision_mask = 4
@@ -3889,6 +3890,7 @@ max_dash = 100
 max_ammo = 10
 projectile_damage = 1
 charge_attack_damage_multiplier = 2.0
+health_component = NodePath("HealthComponent")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -4017,6 +4019,9 @@ script = ExtResource("6_1b0pb")
 aim_hand = NodePath("../../AimHand")
 bullet_spawn_point = NodePath("../../AimHand/BulletSpawnPoint")
 
+[node name="PlayerDeath" type="Node" parent="State Machine"]
+script = ExtResource("16_4ffkt")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_o0jql")
@@ -4059,6 +4064,7 @@ offset_right = 12.0
 offset_bottom = -17.0
 scale = Vector2(1, 0.36)
 health_component = NodePath("../HealthComponent")
+metadata/_edit_use_anchors_ = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "state_machine") instance=ExtResource("17_eyexp")]
 visible = false
@@ -4071,6 +4077,8 @@ state_machine = NodePath("../State Machine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 shape = SubResource("CircleShape2D_3mym3")
+
+[node name="Player_UI" type="CanvasLayer" parent="."]
 
 [connection signal="area_entered" from="Trail/HitBox" to="State Machine/Attack" method="_on_enemy_hit"]
 [connection signal="area_entered" from="Trail/HitBox" to="State Machine/AttackCombo" method="_on_enemy_hit"]

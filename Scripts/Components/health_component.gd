@@ -70,6 +70,6 @@ func number_pop_up(value: int, is_healing: bool):
 	if damage_number_component != null:
 		damage_number_component.display_damage(value, is_healing)
 	
-func check_health():	
+func check_health():
 	if health + armor <= 0: 
-		state_machine.current_state.request_transition("Death")
+		state_machine.on_state_transition(state_machine.current_state,"Death")

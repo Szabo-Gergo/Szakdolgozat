@@ -31,3 +31,5 @@ func _on_player_reached(body: Node2D) -> void:
 	if body.name == "Player":
 		body.xp_gained(xp_amount)
 		queue_free()
+
+	

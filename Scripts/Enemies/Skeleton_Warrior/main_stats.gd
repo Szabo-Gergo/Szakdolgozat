@@ -7,11 +7,14 @@ class_name Base_Enemy
 @export var sprite : Sprite2D
 @export var animation_tree : AnimationTree
 @export var elite_crown: Sprite2D
+@export var droped_xp_amount: int
 @onready var player: CharacterBody2D = get_node("/root/Main/Player")
- 
+
+var is_elite : bool
 var attach_break = 0 #(DO LATER) Should be on the Brain dog only
 
 func apply_modifier(elite_type, modifiers):
+	is_elite = true
 	elite_crown.visible = true
 	var healing_area_node
 	

@@ -7,11 +7,13 @@
 size = Vector2(8, 8)
 
 [node name="EXP" type="Node2D"]
-z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_ggpbp")
+xp_amount = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["XP"]]
+light_mask = 0
+y_sort_enabled = true
 texture = ExtResource("2_v7x4t")
 
 [node name="Area2D" type="Area2D" parent="." groups=["XP"]]

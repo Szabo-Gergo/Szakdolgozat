@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+signal level_up
 
 @onready var state_machine: StateMachine = $"State Machine"
 @onready var animation_tree = %AnimationTree
@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var max_ammo : int 
 @export var projectile_damage : int
 @export var charge_attack_damage_multiplier : float
+@export var health_component : Health_Component
 
 var level : int = 1
 var required_xp : int = 10
@@ -46,14 +47,6 @@ func _physics_process(delta: float) -> void:
 	move_player()
 	handle_transitions()
 	animation_update()
-
-func _add_health(new_health):
-	health += new_health
-	var max_health = base_stats.max_health
-	if health >= max_health:
-		health = max_health
-	elif health <= 0:
-		health = 0
 		
 
 func _add_ammo():
@@ -104,7 +97,8 @@ func xp_gained(amount: int) -> void:
 	while current_xp >= required_xp:  # Handle multiple level-ups
 		current_xp -= required_xp
 		level += 1
-		print("LEVEL UP! New Level: %d" % level) 
+		print("LEVEL UP! New Level: %d" % level)
+		level_up.emit()
 		required_xp = ceil(required_xp * 1.5)  # Convert to int to avoid decimal values
 
 	print("Current XP: %d / %d" % [current_xp, required_xp])

@@ -1,17 +1,21 @@
 extends ProgressBar
 
 @export var health_component : Health_Component
+@export var always_visible : bool
 @onready var shield_bar: ProgressBar = $ShieldBar
 @onready var damage_bar: ProgressBar = $DamageBar
 @onready var health_bar: ProgressBar = $"."
 @onready var damage_timer: Timer = $Damage_Timer
 @onready var visibility_timer: Timer = $Visibility_Timer
 
+
 func _ready() -> void:
+	if always_visible:
+		visible = true
 	health_setup()
 	
 func health_setup():
-	var max_value = health_component.health+health_component.armor
+	var max_value = health_component.stat_sheet.max_health+health_component.stat_sheet.max_armor
 	health_bar.max_value = max_value
 	shield_bar.max_value = max_value
 	damage_bar.max_value = max_value
@@ -23,10 +27,15 @@ func health_setup():
 
 func update_health_points():
 	health_bar.value = health_component.health
-	shield_bar.value = health_component.health+health_component.armor
+	shield_bar.value = health_component.health + health_component.armor
+	
+	print("health: "+str(health_component.health)+"  bar: "+str(health_bar.max_value))
+	
 	damage_timer.start()
 	visible = true
-	visibility_timer.start()
+	
+	if !always_visible:
+		visibility_timer.start()
 
 
 func _on_damage_timer_timeout() -> void:

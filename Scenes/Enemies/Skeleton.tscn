@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ngtpcu1w36s5"]
+[gd_scene load_steps=43 format=3 uid="uid://ngtpcu1w36s5"]
 
 [ext_resource type="Texture2D" uid="uid://cmq3tfef8x3ex" path="res://Spritesheets/Enemies/Sword_Skeleton.png" id="1_5nep8"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/main_stats.gd" id="1_sjipi"]
@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://dcla0uorl72kc" path="res://Resources/Skeleton_Warrior.tres" id="2_1xrwo"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="3_5f1e7"]
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="3_iu5ss"]
-[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="4_258s0"]
 [ext_resource type="Script" path="res://Scripts/Components/hurt_box_component.gd" id="4_j3edn"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="4_koktf"]
 [ext_resource type="Material" uid="uid://cqqne3pxiytgm" path="res://Resources/FlashShaderResource.tres" id="5_8m2at"]
@@ -16,14 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="8_aasmt"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="14_7dj2w"]
 [ext_resource type="Texture2D" uid="uid://bmo0oks3fdkua" path="res://Spritesheets/Misc/elite_crown.png" id="15_bnq6x"]
-
-[sub_resource type="Resource" id="Resource_2ek08"]
-resource_local_to_scene = true
-script = ExtResource("4_258s0")
-damage = 10
-max_health = 5
-max_armor = 4
-speed = 1000.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x281a"]
 radius = 4.67904
@@ -151,7 +142,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "method"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath("HealthComponent")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -177,7 +168,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [4, 5, 6, 22, 23, 24]
 }
 tracks/1/type = "value"
@@ -385,6 +376,8 @@ shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/pixel_size = 0.5
 
 [node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "sprite", "animation_tree", "elite_crown") groups=["Enemy"]]
+light_mask = 0
+y_sort_enabled = true
 scale = Vector2(1.3, 1.3)
 collision_layer = 2
 collision_mask = 7
@@ -397,9 +390,10 @@ health_component = NodePath("HealthComponent")
 sprite = NodePath("Skeleton_Sprite")
 animation_tree = NodePath("AnimationTree")
 elite_crown = NodePath("EliteCrown")
+droped_xp_amount = 5
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "damage_number_component", "state_machine") instance=ExtResource("3_iu5ss")]
-stat_sheet = SubResource("Resource_2ek08")
+stat_sheet = ExtResource("2_1xrwo")
 health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../Skeleton_Sprite")
 damage_number_component = NodePath("../DamageNumberComponent")
@@ -409,6 +403,7 @@ state_machine = NodePath("../State Machine")
 visible = false
 position = Vector2(0, 12)
 shape = SubResource("CircleShape2D_x281a")
+disabled = true
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("root", "health_component", "state_machine", "animation_tree") groups=["Enemy_HurtBox"]]
 visible = false
@@ -438,13 +433,14 @@ polygon = PackedVector2Array(0, 0, -9, 18, -17, 15, -22, 12, -25, 6, -26, 0, -25
 
 [node name="Skeleton_Sprite" type="Sprite2D" parent="."]
 light_mask = 0
+y_sort_enabled = true
 material = ExtResource("5_8m2at")
 position = Vector2(0, 13.0769)
 texture = ExtResource("1_5nep8")
 offset = Vector2(0, -13.0769)
 hframes = 18
 vframes = 2
-frame = 17
+frame = 24
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -470,12 +466,9 @@ health_component = NodePath("../HealthComponent")
 [node name="State Machine" parent="." node_paths=PackedStringArray("base_state") instance=ExtResource("2_1f302")]
 base_state = NodePath("Move")
 
-[node name="Damaged" type="Node" parent="State Machine" node_paths=PackedStringArray("animation_tree", "sprite", "root", "damage_number_component", "health_component")]
+[node name="Damaged" type="Node" parent="State Machine" node_paths=PackedStringArray("root", "health_component")]
 script = ExtResource("3_5f1e7")
-animation_tree = NodePath("../../AnimationTree")
-sprite = NodePath("../../Skeleton_Sprite")
 root = NodePath("../..")
-damage_number_component = NodePath("../../DamageNumberComponent")
 health_component = NodePath("../../HealthComponent")
 
 [node name="Death" type="Node" parent="State Machine" node_paths=PackedStringArray("root", "sprite", "health_bar")]
@@ -516,7 +509,7 @@ texture = ExtResource("15_bnq6x")
 [connection signal="area_entered" from="HitBox" to="State Machine/Attack" method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="HitBox" to="State Machine/Move" method="_on_hit_box_area_entered"]
 [connection signal="area_exited" from="HitBox" to="State Machine/Attack" method="_on_hit_box_area_exited"]
-[connection signal="animation_finished" from="AnimationTree" to="State Machine/Damaged" method="_on_damaged_finished"]
+[connection signal="animation_finished" from="AnimationTree" to="State Machine/Damaged" method="handle_transition"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_attack_finished"]
 [connection signal="transition" from="State Machine/Damaged" to="State Machine" method="on_state_transition"]
 [connection signal="transition" from="State Machine/Death" to="State Machine" method="on_state_transition"]

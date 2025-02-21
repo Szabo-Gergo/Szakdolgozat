@@ -50,7 +50,7 @@ value = 75.0
 show_percentage = false
 
 [node name="ShieldBar" type="ProgressBar" parent="."]
-z_index = -1
+z_index = -2
 y_sort_enabled = true
 layout_mode = 1
 anchors_preset = 15

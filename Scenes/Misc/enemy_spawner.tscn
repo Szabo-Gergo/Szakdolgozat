@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Misc/Spawner/new_enemy_spawner.gd" id="1_m40g1"]
 
 [node name="Enemy_Spawner" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_m40g1")
 
 [node name="Timer GUI" type="CanvasLayer" parent="."]

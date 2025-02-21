@@ -7,6 +7,7 @@ var current_state : State
 @onready var label: Label = $"../Label"
 @onready var player: CharacterBody2D = $".."
 
+
 func _ready() -> void:
 	for child in get_children():
 		if child is State:
@@ -27,14 +28,17 @@ func _physics_process(delta: float) -> void:
 		
 
 func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
-	current_state.exit()
 	if state != current_state:
 		return
+
+	current_state.exit()
 		
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
 		return
 		
 	new_state.enter(inputs)
+	print("Original State: "+state.name+" \nNew State: "+new_state_name+"\n")
+	
 	current_state = new_state
 	label.text = current_state.name

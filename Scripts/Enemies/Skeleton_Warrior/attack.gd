@@ -38,6 +38,6 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 
 func _on_attack_finished(anim_name: StringName) -> void:
 	if anim_name == "Attack" and attacking and !hit_on_collision:
-		root.player._add_health(-root.base_stats.damage)
+		root.player.health_component.deal_damage(root.base_stats.damage)
 	transition.emit(self, "Move")
 	
