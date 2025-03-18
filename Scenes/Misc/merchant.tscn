@@ -1,0 +1,171 @@
+[gd_scene load_steps=21 format=3 uid="uid://c45xdbbrs17f5"]
+
+[ext_resource type="Texture2D" uid="uid://3bb1mdag6qgt" path="res://Spritesheets/Misc/NPC_Merchant.png" id="1_mxb8t"]
+[ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="1_vdx3s"]
+[ext_resource type="PackedScene" uid="uid://bp83uc6sodr51" path="res://Scripts/Components/interaction_component.tscn" id="2_c45kb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btpm1"]
+shader = ExtResource("1_vdx3s")
+shader_parameter/outline_color = null
+shader_parameter/pixel_size = null
+
+[sub_resource type="Animation" id="Animation_wwdk6"]
+resource_name = "EnterInteract"
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_d0j3t"]
+resource_name = "Idle"
+length = 1.5
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [51, 1, 2, 3, 4, 5, 6, 0]
+}
+
+[sub_resource type="Animation" id="Animation_w28kx"]
+resource_name = "Interact"
+length = 4.9
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65, 1.8, 1.95, 2.09286, 2.25, 2.4, 2.55, 2.7, 2.85, 3, 3.15, 3.3, 3.45, 3.6, 3.75, 3.9, 4.05, 4.2, 4.35, 4.5, 4.65, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+}
+
+[sub_resource type="Animation" id="Animation_hv24f"]
+resource_name = "LeavingInteraction"
+length = 0.5
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 50, 51]
+}
+
+[sub_resource type="Animation" id="Animation_ufta3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hxga4"]
+_data = {
+"EnterInteract": SubResource("Animation_wwdk6"),
+"Idle": SubResource("Animation_d0j3t"),
+"Interact": SubResource("Animation_w28kx"),
+"LeavingInteraction": SubResource("Animation_hv24f"),
+"RESET": SubResource("Animation_ufta3")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8r06v"]
+animation = &"EnterInteract"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lhuxa"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fsn81"]
+animation = &"Interact"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rklrv"]
+animation = &"LeavingInteraction"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t8qq3"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sdm8k"]
+advance_mode = 2
+advance_expression = "label.visible"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tnntv"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kv4q2"]
+advance_mode = 2
+advance_expression = "!label.visible"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l4skw"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lh0wy"]
+states/End/position = Vector2(928, 100)
+states/EnterInteract/node = SubResource("AnimationNodeAnimation_8r06v")
+states/EnterInteract/position = Vector2(453, 47)
+states/Idle/node = SubResource("AnimationNodeAnimation_lhuxa")
+states/Idle/position = Vector2(312, 100)
+states/Interact/node = SubResource("AnimationNodeAnimation_fsn81")
+states/Interact/position = Vector2(604, 47)
+states/LeavingInteraction/node = SubResource("AnimationNodeAnimation_rklrv")
+states/LeavingInteraction/position = Vector2(775, 100)
+states/Start/position = Vector2(202, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_t8qq3"), "Idle", "EnterInteract", SubResource("AnimationNodeStateMachineTransition_sdm8k"), "EnterInteract", "Interact", SubResource("AnimationNodeStateMachineTransition_tnntv"), "Interact", "LeavingInteraction", SubResource("AnimationNodeStateMachineTransition_kv4q2"), "LeavingInteraction", "Idle", SubResource("AnimationNodeStateMachineTransition_l4skw")]
+
+[node name="Merchant" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_btpm1")
+texture = ExtResource("1_mxb8t")
+hframes = 52
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hxga4")
+}
+next/Idle = &"Idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_lh0wy")
+advance_expression_base_node = NodePath("../InteractionComponent")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="InteractionComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_c45kb")]
+position = Vector2(0, -37)
+sprite = NodePath("../Sprite2D")
+area_range = 80

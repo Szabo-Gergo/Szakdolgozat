@@ -1,11 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4x721xdv1oy3"]
+[gd_scene load_steps=18 format=3 uid="uid://c4x721xdv1oy3"]
 
 [ext_resource type="PackedScene" uid="uid://bvicg58gitoue" path="res://Scenes/Player/Player.tscn" id="1_evire"]
 [ext_resource type="PackedScene" uid="uid://swhynvv1nbu7" path="res://Scenes/Misc/enemy_spawner.tscn" id="1_gir3m"]
+[ext_resource type="Script" path="res://Scripts/UI/pause.gd" id="1_qsjxj"]
 [ext_resource type="Script" path="res://Scripts/Misc/Spawner/wave_resource.gd" id="2_232c0"]
 [ext_resource type="PackedScene" uid="uid://c8saaqfm137mm" path="res://Scenes/Map.tscn" id="3_cat7x"]
 [ext_resource type="Script" path="res://Scripts/Misc/Spawner/enemy_spawn_info.gd" id="3_vtvkn"]
 [ext_resource type="PackedScene" uid="uid://ngtpcu1w36s5" path="res://Scenes/Enemies/Skeleton.tscn" id="4_3ao8h"]
+[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="6_13qtb"]
+[ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="8_o4bch"]
 
 [sub_resource type="Resource" id="Resource_bk14s"]
 script = ExtResource("3_vtvkn")
@@ -25,6 +28,22 @@ script = ExtResource("2_232c0")
 enemy_info = Array[ExtResource("3_vtvkn")]([])
 duration = 30.0
 is_filler_wave = true
+
+[sub_resource type="Resource" id="Resource_hb61j"]
+resource_local_to_scene = true
+script = ExtResource("6_13qtb")
+damage = 2
+max_health = 100
+max_armor = 0
+speed = 125.0
+
+[sub_resource type="Resource" id="Resource_xw7wj"]
+resource_local_to_scene = true
+script = ExtResource("6_13qtb")
+damage = 2
+max_health = 100
+max_armor = 0
+speed = 125.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xyca7"]
 
@@ -51,6 +70,10 @@ On = false
 unique_name_in_owner = true
 y_sort_enabled = true
 position = Vector2(320, 180)
+base_stats = SubResource("Resource_hb61j")
+
+[node name="HealthComponent" parent="Player" index="13"]
+stat_sheet = SubResource("Resource_xw7wj")
 
 [node name="Map" parent="." instance=ExtResource("3_cat7x")]
 material = SubResource("ShaderMaterial_xyca7")
@@ -58,14 +81,82 @@ generation_noise = SubResource("NoiseTexture2D_agryi")
 generation_size = Vector2(20, 20)
 delete_distance = 75
 
-[node name="Dev_UI" type="CanvasLayer" parent="."]
+[node name="GameUILayer" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="GameUILayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="BasicHealthBar" parent="GameUILayer" node_paths=PackedStringArray("health_component") instance=ExtResource("8_o4bch")]
+offset_left = 39.0
+offset_top = 26.0
+offset_right = 226.0
+offset_bottom = 33.0
+health_component = NodePath("../../Player/HealthComponent")
+always_visible = true
+is_player_hb = true
+
+[node name="PauseUILayer" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="Control" type="Control" parent="PauseUILayer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 3
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qsjxj")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseUILayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -56.0
+offset_right = 84.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseUILayer/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Paused" type="Label" parent="PauseUILayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.47)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 35
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToHub" type="Button" parent="PauseUILayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return To Hub"
+
+[node name="ToMainMenu" type="Button" parent="PauseUILayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return To main Menu"
+
+[connection signal="pressed" from="PauseUILayer/Control/MarginContainer/VBoxContainer/ToHub" to="PauseUILayer/Control" method="_on_to_hub_pressed"]
+[connection signal="pressed" from="PauseUILayer/Control/MarginContainer/VBoxContainer/ToMainMenu" to="PauseUILayer/Control" method="_on_to_main_menu_pressed"]
+
+[editable path="Player"]

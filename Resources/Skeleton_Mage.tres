@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="1_22kbi"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_22kbi")
 damage = 10
 max_health = 20

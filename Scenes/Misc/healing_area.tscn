@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://biywcgvmgbbja"]
 
-[ext_resource type="Script" path="res://healing_area_component.gd" id="1_ri0gr"]
+[ext_resource type="Script" path="res://Scripts/Components/healing_area_component.gd" id="1_ri0gr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rl0d1"]
 radius = 40.0

@@ -4,11 +4,14 @@ signal death
 
 @export_category("Component")
 @export var stat_sheet : BaseStats
+@export var is_player_health_component: bool
 @export var health_bar : ProgressBar 
+
 @export var sprite : Sprite2D
 @export var damage_number_component : DamageNumberComponent
 @export var state_machine : StateMachine
 
+var GUI_health_bar: ProgressBar
 var health : int
 var armor : int
 var can_stagger : bool
@@ -18,6 +21,9 @@ func _ready() -> void:
 
 	health = stat_sheet.max_health
 	armor = stat_sheet.max_armor
+
+	if is_player_health_component:
+		GUI_health_bar = get_node("../../GameUILayer/BasicHealthBar")
 
 	if armor != 0:
 		can_stagger = false
@@ -44,6 +50,9 @@ func deal_damage(damage):
 
 	check_health()
 	health_bar.update_health_points()
+	if is_player_health_component:
+		GUI_health_bar.update_health_points()
+
 	number_pop_up(damage, false)
 	flash(0.2)
 
@@ -62,9 +71,10 @@ func healing(healing_amount):
 	
 
 func flash(time):
-	sprite.material.set("shader_parameter/flash_opacity", 1)
-	await get_tree().create_timer(time).timeout
-	sprite.material.set("shader_parameter/flash_opacity", 0)
+	if !is_player_health_component:
+		sprite.material.set("shader_parameter/flash_opacity", 1)
+		await get_tree().create_timer(time).timeout
+		sprite.material.set("shader_parameter/flash_opacity", 0)
 
 func number_pop_up(value: int, is_healing: bool):
 	if damage_number_component != null:

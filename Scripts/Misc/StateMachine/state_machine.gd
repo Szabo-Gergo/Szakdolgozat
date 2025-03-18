@@ -37,8 +37,6 @@ func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 	if !new_state:
 		return
 		
-	new_state.enter(inputs)
-	print("Original State: "+state.name+" \nNew State: "+new_state_name+"\n")
-	
+	new_state.enter(inputs)	
 	current_state = new_state
 	label.text = current_state.name

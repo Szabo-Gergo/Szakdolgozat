@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dkfwx62e86tvd"]
+
+[node name="KeybindingUp" type="Button"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Key"
+alignment = 0
+autowrap_mode = 3
+
+[node name="InputKey" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Input Key  "
+vertical_alignment = 1

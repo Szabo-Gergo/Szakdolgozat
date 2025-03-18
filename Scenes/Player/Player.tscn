@@ -1,9 +1,10 @@
-[gd_scene load_steps=127 format=3 uid="uid://bvicg58gitoue"]
+[gd_scene load_steps=130 format=3 uid="uid://bvicg58gitoue"]
 
 [ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player/Player.png" id="1_ksx3q"]
 [ext_resource type="Script" path="res://Scripts/Player/main_stats.gd" id="1_tssnm"]
 [ext_resource type="PackedScene" uid="uid://b66ssmufcj31d" path="res://Scenes/Player/AimHand.tscn" id="2_7og2s"]
 [ext_resource type="Resource" uid="uid://5wotaqm6apj7" path="res://Resources/Player.tres" id="2_076ji"]
+[ext_resource type="Shader" path="res://Shaders/Colour_Switch.gdshader" id="3_4ynfh"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="3_cv635"]
 [ext_resource type="PackedScene" uid="uid://3rvyikqwuq7c" path="res://Scenes/Player/Dash.tscn" id="4_fflmd"]
 [ext_resource type="Script" path="res://Scripts/Player/shoot.gd" id="6_1b0pb"]
@@ -18,11 +19,14 @@
 [ext_resource type="Script" path="res://Scripts/Player/player_death.gd" id="16_4ffkt"]
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="17_eyexp"]
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="17_ktqi0"]
+[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="19_yk4dd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olbmv"]
-shader = ExtResource("7_iouf4")
-shader_parameter/outline_color = Color(1, 1, 1, 1)
-shader_parameter/pixel_size = 0.0
+shader = ExtResource("3_4ynfh")
+shader_parameter/number_of_colors = 6
+shader_parameter/target_color = PackedColorArray(0.929412, 0.109804, 0.141176, 1, 0.611765, 0.352941, 0.235294, 1, 0.6, 0, 0.188235, 1, 0.4, 0.188235, 0.105882, 1, 0.6, 0.435294, 0.364706, 1, 0.898039, 0.666667, 0.478431, 1)
+shader_parameter/replace_color = PackedColorArray(0.399302, 0.260339, 0, 1, 0, 0.254902, 0, 1, 2.52686e-06, 0.394228, 0.0794225, 1, 0, 0.257401, 0.0941871, 1, 0.294118, 0.32549, 0.0313726, 1, 0.312988, 1, 0.214844, 1)
+shader_parameter/tolerance = 0.092
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptvar"]
 size = Vector2(12, 11)
@@ -3875,6 +3879,14 @@ states/run/position = Vector2(609.152, 385)
 transitions = ["run", "Attack", SubResource("AnimationNodeStateMachineTransition_gyqgp"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_3teqp"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_8t3ux"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ac23f"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_rdhmg"), "ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_6d6bx"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_l8ltc"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_xno7n"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_cmrdp"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_l0e4x"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_wpcky"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_bc2ly"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_0c2lo"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43"), "Attack", "Shoot", SubResource("AnimationNodeStateMachineTransition_1htc5"), "Combo", "Shoot", SubResource("AnimationNodeStateMachineTransition_sxg5f"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_t7i16"), "run", "Combo", SubResource("AnimationNodeStateMachineTransition_ur286"), "idle", "Combo", SubResource("AnimationNodeStateMachineTransition_xhmyh"), "Combo", "Attack", SubResource("AnimationNodeStateMachineTransition_fxa36")]
 graph_offset = Vector2(-73.848, -152.407)
 
+[sub_resource type="Resource" id="Resource_16fwc"]
+resource_local_to_scene = true
+script = ExtResource("19_yk4dd")
+damage = 2
+max_health = 100
+max_armor = 0
+speed = 125.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_3mym3"]
 radius = 68.67
 
@@ -3924,6 +3936,7 @@ polygon = PackedVector2Array(-4.79436, 4.19497, -7.19637, 8.39419, -9.23312, 2.3
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="." groups=["Player_HurtBox"]]
+visible = false
 collision_mask = 2
 
 [node name="Hurt_shape" type="CollisionShape2D" parent="HurtBox"]
@@ -4019,7 +4032,7 @@ script = ExtResource("6_1b0pb")
 aim_hand = NodePath("../../AimHand")
 bullet_spawn_point = NodePath("../../AimHand/BulletSpawnPoint")
 
-[node name="PlayerDeath" type="Node" parent="State Machine"]
+[node name="Death" type="Node" parent="State Machine"]
 script = ExtResource("16_4ffkt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -4064,16 +4077,19 @@ offset_right = 12.0
 offset_bottom = -17.0
 scale = Vector2(1, 0.36)
 health_component = NodePath("../HealthComponent")
+always_visible = true
 metadata/_edit_use_anchors_ = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "state_machine") instance=ExtResource("17_eyexp")]
 visible = false
-stat_sheet = ExtResource("2_076ji")
+stat_sheet = SubResource("Resource_16fwc")
+is_player_health_component = true
 health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../CharacterSprite")
 state_machine = NodePath("../State Machine")
 
 [node name="PickupArea" type="Area2D" parent="." groups=["Player_Pickup_Area"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 shape = SubResource("CircleShape2D_3mym3")

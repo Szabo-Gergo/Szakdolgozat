@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp83uc6sodr51"]
+
+[ext_resource type="Script" path="res://Scripts/Components/interaction_component.gd" id="1_wqywj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_04xut"]
+
+[node name="InteractionComponent" type="Node2D"]
+script = ExtResource("1_wqywj")
+area_range = 20
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_04xut")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.0
+offset_top = -16.0
+offset_right = 41.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[E] interact"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
