@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2jltl06io3uu"]
+
+[ext_resource type="Script" path="res://Scripts/Misc/skill_node.gd" id="1_6ncbr"]
+[ext_resource type="Texture2D" uid="uid://ecodbkabej01" path="res://Spritesheets/Misc/Skill_Icons/Skillicon7_23.png" id="2_8chkl"]
+[ext_resource type="Texture2D" uid="uid://5nlf6h23yj6r" path="res://Spritesheets/Misc/Skill_Icons/Skillicon7_25.png" id="4_wcoi3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_536f5"]
+resource_local_to_scene = true
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d7x44"]
+resource_local_to_scene = true
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mp1sv"]
+resource_local_to_scene = true
+bg_color = Color(0.230469, 0.230469, 0.230469, 1)
+
+[node name="SkillNode" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.0
+offset_top = -158.0
+offset_right = -298.0
+offset_bottom = -158.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ncbr")
+texture = ExtResource("2_8chkl")
+max_level = 3
+is_locked = true
+
+[node name="Line" type="Line2D" parent="."]
+default_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+z_index = 1
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 44.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_536f5")
+
+[node name="Button" type="Button" parent="PanelContainer"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_d7x44")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_mp1sv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mp1sv")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_mp1sv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mp1sv")
+icon = ExtResource("4_wcoi3")
+icon_alignment = 1
+
+[node name="CostLabel" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "10"
+
+[node name="LevelLabel" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 10
+text = "0/3"
+
+[connection signal="pressed" from="PanelContainer/Button" to="." method="_on_button_pressed"]

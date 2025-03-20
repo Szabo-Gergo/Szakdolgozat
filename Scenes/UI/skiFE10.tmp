@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2jltl06io3uu"]
+
+[ext_resource type="Script" path="res://Scripts/Misc/skill_node.gd" id="1_6ncbr"]
+[ext_resource type="Texture2D" uid="uid://ecodbkabej01" path="res://Spritesheets/Misc/Skill_Icons/Skillicon7_23.png" id="2_8chkl"]
+[ext_resource type="Texture2D" uid="uid://dw2yyc7xmn60h" path="res://Spritesheets/Misc/Skill_Icons/Skillicon7_03.png" id="3_k4a7x"]
+[ext_resource type="Texture2D" uid="uid://5nlf6h23yj6r" path="res://Spritesheets/Misc/Skill_Icons/Skillicon7_25.png" id="4_wcoi3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p32c5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="SkillNode" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ncbr")
+texture = ExtResource("2_8chkl")
+max_level = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 44.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p32c5")
+
+[node name="TextureButton" type="TextureButton" parent="PanelContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_k4a7x")
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+icon = ExtResource("4_wcoi3")
+
+[node name="CostLabel" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "10"
+
+[node name="LevelLabel" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 10
+text = "0/3"
+
+[connection signal="pressed" from="PanelContainer/Button" to="." method="_on_button_pressed"]

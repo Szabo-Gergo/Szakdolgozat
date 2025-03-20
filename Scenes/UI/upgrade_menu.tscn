@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://b1p0vdrkfuneh"]
+[gd_scene load_steps=3 format=3 uid="uid://b1p0vdrkfuneh"]
+
+[ext_resource type="Script" path="res://Scripts/UI/upgrade_menu.gd" id="1_08eut"]
+[ext_resource type="Texture2D" uid="uid://dwi3hdps8axm7" path="res://Spritesheets/Weapon/UI_hammer_texture_atlas.tres" id="2_6a5rq"]
 
 [node name="UpgradeMenu" type="Control"]
 layout_mode = 3
@@ -7,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_08eut")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -18,18 +22,100 @@ grow_vertical = 2
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
+tab_alignment = 1
 current_tab = 0
 
 [node name="Melee Weapons" type="TabBar" parent="MarginContainer/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 0
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Melee Weapons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="WeaponPickerContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="LeftButton" type="Button" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
+z_index = 1
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "<-"
+
+[node name="MeleeTextureButton" type="TextureButton" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 20.0
+texture_normal = ExtResource("2_6a5rq")
+stretch_mode = 5
+
+[node name="RightButton" type="Button" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
+z_index = 1
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "->"
+
 [node name="Secondary Weapons" type="TabBar" parent="MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Secondary Weapons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="WeaponPickerContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="LeftButton" type="Button" parent="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
+z_index = 1
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "<-"
+
+[node name="SecondaryTextureButton" type="TextureButton" parent="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 20.0
+texture_normal = ExtResource("2_6a5rq")
+stretch_mode = 5
+
+[node name="RightButton" type="Button" parent="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
+z_index = 1
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "->"
+
 [node name="Outfits" type="TabBar" parent="MarginContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[connection signal="pressed" from="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/LeftButton" to="." method="_on_melee_switch_left_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/RightButton" to="." method="_on_melee_switch_right_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/LeftButton" to="." method="_on_melee_switch_left_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/RightButton" to="." method="_on_melee_switch_right_pressed"]

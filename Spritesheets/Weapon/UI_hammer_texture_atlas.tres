@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dwi3hdps8axm7"]
+
+[ext_resource type="Texture2D" uid="uid://ssg4bcrjygo3" path="res://Spritesheets/Weapon/Hammer_sprites.png" id="1_ej078"]
+
+[resource]
+atlas = ExtResource("1_ej078")
+region = Rect2(9, 0, 17, 32)

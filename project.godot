@@ -17,12 +17,12 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 [autoload]
 
 ConfigHandler="*res://Scripts/Misc/ConfigHandler.gd"
+PlayerSkillStatHandler="*res://Scripts/Misc/player_skill_stats_handler.gd"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
