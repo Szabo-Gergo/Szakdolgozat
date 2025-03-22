@@ -5,14 +5,14 @@ class_name Dash
 @onready var sprite: Sprite2D = %CharacterSprite
 @onready var trail: Sprite2D = %Trail
 
-@onready var player: CharacterBody2D = $"../.."
-@onready var dash_particle: GPUParticles2D = %DashParticle
+@export var player: CharacterBody2D 
+@export var dash_particle: GPUParticles2D 
 
-@onready var collision: CollisionShape2D = %CollisionShape2D
-@onready var hurt_box: CollisionShape2D = $"../../HurtBox/Hurt_shape"
-@onready var hit_box: CollisionPolygon2D = $"../../Trail/HitBox/CollisionPolygon2D"
-@onready var dash_timer: Timer = $Dash_Timer
+@export var collision: CollisionShape2D
+@export var hurt_box: CollisionShape2D
+@export var hit_box: CollisionPolygon2D 
 
+var dash_timer: Timer 
 const character_width = 32
 const character_height = 34
 
@@ -24,6 +24,7 @@ var dash_velocity : Vector2
 var attack_buffered : bool 
 
 func _ready() -> void:
+	dash_timer = get_child(0)
 	dash_timer.wait_time = dash_duration
 
 func enter(inputs : Dictionary = {}):

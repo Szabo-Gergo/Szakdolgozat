@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://cikpw46qjjxsf"]
+[gd_scene load_steps=38 format=4 uid="uid://cikpw46qjjxsf"]
 
 [ext_resource type="Texture2D" uid="uid://db4ruf1ayj4wx" path="res://Spritesheets/Enviroment/Tileset-Terrain2.png" id="1_rklo1"]
 [ext_resource type="Texture2D" uid="uid://d1prhhghnpvut" path="res://Spritesheets/Enviroment/Summer_Plains_Decoration.png" id="2_ecm2o"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ccwt6yg5f5yn7" path="res://Spritesheets/Enviroment/shrine or fountain 160x128-on grass.png" id="7_vwt2r"]
 [ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="8_vntfd"]
 [ext_resource type="PackedScene" uid="uid://c45xdbbrs17f5" path="res://Scenes/Misc/merchant.tscn" id="10_wfryy"]
+[ext_resource type="PackedScene" uid="uid://b1p0vdrkfuneh" path="res://Scenes/UI/upgrade_menu.tscn" id="13_ecwo3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hl1bb"]
 texture = ExtResource("2_ecm2o")
@@ -1738,6 +1739,14 @@ max_health = 100
 max_armor = 0
 speed = 125.0
 
+[sub_resource type="Resource" id="Resource_1236q"]
+resource_local_to_scene = true
+script = ExtResource("8_vntfd")
+damage = 2
+max_health = 100
+max_armor = 0
+speed = 125.0
+
 [node name="Hub" type="Node2D"]
 
 [node name="Ground_Decorations" type="TileMapLayer" parent="."]
@@ -1799,5 +1808,28 @@ position = Vector2(-108, -556)
 [node name="Merchant" parent="." instance=ExtResource("10_wfryy")]
 position = Vector2(-89, -234)
 
+[node name="InteractionComponent" parent="Merchant" index="3" node_paths=PackedStringArray("menu")]
+process_mode = 3
+menu = NodePath("../../CanvasLayer/UpgradeMenu")
+
 [node name="Player" parent="." instance=ExtResource("7_khhdo")]
 base_stats = SubResource("Resource_fhe3o")
+
+[node name="HealthComponent" parent="Player" index="5"]
+stat_sheet = SubResource("Resource_1236q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 2
+visible = false
+
+[node name="UpgradeMenu" parent="CanvasLayer" instance=ExtResource("13_ecwo3")]
+custom_minimum_size = Vector2(640, 360)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[connection signal="weapon_change" from="CanvasLayer/UpgradeMenu" to="Player/MeleeWeapon" method="_on_weapon_change"]
+
+[editable path="Merchant"]
+[editable path="Player"]
+[editable path="CanvasLayer/UpgradeMenu"]

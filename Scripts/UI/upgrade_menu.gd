@@ -1,16 +1,17 @@
 extends Control
-
+signal weapon_change(weapon_index : int)
 
 var current_melee_index : int = 1
 @onready var melee_texture_button: TextureButton = $"MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/MeleeTextureButton"
+@onready var canvas_layer: CanvasLayer = $".."
 
 const HAMMER_TEXTURE = preload("res://Spritesheets/Weapon/UI_hammer_texture_atlas.tres")
 const SPEAR_TEXTURE = preload("res://Spritesheets/Weapon/UI_spear_texture_atlas.tres")
 const SWORD_TEXTURE = preload("res://Spritesheets/Weapon/UI_sword_texture_atlas.tres")
-
 const MELEE_WEAPONS : Dictionary = { "0" = SWORD_TEXTURE, "1" = HAMMER_TEXTURE, "2" = SPEAR_TEXTURE}
 
 var transitioning_weapons : bool = false
+
 
 
 func _on_melee_switch_left_pressed() -> void:
@@ -41,6 +42,8 @@ func change_weapon(change_direction : int):
 	slide_tween(reset_tween, reset_pos)
 	await reset_tween.finished
 	transitioning_weapons = false
+	
+	weapon_change.emit(current_melee_index)
 
 
 func slide_tween(tween : Tween , slide_to_positon : float):
@@ -49,4 +52,4 @@ func slide_tween(tween : Tween , slide_to_positon : float):
 		"position:x",  
 		slide_to_positon,  
 		0.25
-	).set_trans(Tween.TRANS_CUBIC)
+	)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw05c3h4dtm00"
-path="res://.godot/imported/Trail.png-046aff853d2177d69c065506802c6fa6.ctex"
+uid="uid://c5ag7r2gori0u"
+path="res://.godot/imported/Hammer_Trail.png-947af3b14a39c643d45001d863a34a36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Weapon/Trail.png"
-dest_files=["res://.godot/imported/Trail.png-046aff853d2177d69c065506802c6fa6.ctex"]
+source_file="res://Spritesheets/Weapon/Hammer_Trail.png"
+dest_files=["res://.godot/imported/Hammer_Trail.png-947af3b14a39c643d45001d863a34a36.ctex"]
 
 [params]
 

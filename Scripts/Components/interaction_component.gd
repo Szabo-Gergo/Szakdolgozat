@@ -7,9 +7,12 @@ class_name InteractionComponent
 @onready var label: Label = $Label
 var check_for_input : bool
 
+@export var menu: Control
+
+
+
 func _ready() -> void:
 	check_for_input = false
-	
 	var interact_event = InputMap.action_get_events("interact")[0]	
 	label.text = "["+InputMap.action_get_events("interact")[0].as_text()+"] Interact"
 	collision_shape_2d.shape.set("radius", area_range)
@@ -29,10 +32,18 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		label.visible = false
 		sprite.material.set("shader_parameter/pixel_size", 0)
 		check_for_input = false
-		print("Player Left!")
-		#Close the pop up menu
+		menu.get_parent().hide()
 		
 func _input(event: InputEvent) -> void:
 	if check_for_input and event.is_action_pressed("interact"):
-		print("Menu will be opened!")
-		pass
+		if !get_tree().paused:
+			menu.get_parent().show()
+			get_tree().paused = true
+		elif get_tree().paused:
+			get_tree().paused = false
+			menu.get_parent().hide()
+	
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	print(event)

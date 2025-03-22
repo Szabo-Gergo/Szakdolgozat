@@ -5,6 +5,8 @@ class_name HurtBoxComponent
 @export var health_component : Health_Component
 @export var state_machine : StateMachine
 @export var animation_tree : AnimationTree
+var melee_resource : MeleeWeaponResource 
+
 
 func _on_area_entered(area: Area2D) -> void:
 	var is_melee_hitbox = area.is_in_group("Player_Melee_HitBox")
@@ -12,7 +14,7 @@ func _on_area_entered(area: Area2D) -> void:
 	var damage = 0
 		
 	if is_melee_hitbox:
-		damage = root.player.base_stats.damage
+		damage = root.player.melee_weapon.melee_resource._get_damage()
 	elif is_projectile_hitbox:
 		damage = root.player.projectile_damage
 	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dthkeod2lbbcy"
-path="res://.godot/imported/Skillicon7_21.png-ffdad043584a56e167ab01ca9c7e4401.ctex"
+uid="uid://htqh23hc5u4w"
+path="res://.godot/imported/Sword_Trail.png-4765732498a027cd64f8b98a7053a250.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Misc/Skill_Icons/Skillicon7_21.png"
-dest_files=["res://.godot/imported/Skillicon7_21.png-ffdad043584a56e167ab01ca9c7e4401.ctex"]
+source_file="res://Spritesheets/Weapon/Sword_Trail.png"
+dest_files=["res://.godot/imported/Sword_Trail.png-4765732498a027cd64f8b98a7053a250.ctex"]
 
 [params]
 

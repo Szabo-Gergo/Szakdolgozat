@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4r5is2xuryix"
-path="res://.godot/imported/Skillicon7_30.png-fff14395075047df80af7b82d794e603.ctex"
+uid="uid://hh6viawjk2np"
+path="res://.godot/imported/Skillicon_Speed.png-3eefb6595b784456f82db5a195d1b086.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Misc/Skill_Icons/Skillicon7_30.png"
-dest_files=["res://.godot/imported/Skillicon7_30.png-fff14395075047df80af7b82d794e603.ctex"]
+source_file="res://Spritesheets/Misc/Skillicon_Speed.png"
+dest_files=["res://.godot/imported/Skillicon_Speed.png-3eefb6595b784456f82db5a195d1b086.ctex"]
 
 [params]
 

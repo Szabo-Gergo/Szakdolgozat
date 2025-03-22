@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=2 format=3 uid="uid://bjdl2kn8pe6ek"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/melee_weapon_resource.gd" id="1_b7fde"]
+
+[resource]
+script = ExtResource("1_b7fde")
+base_damage = 2
+damage_multiplier = 1.0
+base_charge_damage = 2
+charge_damage_multiplier = 2.0
+charge_speed = 1.0
+base_range = 1.0
+range_multiplier = 1.0
+base_attack_speed = 1.0
+attack_speed_multiplier = 1.0
+ammo_gained = 1.0
+can_charge = true
+can_precision_charge = false

@@ -17,7 +17,7 @@
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="14_7dj2w"]
 [ext_resource type="Texture2D" uid="uid://bmo0oks3fdkua" path="res://Spritesheets/Misc/elite_crown.png" id="15_bnq6x"]
 
-[sub_resource type="Resource" id="Resource_pfysc"]
+[sub_resource type="Resource" id="Resource_ns12r"]
 resource_local_to_scene = true
 script = ExtResource("4_pu8sl")
 damage = 10
@@ -402,7 +402,7 @@ elite_crown = NodePath("EliteCrown")
 droped_xp_amount = 5
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "damage_number_component", "state_machine") instance=ExtResource("3_iu5ss")]
-stat_sheet = SubResource("Resource_pfysc")
+stat_sheet = SubResource("Resource_ns12r")
 health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../Skeleton_Sprite")
 damage_number_component = NodePath("../DamageNumberComponent")
@@ -449,7 +449,7 @@ texture = ExtResource("1_5nep8")
 offset = Vector2(0, -13.0769)
 hframes = 18
 vframes = 2
-frame = 14
+frame = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

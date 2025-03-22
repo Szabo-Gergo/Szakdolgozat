@@ -1,23 +1,25 @@
 extends Control
-@onready var pause_ui_layer: CanvasLayer = $".."
+
+@export var pause_ui_layer: CanvasLayer
 var is_paused = false
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+	if event.is_action_pressed("menu_exit"):
 		is_paused = !is_paused  
-		
 		if is_paused:
-			Engine.time_scale = 0 
-			pause_ui_layer.visible = true
+			pause_ui_layer.show()
+			get_tree().paused = true
+			
 		else:
-			Engine.time_scale = 1 
-			pause_ui_layer.visible = false
-
+			pause_ui_layer.hide()
+			get_tree().paused = false
+	pass
+	
 func _on_to_main_menu_pressed() -> void:
-	Engine.time_scale = 1 
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/UI/main_menu_screen.tscn")
 
 
 func _on_to_hub_pressed() -> void:
-	Engine.time_scale = 1 
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/Misc/hub_area.tscn")

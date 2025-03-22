@@ -6,11 +6,14 @@ signal level_up
 
 @export_category("Stats")
 @export var base_stats : BaseStats
+
 @export var max_dash : int 
 @export var max_ammo : int 
 @export var projectile_damage : int
-@export var charge_attack_damage_multiplier : float
+
 @export var health_component : Health_Component
+@export var melee_weapon : Node2D
+
 
 var level : int = 1
 var required_xp : int = 10
@@ -42,7 +45,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if (available_dash < max_dash):
 		available_dash += 0.7 * delta
-	
+		
 	attack_cooldown -= delta
 	move_player()
 	handle_transitions()
@@ -51,7 +54,7 @@ func _physics_process(delta: float) -> void:
 
 func _add_ammo():
 	if ammo < max_ammo:
-		ammo += 1
+		ammo += melee_weapon.melee_resource.ammo_gained
 		
 
 func move_player():

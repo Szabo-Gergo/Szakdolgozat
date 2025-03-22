@@ -5,7 +5,7 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_22j2a")
-damage = 2
+damage = 0
 max_health = 100
 max_armor = 0
 speed = 125.0

@@ -15,7 +15,7 @@ var can_charge : bool
 var charge_attack_damage_multiplier : float
 var health_component : Health_Component
 var can_precision_charge : bool
-var attack_cooldown : float
+var attack_speed : float
 
 func use_currency(amount):
 	if upgrade_currency-amount >= 0:

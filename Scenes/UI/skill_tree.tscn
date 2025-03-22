@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dc4hrgph0lk7h"]
+[gd_scene load_steps=2 format=3 uid="uid://dc4hrgph0lk7h"]
 
 [ext_resource type="Script" path="res://Scripts/Misc/skill_tree.gd" id="1_8iowk"]
-[ext_resource type="PackedScene" uid="uid://b2jltl06io3uu" path="res://Scenes/UI/skill_node.tscn" id="2_dv7es"]
 
 [node name="SkillTree" type="Control"]
 layout_mode = 3
@@ -11,54 +10,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8iowk")
-
-[node name="SkillNode1" parent="." instance=ExtResource("2_dv7es")]
-layout_mode = 1
-offset_left = -133.0
-offset_top = -99.0
-offset_right = -133.0
-offset_bottom = -99.0
-is_locked = false
-
-[node name="SkillNode12" parent="SkillNode1" instance=ExtResource("2_dv7es")]
-layout_mode = 1
-offset_left = 91.0
-offset_top = -28.0
-offset_right = 91.0
-offset_bottom = -28.0
-
-[node name="SkillNode2" parent="." instance=ExtResource("2_dv7es")]
-layout_mode = 1
-offset_left = -129.0
-offset_top = -10.0
-offset_right = -129.0
-offset_bottom = -10.0
-is_locked = false
-
-[node name="Skill21" parent="SkillNode2" instance=ExtResource("2_dv7es")]
-layout_mode = 1
-offset_left = 89.0
-offset_top = -31.0
-offset_right = 89.0
-offset_bottom = -31.0
-
-[node name="Skill211" parent="SkillNode2/Skill21" instance=ExtResource("2_dv7es")]
-layout_mode = 1
-offset_left = 82.0
-offset_top = -30.0
-offset_right = 82.0
-offset_bottom = -30.0
-
-[node name="Skill212" parent="SkillNode2/Skill21" instance=ExtResource("2_dv7es")]
-layout_mode = 1
-offset_left = 83.0
-offset_top = 40.0
-offset_right = 83.0
-offset_bottom = 40.0
-
-[node name="Skill22" parent="SkillNode2" instance=ExtResource("2_dv7es")]
-layout_mode = 1
-offset_left = 87.0
-offset_top = 71.0
-offset_right = 87.0
-offset_bottom = 71.0

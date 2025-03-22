@@ -1,28 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1p0vdrkfuneh"]
+[gd_scene load_steps=8 format=3 uid="uid://b1p0vdrkfuneh"]
 
 [ext_resource type="Script" path="res://Scripts/UI/upgrade_menu.gd" id="1_08eut"]
 [ext_resource type="Texture2D" uid="uid://dwi3hdps8axm7" path="res://Spritesheets/Weapon/UI_hammer_texture_atlas.tres" id="2_6a5rq"]
+[ext_resource type="PackedScene" uid="uid://b2jltl06io3uu" path="res://Scenes/UI/skill_node.tscn" id="3_gqwld"]
+[ext_resource type="Texture2D" uid="uid://bj4j3apf5f4p4" path="res://Spritesheets/Misc/Skillicon_Damage.png" id="4_1brty"]
+[ext_resource type="Texture2D" uid="uid://benwhuspvp7ji" path="res://Spritesheets/Misc/Skillicon_Range.png" id="5_uyus2"]
+[ext_resource type="Texture2D" uid="uid://hh6viawjk2np" path="res://Spritesheets/Misc/Skillicon_Speed.png" id="6_hre3t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x33k4"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
 
 [node name="UpgradeMenu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_08eut")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+process_mode = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 3.0
+offset_right = 3.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
-tab_alignment = 1
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_x33k4")
 current_tab = 0
 
 [node name="Melee Weapons" type="TabBar" parent="MarginContainer/TabContainer"]
@@ -42,7 +59,6 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="WeaponPickerContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="LeftButton" type="Button" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
@@ -53,9 +69,8 @@ size_flags_horizontal = 2
 text = "<-"
 
 [node name="MeleeTextureButton" type="TextureButton" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
-custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_stretch_ratio = 20.0
 texture_normal = ExtResource("2_6a5rq")
 stretch_mode = 5
@@ -64,8 +79,41 @@ stretch_mode = 5
 z_index = 1
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 text = "->"
+
+[node name="Panel" type="Panel" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BaseDamage" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/Panel" instance=ExtResource("3_gqwld")]
+layout_mode = 1
+offset_left = 28.0
+offset_top = 123.0
+offset_right = 28.0
+offset_bottom = 123.0
+texture = ExtResource("4_1brty")
+current_level = 3
+max_level = 5
+is_locked = false
+
+[node name="Range1" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/Panel/BaseDamage" instance=ExtResource("3_gqwld")]
+offset_left = 80.0
+offset_top = -77.0
+offset_right = 80.0
+offset_bottom = -77.0
+texture = ExtResource("5_uyus2")
+
+[node name="Charge1" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/Panel/BaseDamage" instance=ExtResource("3_gqwld")]
+offset_left = 80.0
+offset_right = 80.0
+
+[node name="Speed1" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/Panel/BaseDamage" instance=ExtResource("3_gqwld")]
+offset_left = 80.0
+offset_top = 84.0
+offset_right = 80.0
+offset_bottom = 84.0
+texture = ExtResource("6_hre3t")
 
 [node name="Secondary Weapons" type="TabBar" parent="MarginContainer/TabContainer"]
 visible = false
@@ -117,5 +165,3 @@ metadata/_tab_index = 2
 
 [connection signal="pressed" from="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/LeftButton" to="." method="_on_melee_switch_left_pressed"]
 [connection signal="pressed" from="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/RightButton" to="." method="_on_melee_switch_right_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/LeftButton" to="." method="_on_melee_switch_left_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/RightButton" to="." method="_on_melee_switch_right_pressed"]
