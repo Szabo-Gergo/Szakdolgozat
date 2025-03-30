@@ -28,8 +28,7 @@ func gain_currency(amount):
 	if amount >= 0:
 		upgrade_currency += amount
 	
-func set_damage(amount:int):
-	pass
+
 
 func set_speed(amount:int):
 	pass

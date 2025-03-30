@@ -4,7 +4,7 @@ class_name Shoot
 
 const PISTOL_PROJECTILE = 	preload("res://Projectiles/PistolProjectile.tscn")
 
-@export var aim_hand: Node2D
+@export var ranged_weapon: Node2D
 @export var bullet_spawn_point: Node2D
 @onready var animation_tree: AnimationTree = %AnimationTree
 @onready var player_camera: Camera2D = %PlayerCamera
@@ -14,14 +14,14 @@ var mouse_position
 var camera_original_position
 
 func enter(_inputs : Dictionary = {}):
-	aim_hand.visible = true
+	ranged_weapon.visible = true
 	camera_original_position = player_camera.position 
 	
 func physics_process(_delta: float):
 	animation_update()
 	
 	if Input.is_action_pressed("shoot"):
-		aim_hand.look_at(aim_hand.get_global_mouse_position())
+		ranged_weapon.look_at(ranged_weapon.get_global_mouse_position())
 	
 	single_shot()
 	
@@ -33,9 +33,8 @@ func camera_knockback():
 
 
 func animation_update():
-	mouse_position = (aim_hand.global_position - aim_hand.get_global_mouse_position()).normalized()*-1
-	animation_tree.set("parameters/Shoot/blend_position", mouse_position)
-
+	mouse_position = (ranged_weapon.global_position - ranged_weapon.get_global_mouse_position()).normalized()*-1
+	animation_tree.set("parameters/"+player._get_animation_tree_name()+"/StateMachine/Shoot/blend_position", mouse_position)
 
 func single_shot():
 	if Input.is_action_just_released("shoot"):
@@ -51,4 +50,4 @@ func single_shot():
 		transition.emit(self, "idle")
 
 func exit():
-	aim_hand.visible = false
+	ranged_weapon.visible = false

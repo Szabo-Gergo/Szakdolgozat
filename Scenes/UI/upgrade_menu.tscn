@@ -1,14 +1,353 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1p0vdrkfuneh"]
+[gd_scene load_steps=57 format=3 uid="uid://b1p0vdrkfuneh"]
 
 [ext_resource type="Script" path="res://Scripts/UI/upgrade_menu.gd" id="1_08eut"]
 [ext_resource type="Texture2D" uid="uid://dwi3hdps8axm7" path="res://Spritesheets/Weapon/UI_hammer_texture_atlas.tres" id="2_6a5rq"]
+[ext_resource type="PackedScene" uid="uid://iibyaipvpqle" path="res://Scenes/Misc/skill_tree_handler.tscn" id="3_edu1e"]
 [ext_resource type="PackedScene" uid="uid://b2jltl06io3uu" path="res://Scenes/UI/skill_node.tscn" id="3_gqwld"]
 [ext_resource type="Texture2D" uid="uid://bj4j3apf5f4p4" path="res://Spritesheets/Misc/Skillicon_Damage.png" id="4_1brty"]
+[ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="5_i8d43"]
+[ext_resource type="Script" path="res://Scripts/Resources/skill_node_resource.gd" id="5_tqcs6"]
 [ext_resource type="Texture2D" uid="uid://benwhuspvp7ji" path="res://Spritesheets/Misc/Skillicon_Range.png" id="5_uyus2"]
-[ext_resource type="Texture2D" uid="uid://hh6viawjk2np" path="res://Spritesheets/Misc/Skillicon_Speed.png" id="6_hre3t"]
+[ext_resource type="Script" path="res://Scripts/Resources/upgrade_resource.gd" id="6_xmrs2"]
+[ext_resource type="Texture2D" uid="uid://dthkeod2lbbcy" path="res://Spritesheets/Misc/Skillicon_Charge.png" id="7_4u75c"]
+[ext_resource type="Texture2D" uid="uid://b4r5is2xuryix" path="res://Spritesheets/Misc/Skillicon_Ammo.png" id="9_dd3o8"]
+[ext_resource type="Texture2D" uid="uid://dm2k6hx6gmgif" path="res://Spritesheets/Misc/Skillicon_Precision_Charge.png" id="11_swrl7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x33k4"]
 bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gyp1w"]
+bg_color = Color(0.113725, 0.113725, 0.113725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp7o4"]
+bg_color = Color(0.129412, 0.14902, 0.180392, 1)
+
+[sub_resource type="Resource" id="Resource_rsbqr"]
+script = ExtResource("6_xmrs2")
+stat_type = "base_damage"
+value = 5.0
+
+[sub_resource type="Resource" id="Resource_f0ur6"]
+script = ExtResource("5_i8d43")
+upgrades = Array[ExtResource("6_xmrs2")]([SubResource("Resource_rsbqr")])
+is_skill_node = false
+
+[sub_resource type="Resource" id="Resource_6kcbx"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("4_1brty")
+upgrade_cost = 10
+current_level = 0
+max_level = 10
+is_locked = false
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6")])
+ui_node_id = "sw1"
+
+[sub_resource type="Resource" id="Resource_gdw7w"]
+script = ExtResource("6_xmrs2")
+stat_type = "range_multiplier"
+value = 0.5
+
+[sub_resource type="Resource" id="Resource_adlov"]
+script = ExtResource("5_i8d43")
+upgrades = Array[ExtResource("6_xmrs2")]([SubResource("Resource_gdw7w")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_tl0q4"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("5_uyus2")
+upgrade_cost = 10
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov")])
+ui_node_id = "sw11"
+
+[sub_resource type="Resource" id="Resource_suxjg"]
+script = ExtResource("6_xmrs2")
+stat_type = "ammo_gained"
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_l8ukq"]
+script = ExtResource("5_i8d43")
+upgrades = Array[ExtResource("6_xmrs2")]([SubResource("Resource_suxjg")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_4anje"]
+script = ExtResource("6_xmrs2")
+stat_type = "ammo_gained"
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_28nvr"]
+script = ExtResource("5_i8d43")
+upgrades = Array[ExtResource("6_xmrs2")]([SubResource("Resource_4anje")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_8e6dj"]
+script = ExtResource("6_xmrs2")
+stat_type = "ammo_gained"
+value = 2.0
+
+[sub_resource type="Resource" id="Resource_ktnlc"]
+script = ExtResource("5_i8d43")
+upgrades = Array[ExtResource("6_xmrs2")]([SubResource("Resource_8e6dj")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_d6eti"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("9_dd3o8")
+upgrade_cost = 10
+current_level = 0
+max_level = 3
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_l8ukq"), SubResource("Resource_28nvr"), SubResource("Resource_ktnlc")])
+ui_node_id = "sw111"
+
+[sub_resource type="Resource" id="Resource_2564k"]
+script = ExtResource("6_xmrs2")
+stat_type = "can_charge"
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_1a0iw"]
+script = ExtResource("5_i8d43")
+upgrades = Array[ExtResource("6_xmrs2")]([SubResource("Resource_2564k")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_culcm"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("11_swrl7")
+upgrade_cost = 10
+current_level = 0
+max_level = 1
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_1a0iw")])
+ui_node_id = "sw2"
+
+[sub_resource type="Resource" id="Resource_cvhsh"]
+script = ExtResource("6_xmrs2")
+stat_type = "charge_damage_multiplier"
+value = 0.1
+
+[sub_resource type="Resource" id="Resource_mnw47"]
+script = ExtResource("5_i8d43")
+upgrades = Array[ExtResource("6_xmrs2")]([SubResource("Resource_cvhsh")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_hfhl2"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("4_1brty")
+upgrade_cost = 20
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47")])
+ui_node_id = "sw21"
+
+[sub_resource type="Resource" id="Resource_7f1ix"]
+script = ExtResource("6_xmrs2")
+stat_type = "can_precision_charge"
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_7hlp8"]
+script = ExtResource("5_i8d43")
+upgrades = Array[ExtResource("6_xmrs2")]([SubResource("Resource_7f1ix")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_xd7kj"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("7_4u75c")
+upgrade_cost = 10
+current_level = 0
+max_level = 1
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_7hlp8")])
+ui_node_id = "sw211"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yrvg6"]
+load_path = "res://.godot/imported/Skillicon_Speed.png-3eefb6595b784456f82db5a195d1b086.ctex"
+
+[sub_resource type="Resource" id="Resource_h2rkq"]
+script = ExtResource("6_xmrs2")
+stat_type = "attack_speed_multiplier"
+value = 0.05
+
+[sub_resource type="Resource" id="Resource_mew32"]
+script = ExtResource("5_i8d43")
+upgrades = Array[ExtResource("6_xmrs2")]([SubResource("Resource_h2rkq")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_5uk6h"]
+script = ExtResource("5_tqcs6")
+texture = SubResource("CompressedTexture2D_yrvg6")
+upgrade_cost = 10
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32")])
+ui_node_id = "sw3"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oti8m"]
+bg_color = Color(0.129412, 0.14902, 0.180392, 1)
+
+[sub_resource type="Resource" id="Resource_vb51r"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("4_1brty")
+upgrade_cost = 10
+current_level = 0
+max_level = 10
+is_locked = false
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6")])
+ui_node_id = "h1"
+
+[sub_resource type="Resource" id="Resource_o1hdi"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("5_uyus2")
+upgrade_cost = 10
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov")])
+ui_node_id = "h11"
+
+[sub_resource type="Resource" id="Resource_33lnt"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("9_dd3o8")
+upgrade_cost = 10
+current_level = 0
+max_level = 3
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_l8ukq"), SubResource("Resource_28nvr"), SubResource("Resource_ktnlc")])
+ui_node_id = "h111"
+
+[sub_resource type="Resource" id="Resource_8yo0o"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("11_swrl7")
+upgrade_cost = 10
+current_level = 0
+max_level = 1
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_1a0iw")])
+ui_node_id = "h2"
+
+[sub_resource type="Resource" id="Resource_q2m3d"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("4_1brty")
+upgrade_cost = 20
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47")])
+ui_node_id = "h21"
+
+[sub_resource type="Resource" id="Resource_s47y8"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("7_4u75c")
+upgrade_cost = 10
+current_level = 0
+max_level = 1
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_7hlp8")])
+ui_node_id = "h211"
+
+[sub_resource type="Resource" id="Resource_trmck"]
+script = ExtResource("5_tqcs6")
+texture = SubResource("CompressedTexture2D_yrvg6")
+upgrade_cost = 10
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32")])
+ui_node_id = "h3"
+
+[sub_resource type="Resource" id="Resource_hmb34"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("4_1brty")
+upgrade_cost = 10
+current_level = 0
+max_level = 10
+is_locked = false
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6")])
+ui_node_id = "sp1"
+
+[sub_resource type="Resource" id="Resource_r8tgd"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("5_uyus2")
+upgrade_cost = 10
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov")])
+ui_node_id = "sp11"
+
+[sub_resource type="Resource" id="Resource_txcug"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("9_dd3o8")
+upgrade_cost = 10
+current_level = 0
+max_level = 3
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_l8ukq"), SubResource("Resource_28nvr"), SubResource("Resource_ktnlc")])
+ui_node_id = "sp111"
+
+[sub_resource type="Resource" id="Resource_3iloh"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("11_swrl7")
+upgrade_cost = 10
+current_level = 0
+max_level = 1
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_1a0iw")])
+ui_node_id = "sp2"
+
+[sub_resource type="Resource" id="Resource_d5qpt"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("4_1brty")
+upgrade_cost = 20
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47")])
+ui_node_id = "sp21"
+
+[sub_resource type="Resource" id="Resource_hcuq0"]
+script = ExtResource("5_tqcs6")
+texture = ExtResource("7_4u75c")
+upgrade_cost = 10
+current_level = 0
+max_level = 1
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_7hlp8")])
+ui_node_id = "sp211"
+
+[sub_resource type="Resource" id="Resource_ebscy"]
+script = ExtResource("5_tqcs6")
+texture = SubResource("CompressedTexture2D_yrvg6")
+upgrade_cost = 10
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("5_i8d43")]([SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32")])
+ui_node_id = "sp3"
 
 [node name="UpgradeMenu" type="Control"]
 process_mode = 3
@@ -32,9 +371,7 @@ offset_left = 3.0
 offset_right = 3.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
@@ -53,6 +390,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
@@ -66,6 +404,7 @@ z_index = 1
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_gyp1w")
 text = "<-"
 
 [node name="MeleeTextureButton" type="TextureButton" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
@@ -82,38 +421,223 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "->"
 
-[node name="Panel" type="Panel" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer"]
+[node name="SkillTrees" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer" instance=ExtResource("3_edu1e")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BaseDamage" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/Panel" instance=ExtResource("3_gqwld")]
+[node name="SwordTree" type="Panel" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees" groups=["SkillTree"]]
+unique_name_in_owner = true
+visible = false
+z_index = 1
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_kp7o4")
+
+[node name="BaseDamage" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SwordTree" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
 offset_left = 28.0
 offset_top = 123.0
 offset_right = 28.0
 offset_bottom = 123.0
-texture = ExtResource("4_1brty")
-current_level = 3
-max_level = 5
-is_locked = false
+node_id = "sw1"
+skill_resource = SubResource("Resource_6kcbx")
+skill_tree_handler = NodePath("../..")
 
-[node name="Range1" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/Panel/BaseDamage" instance=ExtResource("3_gqwld")]
-offset_left = 80.0
-offset_top = -77.0
-offset_right = 80.0
-offset_bottom = -77.0
-texture = ExtResource("5_uyus2")
+[node name="Range" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SwordTree/BaseDamage" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 72.0
+offset_top = -83.0
+offset_right = 72.0
+offset_bottom = -83.0
+node_id = "sw11"
+skill_resource = SubResource("Resource_tl0q4")
+skill_tree_handler = NodePath("../../..")
 
-[node name="Charge1" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/Panel/BaseDamage" instance=ExtResource("3_gqwld")]
-offset_left = 80.0
-offset_right = 80.0
+[node name="AmmoGain" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SwordTree/BaseDamage/Range" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 100.0
+offset_top = 2.0
+offset_right = 100.0
+offset_bottom = 2.0
+node_id = "sw111"
+skill_resource = SubResource("Resource_d6eti")
+skill_tree_handler = NodePath("../../../..")
 
-[node name="Speed1" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/Panel/BaseDamage" instance=ExtResource("3_gqwld")]
-offset_left = 80.0
-offset_top = 84.0
-offset_right = 80.0
-offset_bottom = 84.0
-texture = ExtResource("6_hre3t")
+[node name="ChargeAttack" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SwordTree/BaseDamage" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 72.0
+offset_top = 78.0
+offset_right = 72.0
+offset_bottom = 78.0
+node_id = "sw2"
+skill_resource = SubResource("Resource_culcm")
+skill_tree_handler = NodePath("../../..")
+
+[node name="ChargeDamageMultiplier" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SwordTree/BaseDamage/ChargeAttack" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 98.0
+offset_right = 98.0
+node_id = "sw21"
+skill_resource = SubResource("Resource_hfhl2")
+skill_tree_handler = NodePath("../../../..")
+
+[node name="PrecisionChargeAttack" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SwordTree/BaseDamage/ChargeAttack/ChargeDamageMultiplier" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 102.0
+offset_top = 2.0
+offset_right = 102.0
+offset_bottom = 2.0
+node_id = "sw211"
+skill_resource = SubResource("Resource_xd7kj")
+skill_tree_handler = NodePath("../../../../..")
+
+[node name="AttackSpeed" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SwordTree/BaseDamage" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 116.0
+offset_right = 116.0
+node_id = "sw3"
+skill_resource = SubResource("Resource_5uk6h")
+skill_tree_handler = NodePath("../../..")
+
+[node name="HammerTree" type="Panel" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees" groups=["SkillTree"]]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_oti8m")
+
+[node name="BaseDamage" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/HammerTree" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 28.0
+offset_top = 123.0
+offset_right = 28.0
+offset_bottom = 123.0
+node_id = "h1"
+skill_resource = SubResource("Resource_vb51r")
+skill_tree_handler = NodePath("../..")
+
+[node name="Range" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/HammerTree/BaseDamage" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 72.0
+offset_top = -83.0
+offset_right = 72.0
+offset_bottom = -83.0
+node_id = "h11"
+skill_resource = SubResource("Resource_o1hdi")
+skill_tree_handler = NodePath("../../..")
+
+[node name="AmmoGain" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/HammerTree/BaseDamage/Range" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 100.0
+offset_top = 2.0
+offset_right = 100.0
+offset_bottom = 2.0
+node_id = "h111"
+skill_resource = SubResource("Resource_33lnt")
+skill_tree_handler = NodePath("../../../..")
+
+[node name="ChargeAttack" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/HammerTree/BaseDamage" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 72.0
+offset_top = 78.0
+offset_right = 72.0
+offset_bottom = 78.0
+node_id = "h2"
+skill_resource = SubResource("Resource_8yo0o")
+skill_tree_handler = NodePath("../../..")
+
+[node name="ChargeDamageMultiplier" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/HammerTree/BaseDamage/ChargeAttack" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 98.0
+offset_right = 98.0
+node_id = "h21"
+skill_resource = SubResource("Resource_q2m3d")
+skill_tree_handler = NodePath("../../../..")
+
+[node name="PrecisionChargeAttack" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/HammerTree/BaseDamage/ChargeAttack/ChargeDamageMultiplier" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 102.0
+offset_top = 2.0
+offset_right = 102.0
+offset_bottom = 2.0
+node_id = "h211"
+skill_resource = SubResource("Resource_s47y8")
+skill_tree_handler = NodePath("../../../../..")
+
+[node name="AttackSpeed" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/HammerTree/BaseDamage" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 116.0
+offset_right = 116.0
+node_id = "h3"
+skill_resource = SubResource("Resource_trmck")
+skill_tree_handler = NodePath("../../..")
+
+[node name="SpearTree" type="Panel" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees" groups=["SkillTree"]]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_kp7o4")
+
+[node name="BaseDamage" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SpearTree" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 28.0
+offset_top = 123.0
+offset_right = 28.0
+offset_bottom = 123.0
+node_id = "sp1"
+skill_resource = SubResource("Resource_hmb34")
+skill_tree_handler = NodePath("../..")
+
+[node name="Range" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SpearTree/BaseDamage" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 72.0
+offset_top = -83.0
+offset_right = 72.0
+offset_bottom = -83.0
+node_id = "sp11"
+skill_resource = SubResource("Resource_r8tgd")
+skill_tree_handler = NodePath("../../..")
+
+[node name="AmmoGain" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SpearTree/BaseDamage/Range" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 100.0
+offset_top = 2.0
+offset_right = 100.0
+offset_bottom = 2.0
+node_id = "sp111"
+skill_resource = SubResource("Resource_txcug")
+skill_tree_handler = NodePath("../../../..")
+
+[node name="ChargeAttack" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SpearTree/BaseDamage" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 72.0
+offset_top = 78.0
+offset_right = 72.0
+offset_bottom = 78.0
+node_id = "sp2"
+skill_resource = SubResource("Resource_3iloh")
+skill_tree_handler = NodePath("../../..")
+
+[node name="ChargeDamageMultiplier" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SpearTree/BaseDamage/ChargeAttack" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 98.0
+offset_right = 98.0
+node_id = "sp21"
+skill_resource = SubResource("Resource_d5qpt")
+skill_tree_handler = NodePath("../../../..")
+
+[node name="PrecisionChargeAttack" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SpearTree/BaseDamage/ChargeAttack/ChargeDamageMultiplier" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 102.0
+offset_top = 2.0
+offset_right = 102.0
+offset_bottom = 2.0
+node_id = "sp211"
+skill_resource = SubResource("Resource_hcuq0")
+skill_tree_handler = NodePath("../../../../..")
+
+[node name="AttackSpeed" parent="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees/SpearTree/BaseDamage" node_paths=PackedStringArray("skill_tree_handler") groups=["SkillNode"] instance=ExtResource("3_gqwld")]
+offset_left = 116.0
+offset_right = 116.0
+node_id = "sp3"
+skill_resource = SubResource("Resource_ebscy")
+skill_tree_handler = NodePath("../../..")
 
 [node name="Secondary Weapons" type="TabBar" parent="MarginContainer/TabContainer"]
 visible = false

@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://c185n760rf7hi"]
+
+[ext_resource type="Script" path="res://Scripts/Misc/challange_indicator.gd" id="1_0uk54"]
+
+[node name="ChallangeSetter" type="Control"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_0uk54")
+challange_title = "Elite Spawn Chance"
+max_challange_amount = 10
+challange_increase_per_level = 0.05
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ChallangeTitle" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 14
+text = "Elite spawn rate"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -2
+
+[node name="ChallangeValueLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "+20%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Decrease" type="Button" parent="MarginContainer/HBoxContainer"]
+process_mode = 2
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-"
+
+[node name="Increase" type="Button" parent="MarginContainer/HBoxContainer"]
+process_mode = 2
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "+"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Decrease" to="." method="_on_decrease_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Increase" to="." method="_on_increase_pressed"]

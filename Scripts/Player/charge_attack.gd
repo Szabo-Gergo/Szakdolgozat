@@ -3,11 +3,13 @@ class_name ChargeAttack
 
 const ATTACK_TYPES = ["slash_projectile", "tornado"]
 
+
 func enter(_inputs : Dictionary = {}):
 	update_trail_position()
 	
+
 func physics_process(_delta: float):
-	animation_tree.set("parameters/ChargeAttack/blend_position", mouse_position)
+	animation_tree.set("parameters/"+player._get_animation_tree_name()+"/StateMachine/ChargeAttack/blend_position", mouse_position)
 	
 	
 func _on_charge_attack_finished(anim_name: StringName) -> void:

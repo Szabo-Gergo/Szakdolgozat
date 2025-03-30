@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkbbfglglcbtu"]
+
+[ext_resource type="StyleBox" uid="uid://djrofpovkfdgj" path="res://Scenes/UI/ui_challange_point.tres" id="1_inybh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ph120"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[node name="ChallangePoint" type="PanelContainer"]
+custom_minimum_size = Vector2(15, 15)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_inybh")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ph120")

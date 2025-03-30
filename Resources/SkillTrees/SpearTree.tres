@@ -1,0 +1,186 @@
+[gd_resource type="Resource" script_class="SkillTreeResource" load_steps=36 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Resources/skill_tree_resource.gd" id="1_gev1g"]
+[ext_resource type="Script" path="res://Scripts/Resources/skill_node_resource.gd" id="2_iw0mm"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Damage.png" id="3_cqbmx"]
+[ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="4_hpomb"]
+[ext_resource type="Script" path="res://Scripts/Resources/upgrade_resource.gd" id="5_esefp"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Range.png" id="6_iidcw"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Ammo.png" id="7_comen"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Precision_Charge.png" id="8_xuwn4"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Charge.png" id="9_y8ia4"]
+
+[sub_resource type="Resource" id="Resource_rsbqr"]
+script = ExtResource("5_esefp")
+stat_type = "base_damage"
+value = 5.0
+
+[sub_resource type="Resource" id="Resource_f0ur6"]
+script = ExtResource("4_hpomb")
+upgrades = Array[ExtResource("5_esefp")]([SubResource("Resource_rsbqr")])
+is_skill_node = false
+
+[sub_resource type="Resource" id="Resource_hmb34"]
+script = ExtResource("2_iw0mm")
+texture = ExtResource("3_cqbmx")
+upgrade_cost = 10
+current_level = 0
+max_level = 10
+is_locked = false
+is_finished = false
+upgrades_per_level = Array[ExtResource("4_hpomb")]([SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6")])
+ui_node_id = "sp1"
+
+[sub_resource type="Resource" id="Resource_gdw7w"]
+script = ExtResource("5_esefp")
+stat_type = "range_multiplier"
+value = 0.5
+
+[sub_resource type="Resource" id="Resource_adlov"]
+script = ExtResource("4_hpomb")
+upgrades = Array[ExtResource("5_esefp")]([SubResource("Resource_gdw7w")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_xcnad"]
+script = ExtResource("2_iw0mm")
+texture = ExtResource("6_iidcw")
+upgrade_cost = 10
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("4_hpomb")]([SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov")])
+ui_node_id = "sp11"
+
+[sub_resource type="Resource" id="Resource_suxjg"]
+script = ExtResource("5_esefp")
+stat_type = "ammo_gained"
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_l8ukq"]
+script = ExtResource("4_hpomb")
+upgrades = Array[ExtResource("5_esefp")]([SubResource("Resource_suxjg")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_4anje"]
+script = ExtResource("5_esefp")
+stat_type = "ammo_gained"
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_28nvr"]
+script = ExtResource("4_hpomb")
+upgrades = Array[ExtResource("5_esefp")]([SubResource("Resource_4anje")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_8e6dj"]
+script = ExtResource("5_esefp")
+stat_type = "ammo_gained"
+value = 2.0
+
+[sub_resource type="Resource" id="Resource_ktnlc"]
+script = ExtResource("4_hpomb")
+upgrades = Array[ExtResource("5_esefp")]([SubResource("Resource_8e6dj")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_txcug"]
+script = ExtResource("2_iw0mm")
+texture = ExtResource("7_comen")
+upgrade_cost = 10
+current_level = 0
+max_level = 3
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("4_hpomb")]([SubResource("Resource_l8ukq"), SubResource("Resource_28nvr"), SubResource("Resource_ktnlc")])
+ui_node_id = "sp111"
+
+[sub_resource type="Resource" id="Resource_2564k"]
+script = ExtResource("5_esefp")
+stat_type = "can_charge"
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_1a0iw"]
+script = ExtResource("4_hpomb")
+upgrades = Array[ExtResource("5_esefp")]([SubResource("Resource_2564k")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_3iloh"]
+script = ExtResource("2_iw0mm")
+texture = ExtResource("8_xuwn4")
+upgrade_cost = 10
+current_level = 0
+max_level = 1
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("4_hpomb")]([SubResource("Resource_1a0iw")])
+ui_node_id = "sp2"
+
+[sub_resource type="Resource" id="Resource_cvhsh"]
+script = ExtResource("5_esefp")
+stat_type = "charge_damage_multiplier"
+value = 0.1
+
+[sub_resource type="Resource" id="Resource_mnw47"]
+script = ExtResource("4_hpomb")
+upgrades = Array[ExtResource("5_esefp")]([SubResource("Resource_cvhsh")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_d5qpt"]
+script = ExtResource("2_iw0mm")
+texture = ExtResource("3_cqbmx")
+upgrade_cost = 20
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("4_hpomb")]([SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47")])
+ui_node_id = "sp21"
+
+[sub_resource type="Resource" id="Resource_7f1ix"]
+script = ExtResource("5_esefp")
+stat_type = "can_precision_charge"
+value = 1.0
+
+[sub_resource type="Resource" id="Resource_7hlp8"]
+script = ExtResource("4_hpomb")
+upgrades = Array[ExtResource("5_esefp")]([SubResource("Resource_7f1ix")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_hcuq0"]
+script = ExtResource("2_iw0mm")
+texture = ExtResource("9_y8ia4")
+upgrade_cost = 10
+current_level = 0
+max_level = 1
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("4_hpomb")]([SubResource("Resource_7hlp8")])
+ui_node_id = "sp211"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yrvg6"]
+load_path = "res://.godot/imported/Skillicon_Speed.png-3eefb6595b784456f82db5a195d1b086.ctex"
+
+[sub_resource type="Resource" id="Resource_h2rkq"]
+script = ExtResource("5_esefp")
+stat_type = "attack_speed_multiplier"
+value = 0.05
+
+[sub_resource type="Resource" id="Resource_mew32"]
+script = ExtResource("4_hpomb")
+upgrades = Array[ExtResource("5_esefp")]([SubResource("Resource_h2rkq")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_ebscy"]
+script = ExtResource("2_iw0mm")
+texture = SubResource("CompressedTexture2D_yrvg6")
+upgrade_cost = 10
+current_level = 0
+max_level = 5
+is_locked = true
+is_finished = false
+upgrades_per_level = Array[ExtResource("4_hpomb")]([SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32")])
+ui_node_id = "sp3"
+
+[resource]
+script = ExtResource("1_gev1g")
+tree_name = "SpearTree"
+skill_nodes = Array[ExtResource("2_iw0mm")]([SubResource("Resource_hmb34"), SubResource("Resource_xcnad"), SubResource("Resource_txcug"), SubResource("Resource_3iloh"), SubResource("Resource_d5qpt"), SubResource("Resource_hcuq0"), SubResource("Resource_ebscy")])

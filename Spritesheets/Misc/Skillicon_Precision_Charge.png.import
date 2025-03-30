@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dm2k6hx6gmgif"
-path="res://.godot/imported/Skillicon7_37.png-802394636b641dbac1c6c0c19a97bc66.ctex"
+path="res://.godot/imported/Skillicon_Precision_Charge.png-ba08392af1820a399cdf45f2f59c8e73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheets/Misc/Skill_Icons/Skillicon7_37.png"
-dest_files=["res://.godot/imported/Skillicon7_37.png-802394636b641dbac1c6c0c19a97bc66.ctex"]
+source_file="res://Spritesheets/Misc/Skillicon_Precision_Charge.png"
+dest_files=["res://.godot/imported/Skillicon_Precision_Charge.png-ba08392af1820a399cdf45f2f59c8e73.ctex"]
 
 [params]
 

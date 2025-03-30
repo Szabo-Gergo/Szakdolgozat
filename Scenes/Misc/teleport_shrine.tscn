@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bv4t8vlc0b24x"]
+[gd_scene load_steps=11 format=3 uid="uid://bv4t8vlc0b24x"]
 
 [ext_resource type="Script" path="res://Scripts/Misc/teleport_shrine.gd" id="1_l37fn"]
 [ext_resource type="Texture2D" uid="uid://dlluau178letg" path="res://Spritesheets/Enviroment/altar 224x288 - standing on grass.png" id="2_cok31"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="2_rbksn"]
+[ext_resource type="PackedScene" uid="uid://bp83uc6sodr51" path="res://Scripts/Components/interaction_component.tscn" id="4_4k7k5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v7ahi"]
 shader = ExtResource("2_rbksn")
@@ -68,3 +69,14 @@ hframes = 39
 libraries = {
 "": SubResource("AnimationLibrary_l5x84")
 }
+
+[node name="InteractionComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_4k7k5")]
+position = Vector2(128, 115)
+sprite = NodePath("../Sprite2D")
+area_range = 95
+
+[node name="Label" parent="InteractionComponent" index="1"]
+offset_top = -100.0
+offset_bottom = -84.0
+
+[editable path="InteractionComponent"]

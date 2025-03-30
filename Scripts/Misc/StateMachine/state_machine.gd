@@ -36,6 +36,9 @@ func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
 		return
+
+	if new_state_name == "Attack" or new_state_name == "attack":
+		print(current_state.name)
 		
 	new_state.enter(inputs)	
 	current_state = new_state

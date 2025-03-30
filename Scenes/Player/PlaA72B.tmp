@@ -1,4 +1,4 @@
-[gd_scene load_steps=149 format=3 uid="uid://bvicg58gitoue"]
+[gd_scene load_steps=138 format=3 uid="uid://bvicg58gitoue"]
 
 [ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player/Player.png" id="1_ksx3q"]
 [ext_resource type="Script" path="res://Scripts/Player/main_stats.gd" id="1_tssnm"]
@@ -11,10 +11,9 @@
 [ext_resource type="Script" path="res://Scripts/Player/shoot.gd" id="6_1b0pb"]
 [ext_resource type="Script" path="res://Scripts/Player/idle.gd" id="6_lyoey"]
 [ext_resource type="PackedScene" uid="uid://dtybtb2pcw8ce" path="res://Scenes/Player/Attack.tscn" id="6_qoo4h"]
-[ext_resource type="Resource" uid="uid://dyt03vnejfiyb" path="res://Resources/MeleeWeaponStats/Sword_Stats.tres" id="6_reiys"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="7_iouf4"]
 [ext_resource type="Texture2D" uid="uid://htqh23hc5u4w" path="res://Spritesheets/Weapon/Sword_Trail.png" id="7_jkjk3"]
-[ext_resource type="Texture2D" uid="uid://51lw5eb6dbrw" path="res://Spritesheets/Weapon/Spear_sprites.png" id="9_lsbg2"]
+[ext_resource type="Texture2D" uid="uid://cuqi404slb28u" path="res://Spritesheets/Weapon/Sword_With_Charge.png" id="9_xus6d"]
 [ext_resource type="Script" path="res://Scripts/Player/attack_combo.gd" id="10_x566i"]
 [ext_resource type="Script" path="res://Scripts/Player/attack_charge_up.gd" id="11_3ygyj"]
 [ext_resource type="Script" path="res://Scripts/Player/charge_attack.gd" id="12_gl7jl"]
@@ -22,9 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="17_eyexp"]
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="17_ktqi0"]
 [ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="19_yk4dd"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://cixr4c5nb3eut" path="res://Saves/AnimationTrees/HammerAnimationTree.tres" id="22_6wpo0"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://biv6mhdnn3bb1" path="res://Saves/AnimationTrees/SpearAnimationTree.tres" id="23_qhb4h"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://dgme7dow81nm6" path="res://Saves/AnimationTrees/SwordAnimationTree.tres" id="24_6krsv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olbmv"]
 shader = ExtResource("3_4ynfh")
@@ -97,7 +93,7 @@ turbulence_noise_strength = 18.74
 radius = 5.0
 height = 20.0
 
-[sub_resource type="Resource" id="Resource_773b4"]
+[sub_resource type="Resource" id="Resource_e7u1r"]
 resource_local_to_scene = true
 script = ExtResource("19_yk4dd")
 damage = 2
@@ -538,6 +534,155 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0.471762, 0.246253, 1, 1), Color(0.391555, 0.582673, 1, 1), Color(0.00168746, 0.109631, 0.532943, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("MeleeWeapon/Sword/GPUParticles2D:emitting")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.642857),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_wi0bc"]
+resource_name = "DownChargeHammer"
+length = 2.5
+step = 0.07
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeWeapon/Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.47),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5, 10), Vector2(5, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeWeapon/Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.47),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.06779, 3.12276]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [57]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterSprite:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeleeWeapon/Sword/SwordSprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MeleeWeapon/Sword:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MeleeWeapon/Sword:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MeleeWeapon/Sword:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("MeleeWeapon/Trail:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 2.03),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.1]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/outline_color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1.26, 2.07143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.00168746, 0.109631, 0.532943, 1), Color(0.391555, 0.582673, 1, 1), Color(0.471762, 0.246253, 1, 1)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
@@ -3594,756 +3739,15 @@ tracks/5/keys = {
 "values": [1]
 }
 
-[sub_resource type="Animation" id="Animation_wi0bc"]
-resource_name = "DownChargeHammer"
-length = 2.5
-step = 0.07
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("MeleeWeapon/Sword:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.47),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(5, 10), Vector2(5, 8)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("MeleeWeapon/Sword:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.47),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [3.06779, 3.12276]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CharacterSprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [57]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CharacterSprite:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeWeapon/Sword/SwordSprite:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = false
-tracks/5/path = NodePath("MeleeWeapon/Sword:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, 1)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MeleeWeapon/Sword:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeWeapon/Sword:z_index")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("MeleeWeapon/Trail:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/pixel_size")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 2.03),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.1]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/outline_color")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 1.26, 2.07143),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0.00168746, 0.109631, 0.532943, 1), Color(0.391555, 0.582673, 1, 1), Color(0.471762, 0.246253, 1, 1)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("MeleeWeapon/Sword/GPUParticles2D:emitting")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.642857),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_1a3ad"]
-resource_name = "SpearUpCharge"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeWeapon/Sword:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0769231, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(14, -4), Vector2(-10, 16), Vector2(-23, -3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeWeapon/Sword:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0769231, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0472, 2.46796, 4.69742]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeWeapon/Trail:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CharacterSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CharacterSprite:flip_h")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeleeWeapon/Sword/SwordSprite:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.34),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [10, 0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MeleeWeapon/Trail:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeWeapon/Sword:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, 1)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("MeleeWeapon/Sword:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/pixel_size")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/outline_color")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0.471762, 0.246253, 1, 1), Color(0.391555, 0.582673, 1, 1), Color(0.00168746, 0.109631, 0.532943, 1)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("MeleeWeapon/Sword/GPUParticles2D:emitting")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.642857),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_rxff4"]
-resource_name = "SpearLeftCharge"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeWeapon/Sword:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0769231, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(14, -4), Vector2(-10, 16), Vector2(-23, -3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeWeapon/Sword:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0769231, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0472, 2.46796, 4.69742]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeWeapon/Trail:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CharacterSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [85]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CharacterSprite:flip_h")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeleeWeapon/Sword/SwordSprite:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.34),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [10, 0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MeleeWeapon/Trail:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeWeapon/Sword:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, 1)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("MeleeWeapon/Sword:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/pixel_size")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/outline_color")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0.471762, 0.246253, 1, 1), Color(0.391555, 0.582673, 1, 1), Color(0.00168746, 0.109631, 0.532943, 1)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("MeleeWeapon/Sword/GPUParticles2D:emitting")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.642857),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_trmhk"]
-resource_name = "SpearDownCharge"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeWeapon/Sword:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeWeapon/Sword:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeWeapon/Trail:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CharacterSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [84]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CharacterSprite:flip_h")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeleeWeapon/Sword/SwordSprite:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.34),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [10, 0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MeleeWeapon/Trail:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeWeapon/Sword:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, 1)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("MeleeWeapon/Sword:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/pixel_size")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/outline_color")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0.471762, 0.246253, 1, 1), Color(0.391555, 0.582673, 1, 1), Color(0.00168746, 0.109631, 0.532943, 1)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("MeleeWeapon/Sword/GPUParticles2D:emitting")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.642857),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_brjgh"]
-resource_name = "SpearCharge"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeWeapon/Sword:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0769231, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(14, -4), Vector2(-10, 16), Vector2(-23, -3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeWeapon/Sword:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0769231, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0472, 2.46796, 4.69742]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeWeapon/Trail:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CharacterSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1.07177),
-"update": 1,
-"values": [83]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CharacterSprite:flip_h")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeleeWeapon/Sword/SwordSprite:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.34),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [10, 0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MeleeWeapon/Trail:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeWeapon/Sword:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, 1)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("MeleeWeapon/Sword:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/pixel_size")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_parameter/outline_color")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0.471762, 0.246253, 1, 1), Color(0.391555, 0.582673, 1, 1), Color(0.00168746, 0.109631, 0.532943, 1)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("MeleeWeapon/Sword/GPUParticles2D:emitting")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.642857),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o0jql"]
 _data = {
 "DownAttack": SubResource("Animation_jkag0"),
 "DownCharge": SubResource("Animation_ega6r"),
 "DownChargeAttack": SubResource("Animation_nwcqd"),
+"DownChargeHammer": SubResource("Animation_wi0bc"),
 "DownCombo": SubResource("Animation_6fkr5"),
 "DownIdle": SubResource("Animation_euqvp"),
 "DownRun": SubResource("Animation_d1ktc"),
-"HammerCharge": SubResource("Animation_wi0bc"),
 "LeftAttack": SubResource("Animation_3rin4"),
 "LeftCharge": SubResource("Animation_g6bcl"),
 "LeftChargeAttack": SubResource("Animation_3jhra"),
@@ -4361,10 +3765,6 @@ _data = {
 "ShootLeft": SubResource("Animation_tme1r"),
 "ShootRight": SubResource("Animation_12afu"),
 "ShootUp": SubResource("Animation_jbbvq"),
-"SpearDownCharge": SubResource("Animation_trmhk"),
-"SpearLeftCharge": SubResource("Animation_rxff4"),
-"SpearRightCharge": SubResource("Animation_brjgh"),
-"SpearUpCharge": SubResource("Animation_1a3ad"),
 "UpAttack": SubResource("Animation_1xodu"),
 "UpCharge": SubResource("Animation_7yov3"),
 "UpChargeAttack": SubResource("Animation_hv4rq"),
@@ -4399,9 +3799,8 @@ blend_mode = 1
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_u26cx"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_rlfic"]
-resource_local_to_scene = true
 nodes/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_vgo6k")
-nodes/BlendSpace2D/position = Vector2(200, 100)
+nodes/BlendSpace2D/position = Vector2(200, 160)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_u26cx")
 nodes/TimeScale/position = Vector2(460, 140)
 nodes/output/position = Vector2(680, 140)
@@ -4571,6 +3970,9 @@ switch_mode = 2
 advance_mode = 2
 advance_expression = "player.velocity.length() > 0 and current_state.get_name() == \"Idle\" or current_state.get_name() == \"Dash\""
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l8ltc"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3p8ue"]
 advance_mode = 2
 advance_expression = "player.velocity.length() > 0 and current_state.get_name() == \"Idle\""
@@ -4682,46 +4084,24 @@ switch_mode = 2
 advance_mode = 2
 advance_expression = "current_state.get_name() == \"ChargeAttack\""
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tptbg"]
-advance_mode = 2
-advance_expression = "current_state.get_name() == \"AttackCombo\" and player.can_combo"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cll2m"]
-advance_mode = 2
-advance_expression = "player.current_melee_type == 0"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5wxnj"]
-advance_mode = 2
-advance_expression = "player.current_melee_type == 1"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t67sm"]
-advance_mode = 2
-advance_expression = "player.current_melee_type == 2"
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0ckd7"]
 states/Attack/node = SubResource("AnimationNodeBlendTree_rlfic")
-states/Attack/position = Vector2(27.152, 112)
+states/Attack/position = Vector2(22.152, 88)
 states/ChargeAttack/node = SubResource("AnimationNodeBlendSpace2D_yowry")
-states/ChargeAttack/position = Vector2(617.152, 112)
+states/ChargeAttack/position = Vector2(626.152, 88)
 states/ChargeUp/node = SubResource("AnimationNodeBlendTree_wuhhq")
-states/ChargeUp/position = Vector2(470.152, -28)
+states/ChargeUp/position = Vector2(452.152, -56)
 states/Combo/node = SubResource("AnimationNodeBlendTree_quspx")
-states/Combo/position = Vector2(186.152, -28)
-states/HammerAnimationTree/node = ExtResource("22_6wpo0")
-states/HammerAnimationTree/position = Vector2(-190.135, 385)
+states/Combo/position = Vector2(180.152, -63)
 states/Shoot/node = SubResource("AnimationNodeBlendSpace2D_prdgf")
-states/Shoot/position = Vector2(342.152, 453.593)
-states/SpearAnimationTree/node = ExtResource("23_qhb4h")
-states/SpearAnimationTree/position = Vector2(-190.135, 465.593)
-states/Start/position = Vector2(-394, 385)
-states/SwordAnimationTree/node = ExtResource("24_6krsv")
-states/SwordAnimationTree/position = Vector2(-190.135, 295.593)
+states/Shoot/position = Vector2(334.152, 495.593)
+states/Start/position = Vector2(-75, 385)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_8oeqy")
-states/idle/position = Vector2(81.152, 385)
+states/idle/position = Vector2(74.152, 380)
 states/run/node = SubResource("AnimationNodeBlendSpace2D_0vvr8")
-states/run/position = Vector2(617.152, 385)
-transitions = ["ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_vmlv5"), "Combo", "Attack", SubResource("AnimationNodeStateMachineTransition_01cgw"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_n2kl7"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_et65l"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ic72t"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_td50i"), "idle", "Combo", SubResource("AnimationNodeStateMachineTransition_hmd61"), "Attack", "Shoot", SubResource("AnimationNodeStateMachineTransition_32kqb"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_enc65"), "run", "Attack", SubResource("AnimationNodeStateMachineTransition_l45jk"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_mfbjj"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_81cnf"), "Combo", "Shoot", SubResource("AnimationNodeStateMachineTransition_st7ja"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_1hon3"), "run", "Combo", SubResource("AnimationNodeStateMachineTransition_vxiw4"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_sjiw3"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_guq2b"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_rdmko"), "ChargeUp", "Combo", SubResource("AnimationNodeStateMachineTransition_tptbg"), "Start", "SwordAnimationTree", SubResource("AnimationNodeStateMachineTransition_cll2m"), "Start", "HammerAnimationTree", SubResource("AnimationNodeStateMachineTransition_5wxnj"), "Start", "SpearAnimationTree", SubResource("AnimationNodeStateMachineTransition_t67sm")]
-graph_offset = Vector2(-512.135, 131.593)
+states/run/position = Vector2(609.152, 385)
+transitions = ["ChargeAttack", "run", SubResource("AnimationNodeStateMachineTransition_wwfdq"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_l8ltc"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_3p8ue"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_naq6q"), "ChargeAttack", "idle", SubResource("AnimationNodeStateMachineTransition_bvjlx"), "idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_gsm0p"), "run", "Shoot", SubResource("AnimationNodeStateMachineTransition_rj631"), "Shoot", "idle", SubResource("AnimationNodeStateMachineTransition_x3pcy"), "Shoot", "run", SubResource("AnimationNodeStateMachineTransition_ipa43"), "Attack", "Combo", SubResource("AnimationNodeStateMachineTransition_vmlv5"), "Combo", "Attack", SubResource("AnimationNodeStateMachineTransition_01cgw"), "Attack", "idle", SubResource("AnimationNodeStateMachineTransition_n2kl7"), "idle", "Attack", SubResource("AnimationNodeStateMachineTransition_et65l"), "Combo", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_ic72t"), "Combo", "idle", SubResource("AnimationNodeStateMachineTransition_td50i"), "idle", "Combo", SubResource("AnimationNodeStateMachineTransition_hmd61"), "Attack", "Shoot", SubResource("AnimationNodeStateMachineTransition_32kqb"), "Attack", "run", SubResource("AnimationNodeStateMachineTransition_enc65"), "run", "Attack", SubResource("AnimationNodeStateMachineTransition_l45jk"), "Attack", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_mfbjj"), "ChargeUp", "Attack", SubResource("AnimationNodeStateMachineTransition_81cnf"), "Combo", "Shoot", SubResource("AnimationNodeStateMachineTransition_st7ja"), "Combo", "run", SubResource("AnimationNodeStateMachineTransition_1hon3"), "run", "Combo", SubResource("AnimationNodeStateMachineTransition_vxiw4"), "idle", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_sjiw3"), "run", "ChargeUp", SubResource("AnimationNodeStateMachineTransition_guq2b"), "ChargeUp", "ChargeAttack", SubResource("AnimationNodeStateMachineTransition_rdmko")]
+graph_offset = Vector2(-243.848, 12.593)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3mym3"]
 radius = 68.67
@@ -4738,7 +4118,7 @@ max_ammo = 10
 projectile_damage = 1
 health_component = NodePath("HealthComponent")
 melee_weapon = NodePath("MeleeWeapon")
-current_melee_type = 2
+current_melee_type = 1
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -4751,13 +4131,10 @@ region_rect = Rect2(7, 2, 790, 99)
 
 [node name="MeleeWeapon" type="Node2D" parent="." node_paths=PackedStringArray("weapon_sprite", "hitbox", "trail", "animation_tree")]
 unique_name_in_owner = true
-position = Vector2(-3, 2)
 script = ExtResource("5_ps6uo")
-current_weapon_index = 2
 weapon_sprite = NodePath("Sword/SwordSprite")
 hitbox = NodePath("Trail/HitBox/CollisionPolygon2D")
 trail = NodePath("Trail")
-melee_resource = ExtResource("6_reiys")
 animation_tree = NodePath("../AnimationTree")
 
 [node name="Trail" type="Sprite2D" parent="MeleeWeapon"]
@@ -4774,7 +4151,7 @@ collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MeleeWeapon/Trail/HitBox"]
 position = Vector2(0.0198491, -10.2323)
-scale = Vector2(2.20894, 2.62151)
+scale = Vector2(1e-05, 1e-05)
 polygon = PackedVector2Array(-4.5, 3.9, -6.5, -1.5, 0.3, -16, 6.5, -1.5, 4.5, 3.9, 0, 3.9)
 disabled = true
 
@@ -4787,10 +4164,9 @@ rotation = 3.49066
 [node name="SwordSprite" type="Sprite2D" parent="MeleeWeapon/Sword"]
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_vmiq1")
-position = Vector2(9.14127, 1.19881)
-rotation = 0.364978
-texture = ExtResource("9_lsbg2")
-offset = Vector2(0, -10)
+position = Vector2(0, 2.38419e-07)
+rotation = 0.0391551
+texture = ExtResource("9_xus6d")
 hframes = 11
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="MeleeWeapon/Sword"]
@@ -4826,7 +4202,7 @@ debug_color = Color(9.62615e-07, 0.385506, 0.980678, 0.113725)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "state_machine") instance=ExtResource("17_eyexp")]
 visible = false
-stat_sheet = SubResource("Resource_773b4")
+stat_sheet = SubResource("Resource_e7u1r")
 is_player_health_component = true
 health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../CharacterSprite")
@@ -4902,7 +4278,6 @@ speed_scale = 1.1
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
-active = false
 reset_on_save = false
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeStateMachine_0ckd7")
@@ -4915,37 +4290,7 @@ parameters/ChargeUp/BlendSpace2D/blend_position = Vector2(0, 0)
 parameters/ChargeUp/TimeScale/scale = 1.0
 parameters/Combo/BlendSpace2D/blend_position = Vector2(0.0118577, 0.98783)
 parameters/Combo/TimeScale/scale = 1.0
-parameters/HammerAnimationTree/StateMachine/Attack/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/HammerAnimationTree/StateMachine/Attack/TimeScale/scale = 1.0
-parameters/HammerAnimationTree/StateMachine/ChargeAttack/blend_position = Vector2(0, 0)
-parameters/HammerAnimationTree/StateMachine/ChargeUp/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/HammerAnimationTree/StateMachine/ChargeUp/TimeScale/scale = 1.0
-parameters/HammerAnimationTree/StateMachine/Combo/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/HammerAnimationTree/StateMachine/Combo/TimeScale/scale = 1.0
-parameters/HammerAnimationTree/StateMachine/Idle/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/HammerAnimationTree/StateMachine/Run/blend_position = Vector2(0, 0)
-parameters/HammerAnimationTree/StateMachine/Shoot/blend_position = Vector2(0, 0)
 parameters/Shoot/blend_position = Vector2(0.423176, -1.20659)
-parameters/SpearAnimationTree/StateMachine/Attack/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/SpearAnimationTree/StateMachine/Attack/TimeScale/scale = 1.0
-parameters/SpearAnimationTree/StateMachine/ChargeAttack/blend_position = Vector2(0, 0)
-parameters/SpearAnimationTree/StateMachine/ChargeUp/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/SpearAnimationTree/StateMachine/ChargeUp/TimeScale/scale = 1.0
-parameters/SpearAnimationTree/StateMachine/Combo/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/SpearAnimationTree/StateMachine/Combo/TimeScale/scale = 1.0
-parameters/SpearAnimationTree/StateMachine/Idle/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/SpearAnimationTree/StateMachine/Run/blend_position = Vector2(0, 0)
-parameters/SpearAnimationTree/StateMachine/Shoot/blend_position = Vector2(0, 0)
-parameters/SwordAnimationTree/StateMachine/Attack/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/SwordAnimationTree/StateMachine/Attack/TimeScale/scale = 1.0
-parameters/SwordAnimationTree/StateMachine/ChargeAttack/blend_position = Vector2(0, 0)
-parameters/SwordAnimationTree/StateMachine/ChargeUp/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/SwordAnimationTree/StateMachine/ChargeUp/TimeScale/scale = 1.0
-parameters/SwordAnimationTree/StateMachine/Combo/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/SwordAnimationTree/StateMachine/Combo/TimeScale/scale = 1.0
-parameters/SwordAnimationTree/StateMachine/Idle/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/SwordAnimationTree/StateMachine/Run/blend_position = Vector2(0, 0)
-parameters/SwordAnimationTree/StateMachine/Shoot/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(0.792779, 0.0744681)
 parameters/run/blend_position = Vector2(-1.34757, -0.0292886)
 
@@ -4990,7 +4335,6 @@ shape = SubResource("CircleShape2D_3mym3")
 [connection signal="transition" from="State Machine/AttackCombo" to="State Machine" method="on_state_transition"]
 [connection signal="timeout" from="State Machine/AttackCombo/ComboTimer" to="." method="combo_timer_timeout"]
 [connection signal="transition" from="State Machine/AttackChargeUp" to="State Machine" method="on_state_transition"]
-[connection signal="transition" from="State Machine/ChargeAttack" to="State Machine" method="on_state_transition"]
 [connection signal="transition" from="State Machine/Shoot" to="State Machine" method="on_state_transition"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_attack_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/AttackCombo" method="_on_attack_combo_finished"]

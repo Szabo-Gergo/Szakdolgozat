@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dtqmfjifv8edu" path="res://Spritesheets/Player/Arm.png" id="1_a0udg"]
 [ext_resource type="Texture2D" uid="uid://dqr0jcospxssv" path="res://Spritesheets/Weapon/Gun.png" id="2_djgua"]
 
-[node name="AimHand" type="Node2D"]
+[node name="RangedWeapon" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Hand" type="Sprite2D" parent="."]

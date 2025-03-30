@@ -5,11 +5,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_04xut"]
 
 [node name="InteractionComponent" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_wqywj")
 area_range = 20
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

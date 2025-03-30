@@ -169,3 +169,16 @@ anim_player = NodePath("../AnimationPlayer")
 position = Vector2(0, -37)
 sprite = NodePath("../Sprite2D")
 area_range = 80
+
+[node name="Area2D" parent="InteractionComponent" index="0"]
+visible = false
+position = Vector2(3, 38)
+
+[node name="CollisionShape2D" parent="InteractionComponent/Area2D" index="0"]
+visible = false
+
+[node name="Label" parent="InteractionComponent" index="1"]
+offset_top = -13.0
+offset_bottom = 3.0
+
+[editable path="InteractionComponent"]

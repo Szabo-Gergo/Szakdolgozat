@@ -1,13 +1,10 @@
 extends Control
 class_name SkillNode
 
-@export var texture : CompressedTexture2D
-@export var upgrade_cost : int = 10
-@export var current_level : int = 0
-@export var max_level : int
-@export var is_locked : bool
-@export var is_finished : bool
-
+@export var node_id : String
+@export var skill_resource : SkillNodeResource
+@export var skill_tree_handler: SkillTreeHandler
+@onready var upgrade_menu: Control = owner
 @onready var panel_container: PanelContainer = $PanelContainer
 @onready var button: Button = $PanelContainer/Button
 @onready var level_label: Label = $PanelContainer/LevelLabel
@@ -17,55 +14,66 @@ class_name SkillNode
 var parent
 
 func _ready() -> void:
-	button.icon = texture
+	
+	check_child_connection()
+	button.icon = skill_resource.texture
 	pivot_offset = size/2
 	parent = get_parent()
+	if !skill_resource.is_finished:
+		var current_level_upgrade = skill_resource.upgrades_per_level[skill_resource.current_level]
+		button.tooltip_text = current_level_upgrade._get_upgrades_string()
 	parent_setup()
 	
 	update_labels()
-	if is_finished:
+	if skill_resource.is_finished:
 		change_to_finished()
 	
-	if is_locked:
+	if skill_resource.is_locked:
 		change_to_locked()
-	
-		
+
+func load_resource(saved_skill_resource : SkillNodeResource):
+	skill_resource = saved_skill_resource
+	_ready()
+
+
 func _on_button_pressed() -> void:
-	if PlayerSkillStatHandler.use_currency(upgrade_cost) and !is_locked and !is_finished:
-		upgrade_cost *= 2
-		current_level += 1
+	if PlayerSkillStatHandler.use_currency(skill_resource.upgrade_cost) and !skill_resource.is_locked and !skill_resource.is_finished:
+		skill_resource.upgrade_cost *= 2
+		skill_resource.upgrades_per_level[skill_resource.current_level].apply_stat(upgrade_menu.player._get_melee_weapon())
+		skill_resource.current_level += 1
 		check_child_connection()
 		update_labels()
-		print(str(current_level)+"/"+str(max_level))
-		if current_level == max_level:
+		skill_tree_handler.save_all_trees()
+		if skill_resource.current_level == skill_resource.max_level:
 			change_to_finished()
-	elif !is_locked and !is_finished:
+	
+	if !PlayerSkillStatHandler.use_currency(skill_resource.upgrade_cost):
 		cost_label.set("theme_override_colors/font_color", Color(0.71, 0.094, 0.094))
 		await get_tree().create_timer(0.25).timeout
-		print("did this run?")
 		cost_label.set("theme_override_colors/font_color", Color(1, 1, 1))
-		
+
 func update_labels():
-	level_label.text = str(current_level)+"|"+str(max_level)
-	cost_label.text = str(upgrade_cost)
+	level_label.text = str(skill_resource.current_level)+"|"+str(skill_resource.max_level)
+	cost_label.text = str(skill_resource.upgrade_cost)
 
 func change_to_locked():
 		cost_label.set("theme_override_colors/font_color", Color(1, 1, 1, 0.5))
 		level_label.set("theme_override_colors/font_color", Color(1, 1, 1, 0.5))
 		button.set("theme_override_colors/icon_normal_color", Color(1,1,1,0.5))
 		button.disabled = true
-		is_locked = true
+		skill_resource.is_locked = true
 		
 func change_to_finished():
 	var panel_style : StyleBoxFlat = panel_container.get_theme_stylebox("panel")
 	panel_style.border_color = "#128d1d"			
-	is_finished = true
-	if is_finished:
-		check_child_connection()
-		update_line_connection()
+	cost_label.visible = false
+	skill_resource.is_finished = true
+	
+	check_child_connection()
+	update_line_connection()
 	
 func change_to_unlocked():
-	is_locked = false
+	skill_resource.is_locked = false
 	button.disabled = false
 	cost_label.set("theme_override_colors/font_color", Color(1, 1, 1,1))
 	level_label.set("theme_override_colors/font_color", Color(1, 1, 1,1))
@@ -80,12 +88,12 @@ func parent_setup():
 
 func update_line_connection():
 	if line.points.size() > 0:
-		if parent.is_locked:
+		if parent.skill_resource.is_locked:
 			line.default_color = "#9191913b"
 			change_to_locked()
-		elif parent.is_finished and is_finished:
+		elif parent.skill_resource.is_finished and skill_resource.is_finished:
 			line.default_color = "#128d1d"
-		elif !parent.is_locked and parent.current_level > 0:
+		elif !parent.skill_resource.is_locked and parent.skill_resource.current_level > 0:
 			line.default_color = "#cccccc"
 			change_to_unlocked()
 	

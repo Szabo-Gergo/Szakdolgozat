@@ -13,9 +13,9 @@
 [sub_resource type="Resource" id="Resource_bk14s"]
 script = ExtResource("3_vtvkn")
 enemy = ExtResource("4_3ao8h")
-elite_chance = 0.0
-spawn_amount = 1
-elite_type = 0
+elite_chance = 1.0
+spawn_amount = 5
+elite_type = 3
 
 [sub_resource type="Resource" id="Resource_nxsl8"]
 script = ExtResource("2_232c0")
@@ -71,9 +71,42 @@ unique_name_in_owner = true
 y_sort_enabled = true
 position = Vector2(320, 180)
 base_stats = SubResource("Resource_hb61j")
+current_melee_type = 2
 
 [node name="HealthComponent" parent="Player" index="5"]
 stat_sheet = SubResource("Resource_xw7wj")
+
+[node name="AnimationTree" parent="Player" index="9"]
+parameters/HammerAnimationTree/StateMachine/Attack/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/HammerAnimationTree/StateMachine/Attack/TimeScale/scale = 1.0
+parameters/HammerAnimationTree/StateMachine/ChargeAttack/blend_position = Vector2(0, 0)
+parameters/HammerAnimationTree/StateMachine/ChargeUp/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/HammerAnimationTree/StateMachine/ChargeUp/TimeScale/scale = 1.0
+parameters/HammerAnimationTree/StateMachine/Combo/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/HammerAnimationTree/StateMachine/Combo/TimeScale/scale = 1.0
+parameters/HammerAnimationTree/StateMachine/Idle/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/HammerAnimationTree/StateMachine/Run/blend_position = Vector2(0, 0)
+parameters/HammerAnimationTree/StateMachine/Shoot/blend_position = Vector2(0, 0)
+parameters/SpearAnimationTree/StateMachine/Attack/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/SpearAnimationTree/StateMachine/Attack/TimeScale/scale = 1.0
+parameters/SpearAnimationTree/StateMachine/ChargeAttack/blend_position = Vector2(0, 0)
+parameters/SpearAnimationTree/StateMachine/ChargeUp/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/SpearAnimationTree/StateMachine/ChargeUp/TimeScale/scale = 1.0
+parameters/SpearAnimationTree/StateMachine/Combo/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/SpearAnimationTree/StateMachine/Combo/TimeScale/scale = 1.0
+parameters/SpearAnimationTree/StateMachine/Idle/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/SpearAnimationTree/StateMachine/Run/blend_position = Vector2(0, 0)
+parameters/SpearAnimationTree/StateMachine/Shoot/blend_position = Vector2(0, 0)
+parameters/SwordAnimationTree/StateMachine/Attack/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/SwordAnimationTree/StateMachine/Attack/TimeScale/scale = 1.0
+parameters/SwordAnimationTree/StateMachine/ChargeAttack/blend_position = Vector2(0, 0)
+parameters/SwordAnimationTree/StateMachine/ChargeUp/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/SwordAnimationTree/StateMachine/ChargeUp/TimeScale/scale = 1.0
+parameters/SwordAnimationTree/StateMachine/Combo/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/SwordAnimationTree/StateMachine/Combo/TimeScale/scale = 1.0
+parameters/SwordAnimationTree/StateMachine/Idle/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/SwordAnimationTree/StateMachine/Run/blend_position = Vector2(0, 0)
+parameters/SwordAnimationTree/StateMachine/Shoot/blend_position = Vector2(0, 0)
 
 [node name="Map" parent="." instance=ExtResource("3_cat7x")]
 material = SubResource("ShaderMaterial_xyca7")

@@ -26,7 +26,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		print("Player Entered!")
 
 
-
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		label.visible = false
@@ -35,7 +34,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		menu.get_parent().hide()
 		
 func _input(event: InputEvent) -> void:
-	if check_for_input and event.is_action_pressed("interact"):
+	if check_for_input and (event.is_action_pressed("interact") or (get_tree().paused and event.is_action_pressed("menu_exit"))):
 		if !get_tree().paused:
 			menu.get_parent().show()
 			get_tree().paused = true
@@ -43,7 +42,3 @@ func _input(event: InputEvent) -> void:
 			get_tree().paused = false
 			menu.get_parent().hide()
 	
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	print(event)
