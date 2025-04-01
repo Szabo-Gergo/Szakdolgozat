@@ -1,7 +1,7 @@
 extends BaseStatModifierStrategy
-class_name TemporaryMeleeStatStrategy
+class_name TemporaryProjectileStatStrategy
 
-@export var upgrades: Array[UpgradeResource]
+@export var upgrades: Array[ProjectileUpgradeResource]
 @export var duration: float
 
 func apply_stat(target: Node):
@@ -11,11 +11,7 @@ func apply_stat(target: Node):
 
 func remove_stat(target : Node):
 	for upgrade in upgrades:
-		var upgrade_type = upgrade.stat_type.split("_")
-		if upgrade.stat_type.contains("multiplier"):
-			target.apply_upgrade(upgrade.stat_type, 1/upgrade.value, 0, false)
-		elif upgrade.stat_type.contains("base"):
-			target.apply_upgrade(upgrade.stat_type, -upgrade.value, 0, false)
+		target.apply_upgrade(upgrade.stat_type, -upgrade.value, 0, false)
 
 func _get_upgrades_string():
 	if upgrades.size() == 1:

@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://b54g5hu4nquhy"]
+[gd_scene load_steps=5 format=3 uid="uid://b54g5hu4nquhy"]
 
 [ext_resource type="Script" path="res://Scenes/UI/RoundStartUI.gd" id="1_d8iqv"]
 [ext_resource type="PackedScene" uid="uid://c185n760rf7hi" path="res://Scenes/Misc/challange_indicator.tscn" id="2_a6wfa"]
+[ext_resource type="Script" path="res://Scripts/Resources/challange_effect_resource.gd" id="3_32jkn"]
+
+[sub_resource type="Resource" id="Resource_6347o"]
+script = ExtResource("3_32jkn")
+effect_type = "elite_chance"
+current_value = 0.0
 
 [node name="RoundStarterUI" type="Control"]
 custom_minimum_size = Vector2(300, 0)
@@ -42,14 +48,16 @@ text = "Set Challanges"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ChallangeContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ChallangeSetter" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_a6wfa")]
+[node name="ChallangeSetter" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
 layout_mode = 2
 size_flags_horizontal = 1
 challange_title = "Elite Chance"
 max_challange_amount = 20
+challange_effect = SubResource("Resource_6347o")
 point_color = Color(0.803922, 0.807843, 0.823529, 1)
 border_color = Color(0.113725, 0.133333, 0.160784, 1)
 

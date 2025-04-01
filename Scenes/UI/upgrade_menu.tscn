@@ -46,7 +46,7 @@ ui_node_id = "sw1"
 [sub_resource type="Resource" id="Resource_gdw7w"]
 script = ExtResource("6_xmrs2")
 stat_type = "range_multiplier"
-value = 0.5
+value = 0.05
 
 [sub_resource type="Resource" id="Resource_adlov"]
 script = ExtResource("5_i8d43")

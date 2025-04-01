@@ -16,7 +16,6 @@ func _ready() -> void:
 	
 
 func enter(_inputs : Dictionary = {}):
-	attacking = true
 	player_direction = root.global_position.direction_to(Vector2i(root.player.position))
 
 
@@ -41,3 +40,6 @@ func _on_attack_finished(anim_name: StringName) -> void:
 		root.player.health_component.deal_damage(root.base_stats.damage)
 	transition.emit(self, "Move")
 	
+func exit():
+	print("Attacking while damaged: "+str(attacking))
+	attacking = false

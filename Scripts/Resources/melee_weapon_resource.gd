@@ -28,11 +28,12 @@ func _get_damage():
 func _get_charge_damage():
 	return base_charge_damage*charge_damage_multiplier
 
-func _get_range():
-	return base_range*range_multiplier
+func _get_range(target : Sprite2D):
+	return Vector2(1,1) * (base_range*range_multiplier)
 
 func _get_attack_speed():
 	return base_attack_speed*attack_speed_multiplier
+	
 	
 func _apply_stat(stat_name : String, value : float):
 	match stat_name:
@@ -72,7 +73,8 @@ func _apply_attack_speed(animation_tree : AnimationTree, attack_cooldown_timer :
 	animation_tree.set("parameters/Attack/TimeScale/scale", _get_attack_speed())
 	animation_tree.set("parameters/Combo/TimeScale/scale", _get_attack_speed())
 	attack_cooldown_timer.wait_time = attack_cooldown
-	combo_timer.wait_time *= attack_cooldown_timer.wait_time * 1.5
+	combo_timer.wait_time = attack_cooldown_timer.wait_time * 1.5
 	
 func _apply_range(target : Sprite2D):
-	target.scale *= _get_range()
+	target.scale = _get_range(target)
+	

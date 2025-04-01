@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_b7fde")
-base_damage = 4
+base_damage = 1
 damage_multiplier = 2.0
 base_charge_damage = 4
-charge_damage_multiplier = 2.0
+charge_damage_multiplier = 1.0
 charge_speed = 1.0
 base_range = 1.0
-range_multiplier = 1.0
+range_multiplier = 1.5
 base_attack_speed = 1.0
-attack_speed_multiplier = 1.0
+attack_speed_multiplier = 1.05
 ammo_gained = 1.0
 collision_polygon = PackedVector2Array(-4.5, 3.9, -6.5, -1.5, 0.3, -16, 6.5, -1.5, 4.5, 3.9, 0, 3.9)
 can_charge = true

@@ -11,7 +11,7 @@ var dead : bool
 func enter(_inputs : Dictionary = {}):
 	if _inputs["state_origin"] != self.name:
 		state_origin = _inputs["state_origin"] 	
-		
+	
 	health_component.deal_damage(_inputs["damage"])
 	damaged_again = true
 

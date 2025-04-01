@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b66ssmufcj31d"]
+[gd_scene load_steps=4 format=3 uid="uid://b66ssmufcj31d"]
 
 [ext_resource type="Texture2D" uid="uid://dtqmfjifv8edu" path="res://Spritesheets/Player/Arm.png" id="1_a0udg"]
-[ext_resource type="Texture2D" uid="uid://dqr0jcospxssv" path="res://Spritesheets/Weapon/Gun.png" id="2_djgua"]
+[ext_resource type="Script" path="res://Scripts/Player/ranged_weapon.gd" id="1_mh78k"]
+[ext_resource type="Texture2D" uid="uid://dqr0jcospxssv" path="res://Spritesheets/Weapon/Pistol.png" id="2_djgua"]
 
 [node name="RangedWeapon" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_mh78k")
 
 [node name="Hand" type="Sprite2D" parent="."]
 y_sort_enabled = true

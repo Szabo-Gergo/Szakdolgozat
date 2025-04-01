@@ -47,7 +47,8 @@ func deal_damage(damage):
 		
 	health = max(health, 0)
 	armor = max(armor, 0)
-
+	
+	print("\nHealth in HealthComponent")
 	check_health()
 	health_bar.update_health_points()
 	if is_player_health_component:

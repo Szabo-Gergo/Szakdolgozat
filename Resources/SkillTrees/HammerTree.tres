@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="SkillTreeResource" load_steps=36 format=3]
+[gd_resource type="Resource" script_class="SkillTreeResource" load_steps=36 format=3 uid="uid://bfp5g2a2vr2sv"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/skill_tree_resource.gd" id="1_537n5"]
 [ext_resource type="Script" path="res://Scripts/Resources/skill_node_resource.gd" id="2_25uyb"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Damage.png" id="3_5rob4"]
+[ext_resource type="Texture2D" uid="uid://bj4j3apf5f4p4" path="res://Spritesheets/Misc/Skillicon_Damage.png" id="3_5rob4"]
 [ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="4_1jolo"]
 [ext_resource type="Script" path="res://Scripts/Resources/upgrade_resource.gd" id="5_ahu8i"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Range.png" id="6_5e42g"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Ammo.png" id="7_w0fio"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Precision_Charge.png" id="8_gwamj"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Charge.png" id="9_okkr6"]
+[ext_resource type="Texture2D" uid="uid://benwhuspvp7ji" path="res://Spritesheets/Misc/Skillicon_Range.png" id="6_5e42g"]
+[ext_resource type="Texture2D" uid="uid://b4r5is2xuryix" path="res://Spritesheets/Misc/Skillicon_Ammo.png" id="7_w0fio"]
+[ext_resource type="Texture2D" uid="uid://dm2k6hx6gmgif" path="res://Spritesheets/Misc/Skillicon_Precision_Charge.png" id="8_gwamj"]
+[ext_resource type="Texture2D" uid="uid://dthkeod2lbbcy" path="res://Spritesheets/Misc/Skillicon_Charge.png" id="9_okkr6"]
 
 [sub_resource type="Resource" id="Resource_rsbqr"]
 script = ExtResource("5_ahu8i")
@@ -44,11 +44,11 @@ is_skill_node = true
 [sub_resource type="Resource" id="Resource_o1hdi"]
 script = ExtResource("2_25uyb")
 texture = ExtResource("6_5e42g")
-upgrade_cost = 10
-current_level = 0
+upgrade_cost = 320
+current_level = 5
 max_level = 5
-is_locked = true
-is_finished = false
+is_locked = false
+is_finished = true
 upgrades_per_level = Array[ExtResource("4_1jolo")]([SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov")])
 ui_node_id = "sw11"
 
@@ -172,11 +172,11 @@ is_skill_node = true
 [sub_resource type="Resource" id="Resource_trmck"]
 script = ExtResource("2_25uyb")
 texture = SubResource("CompressedTexture2D_yrvg6")
-upgrade_cost = 40
-current_level = 2
+upgrade_cost = 320
+current_level = 5
 max_level = 5
 is_locked = false
-is_finished = false
+is_finished = true
 upgrades_per_level = Array[ExtResource("4_1jolo")]([SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32")])
 ui_node_id = "h3"
 

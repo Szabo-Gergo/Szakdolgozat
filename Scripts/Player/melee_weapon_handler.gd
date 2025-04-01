@@ -74,9 +74,7 @@ func apply_upgrade(stat_type : String, value : float, is_skill_node : bool):
 		melee_resource._apply_range(trail)
 	elif stat_type.contains("attack_speed"):
 		melee_resource._apply_attack_speed(animation_tree, cooldown_timer, combo_timer)
-		
+	
 	if is_skill_node:
+		print("Should Save!")
 		ResourceSaver.save(melee_resource, melee_resource.resource_path)
-
-func _set_animation_speed(animation_node_name : String):
-	player.animation_tree

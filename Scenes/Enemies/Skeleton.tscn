@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ngtpcu1w36s5"]
+[gd_scene load_steps=43 format=3 uid="uid://ngtpcu1w36s5"]
 
 [ext_resource type="Texture2D" uid="uid://cmq3tfef8x3ex" path="res://Spritesheets/Enemies/Sword_Skeleton.png" id="1_5nep8"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/main_stats.gd" id="1_sjipi"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="3_iu5ss"]
 [ext_resource type="Script" path="res://Scripts/Components/hurt_box_component.gd" id="4_j3edn"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="4_koktf"]
-[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="4_pu8sl"]
 [ext_resource type="Material" uid="uid://cqqne3pxiytgm" path="res://Resources/FlashShaderResource.tres" id="5_8m2at"]
 [ext_resource type="PackedScene" uid="uid://bexq54sbkhv2o" path="res://Scenes/Misc/damage_number.tscn" id="5_jt1pr"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/move.gd" id="6_apmgx"]
@@ -16,14 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="8_aasmt"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="14_7dj2w"]
 [ext_resource type="Texture2D" uid="uid://bmo0oks3fdkua" path="res://Spritesheets/Misc/elite_crown.png" id="15_bnq6x"]
-
-[sub_resource type="Resource" id="Resource_swnjd"]
-resource_local_to_scene = true
-script = ExtResource("4_pu8sl")
-damage = 10
-max_health = 3
-max_armor = 0
-speed = 100.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x281a"]
 radius = 4.67904
@@ -386,6 +377,7 @@ shader_parameter/pixel_size = 0.5
 
 [node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "sprite", "animation_tree", "elite_crown") groups=["Enemy"]]
 light_mask = 0
+z_index = 1
 y_sort_enabled = true
 scale = Vector2(1.3, 1.3)
 collision_layer = 2
@@ -402,7 +394,7 @@ elite_crown = NodePath("EliteCrown")
 droped_xp_amount = 5
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "damage_number_component", "state_machine") instance=ExtResource("3_iu5ss")]
-stat_sheet = SubResource("Resource_swnjd")
+stat_sheet = ExtResource("2_1xrwo")
 health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../Skeleton_Sprite")
 damage_number_component = NodePath("../DamageNumberComponent")
@@ -415,15 +407,15 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_x281a")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("root", "health_component", "state_machine", "animation_tree") groups=["Enemy_HurtBox"]]
-visible = false
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("4_j3edn")
 root = NodePath("..")
 health_component = NodePath("../HealthComponent")
 state_machine = NodePath("../State Machine")
 animation_tree = NodePath("../AnimationTree")
 
-[node name="Hurt_shape" type="CollisionShape2D" parent="HurtBox"]
+[node name="Hurt_shape" type="CollisionShape2D" parent="HurtBox" groups=["Enemy_HurtBox"]]
 position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_22qb7")
 debug_color = Color(0.219764, 0.639022, 7.70092e-07, 0.42)

@@ -12,7 +12,6 @@ class_name Base_Enemy
 
 var is_elite : bool
 var attach_break = 0 #(DO LATER) Should be on the Brain dog only
-
 func apply_modifier(elite_type, modifiers):
 	is_elite = true
 	elite_crown.visible = true

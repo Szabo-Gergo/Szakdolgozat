@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ProjectileStatResource" load_steps=2 format=3 uid="uid://cjk8te1h38qup"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_stat_resource.gd" id="1_544eu"]
+
+[resource]
+script = ExtResource("1_544eu")
+speed = 350.0
+damage = 2
+range = 250.0
+piercing = 10
+multishot = 20.0
+bullet_spread = 10.0
+ammo_cost = 1.0

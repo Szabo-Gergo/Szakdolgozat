@@ -13,8 +13,10 @@ signal level_up
 
 @export var health_component : Health_Component
 @export var melee_weapon : MeleeWeapon
+@export var ranged_weapon : RangedWeapon
 
 @export_enum("Sword","Hammer","Spear") var current_melee_type : int
+@export_enum("Pistol","Shotgun","Beam") var current_ranged_type : int
 
 var level : int = 1
 var required_xp : int = 10
@@ -124,6 +126,9 @@ func _get_melee_weapon() -> Node2D:
 
 func _set_melee_weapon() -> void:
 	melee_weapon._on_weapon_change(current_melee_type)
+
+func _set_ranged_weapon() -> void:
+	ranged_weapon._on_weapon_change(current_ranged_type)
 
 func _get_animation_tree_name() -> String:
 	match current_melee_type:

@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://0pn66s5ww7sn"]
+
+[ext_resource type="Script" path="res://Scripts/Player/projectile.gd" id="1_y4xcv"]
+[ext_resource type="Texture2D" uid="uid://cjl2ym7askgjq" path="res://Spritesheets/Weapon/Bullet.png" id="2_bj6s0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsirv"]
+size = Vector2(11, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euc8u"]
+atlas = ExtResource("2_bj6s0")
+region = Rect2(0, 0, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmi2h"]
+atlas = ExtResource("2_bj6s0")
+region = Rect2(12, 0, 12, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_okd6s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euc8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmi2h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75cn2"]
+radius = 150.0
+
+[node name="Projectile" type="Node2D" node_paths=PackedStringArray("animated_sprite")]
+z_index = 2
+script = ExtResource("1_y4xcv")
+animated_sprite = NodePath("AnimatedSprite")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Player_Projectile_HitBox"]]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_fsirv")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_okd6s")
+frame_progress = 0.753738
+
+[node name="ChainArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChainArea"]
+visible = false
+shape = SubResource("CircleShape2D_75cn2")
+disabled = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
