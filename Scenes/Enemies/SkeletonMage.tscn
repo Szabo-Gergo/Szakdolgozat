@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="8_4l85a"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Mage/move.gd" id="8_67g3n"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="10_pe158"]
-[ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="12_u6gb2"]
+[ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scenes/Components/health_component.tscn" id="12_u6gb2"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Mage/flee.gd" id="13_1cjsv"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="15_w18gc"]
 [ext_resource type="Texture2D" uid="uid://bmo0oks3fdkua" path="res://Spritesheets/Misc/elite_crown.png" id="16_urukd"]

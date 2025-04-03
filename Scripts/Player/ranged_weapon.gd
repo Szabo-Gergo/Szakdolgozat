@@ -6,6 +6,7 @@ const PISTOL_STATS = preload("res://Resources/RangedWeaponStats/Pistol_Stats.tre
 
 @export var projectile_resource : ProjectileStatResource
 @onready var weapon_sprite: Sprite2D = $Weapon
+@export var modifiers: Array[BaseStatModifierStrategy]
 
 func _on_weapon_change(weapon_index : int):
 	match weapon_index:

@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://bhdlnyet8fsnm" path="res://Resources/BrainDog.tres" id="2_21px5"]
 [ext_resource type="Shader" path="res://Shaders/Flash.gdshader" id="2_b4iju"]
 [ext_resource type="Texture2D" uid="uid://dit7twgkheiaj" path="res://Spritesheets/Enemies/Intellect Devourer Sprites.png" id="3_60e2x"]
-[ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="3_qwmat"]
+[ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scenes/Components/health_component.tscn" id="3_qwmat"]
 [ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="4_bynd6"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="4_ulgu5"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/move.gd" id="5_a0uws"]

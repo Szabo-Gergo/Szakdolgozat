@@ -98,7 +98,7 @@ turbulence_noise_strength = 18.74
 radius = 5.0
 height = 20.0
 
-[sub_resource type="Resource" id="Resource_nap0q"]
+[sub_resource type="Resource" id="Resource_v1cre"]
 resource_local_to_scene = true
 script = ExtResource("19_yk4dd")
 damage = 2
@@ -4871,7 +4871,7 @@ debug_color = Color(9.62615e-07, 0.385506, 0.980678, 0.113725)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "state_machine") instance=ExtResource("17_eyexp")]
 visible = false
-stat_sheet = SubResource("Resource_nap0q")
+stat_sheet = SubResource("Resource_v1cre")
 is_player_health_component = true
 health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../CharacterSprite")

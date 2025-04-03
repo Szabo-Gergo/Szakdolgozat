@@ -39,4 +39,3 @@ func on_state_transition(state, new_state_name, inputs : Dictionary = {}):
 		
 	new_state.enter(inputs)	
 	current_state = new_state
-	label.text = current_state.name

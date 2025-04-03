@@ -11,7 +11,8 @@ var correcting_signal : bool
 
 	
 func enter(_inputs : Dictionary = {}):
-	hitbox.get_child(0).disabled = false
+	if hitbox:
+		hitbox.get_child(0).disabled = false
 
 var frame_count = 0
 

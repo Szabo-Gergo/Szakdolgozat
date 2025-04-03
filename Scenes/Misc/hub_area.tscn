@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://cikpw46qjjxsf"]
+[gd_scene load_steps=44 format=4 uid="uid://cikpw46qjjxsf"]
 
 [ext_resource type="Texture2D" uid="uid://db4ruf1ayj4wx" path="res://Spritesheets/Enviroment/Tileset-Terrain2.png" id="1_rklo1"]
 [ext_resource type="Texture2D" uid="uid://d1prhhghnpvut" path="res://Spritesheets/Enviroment/Summer_Plains_Decoration.png" id="2_ecm2o"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://c45xdbbrs17f5" path="res://Scenes/Misc/merchant.tscn" id="10_wfryy"]
 [ext_resource type="PackedScene" uid="uid://b1p0vdrkfuneh" path="res://Scenes/UI/upgrade_menu.tscn" id="13_ecwo3"]
 [ext_resource type="PackedScene" uid="uid://b54g5hu4nquhy" path="res://Scenes/UI/RoundStarterUI.tscn" id="14_r3q11"]
+[ext_resource type="PackedScene" uid="uid://uxdf7rf5w0do" path="res://Scenes/Enemies/TrainingDummy.tscn" id="15_hb07a"]
+[ext_resource type="Shader" path="res://Shaders/Flash.gdshader" id="16_44tyr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hl1bb"]
 texture = ExtResource("2_ecm2o")
@@ -1748,6 +1750,24 @@ max_health = 100
 max_armor = 0
 speed = 0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrncc"]
+resource_local_to_scene = true
+shader = ExtResource("16_44tyr")
+shader_parameter/flash_color = Color(0.603963, 0, 0.0631262, 0.737255)
+shader_parameter/flash_opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmc7w"]
+resource_local_to_scene = true
+shader = ExtResource("16_44tyr")
+shader_parameter/flash_color = Color(0.603963, 0, 0.0631262, 0.737255)
+shader_parameter/flash_opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4io2w"]
+resource_local_to_scene = true
+shader = ExtResource("16_44tyr")
+shader_parameter/flash_color = Color(0.603963, 0, 0.0631262, 0.737255)
+shader_parameter/flash_opacity = 0.0
+
 [node name="Hub" type="Node2D"]
 
 [node name="Ground_Decorations" type="TileMapLayer" parent="."]
@@ -1840,6 +1860,18 @@ player = NodePath("../../Player")
 visible = false
 
 [node name="RoundStarterUI" parent="RoundStartLayer" instance=ExtResource("14_r3q11")]
+
+[node name="Training Dummy" parent="." instance=ExtResource("15_hb07a")]
+material = SubResource("ShaderMaterial_yrncc")
+position = Vector2(109, -158)
+
+[node name="Training Dummy2" parent="." instance=ExtResource("15_hb07a")]
+material = SubResource("ShaderMaterial_kmc7w")
+position = Vector2(154, -130)
+
+[node name="Training Dummy3" parent="." instance=ExtResource("15_hb07a")]
+material = SubResource("ShaderMaterial_4io2w")
+position = Vector2(106, -98)
 
 [connection signal="visibility_changed" from="UpgradeLayer" to="UpgradeLayer/UpgradeMenu/MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees" method="_on_upgrade_menu_closed"]
 [connection signal="weapon_change" from="UpgradeLayer/UpgradeMenu" to="Player/MeleeWeapon" method="_on_weapon_change"]

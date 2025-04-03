@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="1_iijwc"]
 [ext_resource type="Shader" path="res://Shaders/Flash.gdshader" id="1_rdwqv"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/move.gd" id="2_4l3vc"]
-[ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scripts/Components/health_component.tscn" id="3_6kvhi"]
+[ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scenes/Components/health_component.tscn" id="3_6kvhi"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/attack.gd" id="3_vsqjc"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="4_aj8jv"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/death.gd" id="5_akt7t"]

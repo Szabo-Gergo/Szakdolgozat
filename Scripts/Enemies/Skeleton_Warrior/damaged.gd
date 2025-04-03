@@ -15,6 +15,7 @@ func enter(_inputs : Dictionary = {}):
 	health_component.deal_damage(_inputs["damage"])
 	damaged_again = true
 
+
 func handle_transition():
 	if state_origin == "Move":
 		transition.emit(self, state_origin)

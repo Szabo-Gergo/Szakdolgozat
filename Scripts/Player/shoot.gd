@@ -39,6 +39,7 @@ func animation_update():
 
 func set_projectile():
 	if player.ammo > 0:
+
 		var num_projectiles = floor(projectile_resource.multishot) 
 	
 		if randf() < (projectile_resource.multishot - num_projectiles):
@@ -57,12 +58,13 @@ func spawn_projectile():
 	get_parent().add_child(bullet)
 	
 	bullet.position = bullet_spawn_point.global_position
-	
+	bullet.target_group = "Enemy_HurtBox"
 	var spread_angle = randf_range(-projectile_resource.bullet_spread, projectile_resource.bullet_spread)
 	bullet.rotation = bullet_spawn_point.global_rotation + deg_to_rad(spread_angle)
 	
 	bullet.projectile_stats_resource = projectile_resource.duplicate(true)
 	bullet._set_base_values()
+	
 
 func exit():
 	ranged_weapon.visible = false

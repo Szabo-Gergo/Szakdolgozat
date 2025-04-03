@@ -1,15 +1,32 @@
-[gd_scene load_steps=13 format=3 uid="uid://uxdf7rf5w0do"]
+[gd_scene load_steps=29 format=3 uid="uid://uxdf7rf5w0do"]
 
 [ext_resource type="Shader" path="res://Shaders/Flash.gdshader" id="1_qf4w4"]
-[ext_resource type="Script" path="res://Scripts/Enemies/basic_enemy.gd" id="1_qqh32"]
+[ext_resource type="Material" uid="uid://cqqne3pxiytgm" path="res://Resources/FlashShaderResource.tres" id="1_qm53s"]
+[ext_resource type="Script" path="res://Scripts/Enemies/base_training_dummy.gd" id="1_qqh32"]
 [ext_resource type="Texture2D" uid="uid://bedue0ofo6ub3" path="res://Spritesheets/Enemies/Training Dummy Sprite Sheet.png" id="1_tuvqi"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlkee"]
-size = Vector2(26, 24)
+[ext_resource type="Script" path="res://Scripts/Components/hurt_box_component.gd" id="3_hvrwh"]
+[ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scenes/Components/health_component.tscn" id="3_mcg32"]
+[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="4_2d2lb"]
+[ext_resource type="PackedScene" uid="uid://bexq54sbkhv2o" path="res://Scenes/Misc/damage_number.tscn" id="5_01e1o"]
+[ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="6_ki7wi"]
+[ext_resource type="Script" path="res://Scripts/Misc/StateMachine/state_machine.gd" id="8_7p3eu"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="9_nl0a5"]
+[ext_resource type="Script" path="res://Scripts/Enemies/base_idle_state.gd" id="12_bs7d5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lcd8b"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlkee"]
+size = Vector2(26, 35)
+
+[sub_resource type="Resource" id="Resource_rwkes"]
+script = ExtResource("4_2d2lb")
+damage = 0
+max_health = 10000000
+max_armor = 0
+speed = 0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yx5oi"]
+resource_local_to_scene = true
 shader = ExtResource("1_qf4w4")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_opacity = 0.0
@@ -30,6 +47,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/Damaged")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"handle_transition"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_vqh2o"]
 resource_name = "GotSlamed"
@@ -46,6 +77,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [8, 9, 10, 11, 12, 3]
+}
+
+[sub_resource type="Animation" id="Animation_2cuco"]
+resource_name = "Idle"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DummySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_roif1"]
@@ -84,39 +132,86 @@ tracks/0/keys = {
 _data = {
 "GotHit": SubResource("Animation_bo4e2"),
 "GotSlammed": SubResource("Animation_vqh2o"),
+"Idle": SubResource("Animation_2cuco"),
 "RESET": SubResource("Animation_roif1"),
 "Spin": SubResource("Animation_g4iho")
 }
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ig6bi"]
-particle_flag_disable_z = true
-spread = 30.0
-initial_velocity_min = 38.48
-initial_velocity_max = 79.22
-radial_velocity_min = 40.0
-radial_velocity_max = 40.0
-gravity = Vector3(0, 0, 0)
-scale_max = 2.0
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tre3q"]
+animation = &"GotHit"
 
-[node name="Training Dummy" type="CharacterBody2D"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_28qki"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kjp0e"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tqi7m"]
+advance_mode = 2
+advance_expression = "current_state.name == \"Damaged\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7ay8j"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_r8a6e"]
+states/GotHit/node = SubResource("AnimationNodeAnimation_tre3q")
+states/GotHit/position = Vector2(498, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_28qki")
+states/Idle/position = Vector2(275, 100)
+states/Start/position = Vector2(129, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kjp0e"), "Idle", "GotHit", SubResource("AnimationNodeStateMachineTransition_tqi7m"), "GotHit", "Idle", SubResource("AnimationNodeStateMachineTransition_7ay8j")]
+graph_offset = Vector2(-8, -76)
+
+[node name="Training Dummy" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 1
+material = ExtResource("1_qm53s")
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_qqh32")
-
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-visible = false
-shape = SubResource("RectangleShape2D_rlkee")
-debug_color = Color(0, 0.640378, 0.350803, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_lcd8b")
 
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("root", "health_component", "state_machine", "animation_tree") groups=["Enemy_HurtBox"]]
+visible = false
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("3_hvrwh")
+root = NodePath("..")
+health_component = NodePath("../HealthComponent")
+state_machine = NodePath("../StateMachine")
+animation_tree = NodePath("../AnimationTree")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" groups=["Enemy_HurtBox"]]
+visible = false
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_rlkee")
+debug_color = Color(0, 0.640378, 0.350803, 0.42)
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "damage_number_component", "state_machine") instance=ExtResource("3_mcg32")]
+visible = false
+stat_sheet = SubResource("Resource_rwkes")
+health_bar = NodePath("../BasicHealthBar")
+sprite = NodePath("../DummySprite")
+damage_number_component = NodePath("../DamageNumberComponent")
+state_machine = NodePath("../StateMachine")
+
+[node name="BasicHealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_ki7wi")]
+offset_left = -18.0
+offset_top = -24.0
+offset_right = 3.00004
+offset_bottom = -23.0
+scale = Vector2(1.68, 2.52)
+health_component = NodePath("../HealthComponent")
+
+[node name="DamageNumberComponent" parent="." instance=ExtResource("5_01e1o")]
+position = Vector2(0, -13)
+
 [node name="DummySprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_yx5oi")
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_tuvqi")
 hframes = 8
 vframes = 3
@@ -126,18 +221,23 @@ libraries = {
 "": SubResource("AnimationLibrary_qtmdc")
 }
 
-[node name="FlashTimer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 0.1
-one_shot = true
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_r8a6e")
+advance_expression_base_node = NodePath("../StateMachine")
+anim_player = NodePath("../AnimationPlayer")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
-emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_ig6bi")
-lifetime = 0.3
-one_shot = true
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("base_state")]
+script = ExtResource("8_7p3eu")
+base_state = NodePath("Idle")
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_entered"]
-[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]
+[node name="Damaged" type="Node" parent="StateMachine" node_paths=PackedStringArray("root", "health_component")]
+script = ExtResource("9_nl0a5")
+root = NodePath("../..")
+health_component = NodePath("../../HealthComponent")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("12_bs7d5")
+
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
+[connection signal="transition" from="StateMachine/Damaged" to="StateMachine" method="on_state_transition"]
+[connection signal="transition" from="StateMachine/Idle" to="StateMachine" method="on_state_transition"]

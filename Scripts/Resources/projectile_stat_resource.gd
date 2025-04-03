@@ -1,7 +1,6 @@
 extends Resource
 class_name ProjectileStatResource
 
-@export var projectile_sprite: Texture
 @export_range(100,1000) var speed: float 
 @export var damage: int 
 @export var range: float
@@ -10,6 +9,7 @@ class_name ProjectileStatResource
 @export var bullet_spread: float
 @export var ammo_cost : float
 @export var chain : int
+
 func _apply_stat(stat_type : String, value):
 	match stat_type:
 		"damage":

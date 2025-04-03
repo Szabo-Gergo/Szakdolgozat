@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="SkillTreeResource" load_steps=36 format=3 uid="uid://brw7ihnbjhn62"]
+[gd_resource type="Resource" script_class="SkillTreeResource" load_steps=36 format=3]
 
 [ext_resource type="Script" path="res://Scripts/Resources/skill_tree_resource.gd" id="1_abo2r"]
 [ext_resource type="Script" path="res://Scripts/Resources/skill_node_resource.gd" id="2_ur7d4"]
-[ext_resource type="Texture2D" uid="uid://bj4j3apf5f4p4" path="res://Spritesheets/Misc/Skillicon_Damage.png" id="3_io21j"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Damage.png" id="3_io21j"]
 [ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="4_shbxu"]
 [ext_resource type="Script" path="res://Scripts/Resources/upgrade_resource.gd" id="5_8smxh"]
-[ext_resource type="Texture2D" uid="uid://benwhuspvp7ji" path="res://Spritesheets/Misc/Skillicon_Range.png" id="6_oursl"]
-[ext_resource type="Texture2D" uid="uid://b4r5is2xuryix" path="res://Spritesheets/Misc/Skillicon_Ammo.png" id="7_66a55"]
-[ext_resource type="Texture2D" uid="uid://dm2k6hx6gmgif" path="res://Spritesheets/Misc/Skillicon_Precision_Charge.png" id="8_py808"]
-[ext_resource type="Texture2D" uid="uid://dthkeod2lbbcy" path="res://Spritesheets/Misc/Skillicon_Charge.png" id="9_bcm7e"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Range.png" id="6_oursl"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Ammo.png" id="7_66a55"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Precision_Charge.png" id="8_py808"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Charge.png" id="9_bcm7e"]
 
 [sub_resource type="Resource" id="Resource_rsbqr"]
 script = ExtResource("5_8smxh")

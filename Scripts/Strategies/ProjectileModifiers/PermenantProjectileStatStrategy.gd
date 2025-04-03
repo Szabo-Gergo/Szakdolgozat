@@ -5,7 +5,7 @@ class_name PermenantProjectileStatStrategy
 
 func apply_stat(projectile: Node):
 	for upgrade in upgrades:
-		projectile.apply_upgrade(upgrade.stat_type, upgrade.value)
+		projectile.projectile_stats_resource._apply_stat(upgrade.stat_type, upgrade.value)
 
 func _get_upgrades_string() -> String:
 	if upgrades.size() == 1:

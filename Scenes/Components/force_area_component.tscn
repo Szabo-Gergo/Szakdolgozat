@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxpihve6yt0n4"]
+
+[ext_resource type="Script" path="res://Scripts/Components/attractor_area_component.gd" id="1_nqri5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1q7ad"]
+radius = 100.0
+
+[node name="ForceAreaComponent" type="Area2D"]
+collision_mask = 10
+monitorable = false
+script = ExtResource("1_nqri5")
+force_range = 100
+force_strength = 1024.0
+is_pulling = true
+affect_enemies = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1q7ad")
+
+[connection signal="area_entered" from="." to="." method="_on_force_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_force_area_exited"]
