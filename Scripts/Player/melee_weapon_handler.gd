@@ -42,7 +42,6 @@ var weapon_setup_data = {
 @export var trail : Sprite2D
 @export var melee_resource : Resource
 @export var animation_tree : AnimationTree
-
 @onready var player: CharacterBody2D = $".."
 @onready var cooldown_timer: Timer = $"../State Machine/Attack/CooldownTimer"
 @onready var combo_timer: Timer = $"../State Machine/AttackCombo/ComboTimer"

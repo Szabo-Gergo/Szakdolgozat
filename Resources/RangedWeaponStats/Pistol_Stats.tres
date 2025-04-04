@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="ProjectileStatResource" load_steps=2 format=3 uid="uid://cjk8te1h38qup"]
+[gd_resource type="Resource" script_class="ProjectileStatResource" load_steps=3 format=3 uid="uid://cjk8te1h38qup"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/projectile_stat_resource.gd" id="1_544eu"]
+[ext_resource type="SpriteFrames" uid="uid://bxwsdyag0dikg" path="res://Resources/ProjectileAnimations/bullet_sprite_frames.tres" id="2_3hx02"]
 
 [resource]
 script = ExtResource("1_544eu")
+sprite_frames = ExtResource("2_3hx02")
 speed = 350.0
 damage = 2
 range = 250.0

@@ -15,10 +15,10 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	if is_melee_hitbox:
 		is_hit = true
-		damage = root.player.melee_weapon.melee_resource._get_damage()
+		damage = root.player.melee_weapon_node.melee_resource._get_damage()
 	elif is_projectile_hitbox :	
 		is_hit = true
-		damage = root.player.ranged_weapon._get_projectile_resource().damage
+		damage = root.player.ranged_weapon_node._get_projectile_resource().damage
 	
 	var will_survive = health_component.health - damage > 0
 		

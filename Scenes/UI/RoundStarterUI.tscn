@@ -58,8 +58,6 @@ size_flags_horizontal = 1
 challange_title = "Elite Chance"
 max_challange_amount = 20
 challange_effect = SubResource("Resource_6347o")
-point_color = Color(0.803922, 0.807843, 0.823529, 1)
-border_color = Color(0.113725, 0.133333, 0.160784, 1)
 
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 process_mode = 3

@@ -23,7 +23,7 @@ func _ready() -> void:
 	armor = stat_sheet.max_armor
 
 	if is_player_health_component:
-		GUI_health_bar = get_node("../../GameUILayer/BasicHealthBar")
+		GUI_health_bar = get_node("../../GameUILayer/VBoxContainer/BasicHealthBar")
 
 	if armor != 0:
 		can_stagger = false

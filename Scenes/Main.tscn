@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4x721xdv1oy3"]
+[gd_scene load_steps=16 format=3 uid="uid://c4x721xdv1oy3"]
 
 [ext_resource type="PackedScene" uid="uid://bvicg58gitoue" path="res://Scenes/Player/Player.tscn" id="1_evire"]
 [ext_resource type="PackedScene" uid="uid://swhynvv1nbu7" path="res://Scenes/Misc/enemy_spawner.tscn" id="1_gir3m"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Scripts/Misc/Spawner/enemy_spawn_info.gd" id="3_vtvkn"]
 [ext_resource type="PackedScene" uid="uid://ngtpcu1w36s5" path="res://Scenes/Enemies/Skeleton.tscn" id="4_3ao8h"]
 [ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="6_13qtb"]
-[ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="8_o4bch"]
 [ext_resource type="PackedScene" uid="uid://cmmqj53pmtawe" path="res://Scenes/UI/paused_menu.tscn" id="9_t4vng"]
 
 [sub_resource type="Resource" id="Resource_bk14s"]
@@ -23,7 +22,7 @@ enemy_info = Array[ExtResource("3_vtvkn")]([SubResource("Resource_bk14s")])
 duration = 10.0
 is_filler_wave = false
 
-[sub_resource type="Resource" id="Resource_hb61j"]
+[sub_resource type="Resource" id="Resource_xa41h"]
 resource_local_to_scene = true
 script = ExtResource("6_13qtb")
 damage = 2
@@ -62,7 +61,7 @@ waves = Array[ExtResource("2_232c0")]([SubResource("Resource_nxsl8")])
 unique_name_in_owner = true
 y_sort_enabled = true
 position = Vector2(320, 180)
-base_stats = SubResource("Resource_hb61j")
+base_stats = SubResource("Resource_xa41h")
 
 [node name="HealthComponent" parent="Player" index="6"]
 stat_sheet = SubResource("Resource_xw7wj")
@@ -72,25 +71,6 @@ material = SubResource("ShaderMaterial_xyca7")
 generation_noise = SubResource("NoiseTexture2D_agryi")
 generation_size = Vector2(20, 20)
 delete_distance = 75
-
-[node name="GameUILayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="GameUILayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="BasicHealthBar" parent="GameUILayer" node_paths=PackedStringArray("health_component") instance=ExtResource("8_o4bch")]
-offset_left = 39.0
-offset_top = 26.0
-offset_right = 226.0
-offset_bottom = 33.0
-health_component = NodePath("../../Player/HealthComponent")
-always_visible = true
-is_player_hb = true
 
 [node name="PauseUILayer" type="CanvasLayer" parent="."]
 layer = 2

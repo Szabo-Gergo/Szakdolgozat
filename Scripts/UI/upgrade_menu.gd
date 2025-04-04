@@ -64,8 +64,7 @@ func change_tree(weapon_index):
 
 
 func _melee_upgrades_setup():
-	
-	match player.melee_weapon.weapon_sprite.texture: 
+	match player.melee_weapon_node.weapon_sprite.texture: 
 		SWORD_TEXTURE:
 			current_melee_index = 0
 		HAMMER_TEXTURE:

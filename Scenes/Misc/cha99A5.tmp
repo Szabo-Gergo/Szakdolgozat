@@ -1,13 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c185n760rf7hi"]
+[gd_scene load_steps=3 format=3 uid="uid://c185n760rf7hi"]
 
 [ext_resource type="Script" path="res://Scripts/Misc/challange_indicator.gd" id="1_0uk54"]
-[ext_resource type="Script" path="res://Scripts/Resources/challange_effect_resource.gd" id="2_iu0ot"]
-[ext_resource type="PackedScene" uid="uid://qth8ts5fif8a" path="res://Scenes/UI/point_container.tscn" id="3_gsjjb"]
-
-[sub_resource type="Resource" id="Resource_bdurv"]
-script = ExtResource("2_iu0ot")
-effect_type = "elite_chance"
-current_value = 0.0
+[ext_resource type="Script" path="res://Scenes/Misc/point_bar_handler.gd" id="2_vpxua"]
 
 [node name="ChallangeSetter" type="Control"]
 custom_minimum_size = Vector2(0, 25)
@@ -20,7 +14,8 @@ size_flags_vertical = 0
 script = ExtResource("1_0uk54")
 challange_title = "Elite Spawn Chance"
 max_challange_amount = 10
-challange_effect = SubResource("Resource_bdurv")
+point_color = null
+border_color = null
 challange_increase_per_level = 0.05
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -42,9 +37,12 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 14
 text = "Elite spawn rate"
 
-[node name="PointContainer" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_gsjjb")]
+[node name="PointContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -2
+script = ExtResource("2_vpxua")
 
 [node name="ChallangeValueLabel" type="Label" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)

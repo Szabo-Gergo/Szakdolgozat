@@ -1,8 +1,6 @@
 extends Node2D
 class_name BaseProjectile
 
-@export var sprite_frames : SpriteFrames
-
 @export_category("Projectile Stats")
 @export_enum("Enemy_Hurtbox", "Player_Hurtbox") var target_group : String
 @export var animated_sprite : AnimatedSprite2D
@@ -13,10 +11,6 @@ var traveled_distance : float
 var current_pierce : int
 var current_chain : int
 var can_chain : bool
-
-func _ready() -> void:
-	animated_sprite.sprite_frames = sprite_frames
-	animated_sprite.play("default")
 
 
 func _process(delta: float) -> void:
@@ -29,6 +23,9 @@ func _process(delta: float) -> void:
 	
 
 func _set_base_values():
+	animated_sprite.sprite_frames = projectile_stats_resource.sprite_frames
+	animated_sprite.play("default")
+	
 	if projectile_stats_resource.chain > 0:
 		current_chain = projectile_stats_resource.chain
 		$ChainArea/ChainShape.disabled = false

@@ -1,12 +1,13 @@
 extends Resource
 class_name ProjectileStatResource
 
+@export var sprite_frames : SpriteFrames
 @export_range(100,1000) var speed: float 
-@export var damage: int 
-@export var range: float
-@export var piercing: int
-@export var multishot: float
-@export var bullet_spread: float
+@export var damage : int
+@export var range : float
+@export var piercing : int
+@export var multishot : float
+@export var bullet_spread : float
 @export var ammo_cost : float
 @export var chain : int
 

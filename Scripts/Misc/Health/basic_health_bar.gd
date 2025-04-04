@@ -2,7 +2,6 @@ extends ProgressBar
 
 @export var health_component : Health_Component
 @export var always_visible : bool
-@export var is_player_hb : bool
 
 @onready var shield_bar: ProgressBar = $ShieldBar
 @onready var damage_bar: ProgressBar = $DamageBar
@@ -10,14 +9,12 @@ extends ProgressBar
 @onready var damage_timer: Timer = $Damage_Timer
 @onready var visibility_timer: Timer = $Visibility_Timer
 
-var player_health_component : Health_Component
-
 func _ready() -> void:
 	if always_visible:
 		visible = true
 	health_setup()
-	
-	
+		
+
 func health_setup():
 	
 	var max_value = health_component.stat_sheet.max_health+health_component.stat_sheet.max_armor

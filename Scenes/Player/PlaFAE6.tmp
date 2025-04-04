@@ -1,9 +1,9 @@
-[gd_scene load_steps=151 format=3 uid="uid://bvicg58gitoue"]
+[gd_scene load_steps=152 format=3 uid="uid://bvicg58gitoue"]
 
 [ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player/Player.png" id="1_ksx3q"]
 [ext_resource type="Script" path="res://Scripts/Player/main_stats.gd" id="1_tssnm"]
 [ext_resource type="PackedScene" uid="uid://b66ssmufcj31d" path="res://Scenes/Player/RangedWeapon.tscn" id="2_7og2s"]
-[ext_resource type="Resource" uid="uid://dowtkqlnkkb7" path="res://Resources/Player.tres" id="2_076ji"]
+[ext_resource type="Script" path="res://Scripts/Misc/player_skill_stats_handler.gd" id="2_x8wed"]
 [ext_resource type="Shader" path="res://Shaders/Colour_Switch.gdshader" id="3_4ynfh"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="3_cv635"]
 [ext_resource type="PackedScene" uid="uid://3rvyikqwuq7c" path="res://Scenes/Player/Dash.tscn" id="4_fflmd"]
@@ -22,12 +22,24 @@
 [ext_resource type="Script" path="res://Scripts/Player/player_death.gd" id="16_4ffkt"]
 [ext_resource type="PackedScene" uid="uid://cwku83f0cg2br" path="res://Scenes/Components/health_component.tscn" id="17_eyexp"]
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="17_ktqi0"]
+[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="19_yk4dd"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cixr4c5nb3eut" path="res://Saves/AnimationTrees/HammerAnimationTree.tres" id="22_6wpo0"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://biv6mhdnn3bb1" path="res://Saves/AnimationTrees/SpearAnimationTree.tres" id="23_qhb4h"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dgme7dow81nm6" path="res://Saves/AnimationTrees/SwordAnimationTree.tres" id="24_6krsv"]
 [ext_resource type="PackedScene" uid="uid://qth8ts5fif8a" path="res://Scenes/UI/point_container.tscn" id="26_ry1kw"]
-[ext_resource type="Texture2D" uid="uid://dbimqwxrwoeb8" path="res://Spritesheets/Player/charge_bar.png" id="27_ncfi8"]
-[ext_resource type="Texture2D" uid="uid://rbq2jvbhexbe" path="res://Spritesheets/Player/charge_progress.png" id="28_cf0ra"]
+
+[sub_resource type="Resource" id="Resource_msknl"]
+script = ExtResource("2_x8wed")
+upgrade_currency = 2000
+melee_weapon_type = 1
+ranged_weapon_type = 0
+outfit_index = 0
+max_dash = 2
+max_ammo = 100
+damage = 0
+max_health = 100
+max_armor = 0
+speed = 100
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olbmv"]
 shader = ExtResource("3_4ynfh")
@@ -99,6 +111,14 @@ turbulence_noise_strength = 18.74
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1i0f"]
 radius = 5.0
 height = 20.0
+
+[sub_resource type="Resource" id="Resource_nj5y8"]
+resource_local_to_scene = true
+script = ExtResource("19_yk4dd")
+damage = 2
+max_health = 100
+max_armor = 0
+speed = 0
 
 [sub_resource type="Animation" id="Animation_jkag0"]
 resource_name = "DownSlash"
@@ -397,35 +417,11 @@ tracks/11/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ChargeBar:value")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("ChargeBar:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_nwcqd"]
 resource_name = "DownChargeAttack"
 length = 0.35
-step = 0.05
+step = 0.04
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1344,30 +1340,6 @@ tracks/11/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ChargeBar:value")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("ChargeBar:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_3jhra"]
 resource_name = "LeftChargeAttack"
@@ -1992,30 +1964,6 @@ tracks/15/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("ChargeBar:value")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [50.0]
-}
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("ChargeBar:visible")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_t7thc"]
 resource_name = "SideSlash"
@@ -2313,30 +2261,6 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ChargeBar:value")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("ChargeBar:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_wmhb3"]
@@ -3290,30 +3214,6 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(),
 "values": []
 }
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("ChargeBar:value")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("ChargeBar:visible")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_rxff4"]
 resource_name = "SpearLeftCharge"
@@ -3462,30 +3362,6 @@ tracks/11/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ChargeBar:value")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("ChargeBar:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_brjgh"]
 resource_name = "SpearCharge"
@@ -3617,7 +3493,7 @@ tracks/10/path = NodePath("MeleeWeapon/Sword/SwordSprite:material:shader_paramet
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0.471762, 0.246253, 1, 1), Color(0.391555, 0.582673, 1, 1), Color(0.00168746, 0.109631, 0.532943, 1)]
@@ -3633,30 +3509,6 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ChargeBar:value")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("ChargeBar:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_1a3ad"]
@@ -3805,30 +3657,6 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ChargeBar:value")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("ChargeBar:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_1xodu"]
@@ -4127,30 +3955,6 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ChargeBar:value")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("ChargeBar:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_hv4rq"]
@@ -4979,11 +4783,13 @@ collision_mask = 4
 platform_on_leave = 2
 platform_floor_layers = 0
 script = ExtResource("1_tssnm")
-base_stats = ExtResource("2_076ji")
+base_stats = SubResource("Resource_msknl")
+max_dash = 100
+max_ammo = 100
+dash_recharge_speed = 0.5
 health_component = NodePath("HealthComponent")
 melee_weapon_node = NodePath("MeleeWeapon")
 ranged_weapon_node = NodePath("RangedWeapon")
-dash_recharge_speed = 0.5
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -5044,7 +4850,6 @@ lifetime = 0.4
 
 [node name="RangedWeapon" parent="." instance=ExtResource("2_7og2s")]
 visible = false
-max_ammo = 20
 projectile_resource = ExtResource("11_0kk4g")
 
 [node name="BulletSpawnPoint" type="Node2D" parent="RangedWeapon"]
@@ -5081,7 +4886,7 @@ debug_color = Color(9.62615e-07, 0.385506, 0.980678, 0.113725)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "state_machine") instance=ExtResource("17_eyexp")]
 visible = false
-stat_sheet = ExtResource("2_076ji")
+stat_sheet = SubResource("Resource_nj5y8")
 is_player_health_component = true
 health_bar = NodePath("../VBoxContainer/BasicHealthBar")
 sprite = NodePath("../CharacterSprite")
@@ -5207,13 +5012,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -18.0
+offset_left = -25.0
 offset_top = -27.0
-offset_right = 32.0
+offset_right = 25.0
 offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(0.759591, 0.64)
+scale = Vector2(1, 0.64)
 size_flags_horizontal = 4
 theme_override_constants/separation = 0
 
@@ -5222,9 +5027,9 @@ unique_name_in_owner = true
 z_index = 2
 layout_mode = 2
 size_flags_vertical = 3
-border_width = 0
+max_point = 3
 inner_border_width = 1
-point_height = 5
+point_height = 1
 is_active_by_default = true
 
 [node name="BasicHealthBar" parent="VBoxContainer" node_paths=PackedStringArray("health_component") instance=ExtResource("17_ktqi0")]
@@ -5245,55 +5050,6 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 shape = SubResource("CircleShape2D_3mym3")
-
-[node name="Hud" type="CanvasLayer" parent="."]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Hud"]
-custom_minimum_size = Vector2(100, 100)
-offset_left = 11.0
-offset_top = 7.0
-offset_right = 51.0
-offset_bottom = 47.0
-theme_override_constants/separation = 5
-
-[node name="BasicHealthBar" parent="Hud/VBoxContainer" node_paths=PackedStringArray("health_component") instance=ExtResource("17_ktqi0")]
-custom_minimum_size = Vector2(0, 5)
-layout_mode = 2
-size_flags_vertical = 1
-health_component = NodePath("../../../HealthComponent")
-always_visible = true
-
-[node name="AmmoContainer" parent="Hud/VBoxContainer" instance=ExtResource("26_ry1kw")]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 0
-border_width = 0
-inner_border_width = 1
-point_height = 10
-is_active_by_default = true
-
-[node name="DashContainer" parent="Hud/VBoxContainer" instance=ExtResource("26_ry1kw")]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 0
-border_width = 1
-inner_border_width = 1
-point_color = Color(0.00784314, 0.517647, 0.552941, 1)
-point_height = 10
-is_active_by_default = true
-
-[node name="ChargeBar" type="TextureProgressBar" parent="."]
-visible = false
-offset_left = -24.0
-offset_top = -19.0
-offset_right = 16.0
-offset_bottom = 21.0
-scale = Vector2(0.604811, 0.604811)
-value = 50.0
-fill_mode = 4
-texture_under = ExtResource("27_ncfi8")
-texture_progress = ExtResource("28_cf0ra")
-tint_progress = Color(0, 0.603922, 0.239216, 1)
 
 [connection signal="area_entered" from="MeleeWeapon/Trail/HitBox" to="State Machine/Attack" method="_on_enemy_hit"]
 [connection signal="area_entered" from="MeleeWeapon/Trail/HitBox" to="State Machine/AttackCombo" method="_on_enemy_hit"]

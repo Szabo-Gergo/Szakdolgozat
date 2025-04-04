@@ -2,7 +2,7 @@ extends State
 class_name Shoot
 
 
-const PROJECTILE = preload("res://Projectiles/Projectile.tscn")
+const PROJECTILE = preload("res://Projectiles/BaseProjectile.tscn")
 
 @export var ranged_weapon: Node2D
 @export var bullet_spawn_point: Node2D
@@ -49,6 +49,7 @@ func set_projectile():
 			spawn_projectile()
 
 		player.ammo -= projectile_resource.ammo_cost
+		player.main_ammo_point_container._decrease_point(projectile_resource.ammo_cost)
 		camera_knockback()
 
 	transition.emit(self, "idle")

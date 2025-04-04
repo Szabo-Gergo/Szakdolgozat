@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="BaseStats" load_steps=2 format=3 uid="uid://5wotaqm6apj7"]
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3 uid="uid://dowtkqlnkkb7"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="1_22j2a"]
+[ext_resource type="Script" path="res://Scripts/Misc/player_skill_stats_handler.gd" id="1_jslpe"]
 
 [resource]
-resource_local_to_scene = true
-script = ExtResource("1_22j2a")
+script = ExtResource("1_jslpe")
+upgrade_currency = 2000
+melee_weapon_type = 0
+ranged_weapon_type = 0
+outfit_index = 0
+max_dash = 10
 damage = 0
 max_health = 100
 max_armor = 0
-speed = 125.0
+speed = 100
