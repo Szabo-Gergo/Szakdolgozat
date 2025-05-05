@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://chm7odig1hj72"]
+
+[ext_resource type="Script" path="res://Scripts/Components/burn_effect_component.gd" id="1_ipev7"]
+
+[sub_resource type="Gradient" id="Gradient_o6kyr"]
+offsets = PackedFloat32Array(0, 0.522124, 1)
+colors = PackedColorArray(1, 0.539063, 0, 1, 1, 0.140625, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hersj"]
+gradient = SubResource("Gradient_o6kyr")
+
+[sub_resource type="Curve" id="Curve_xjmtw"]
+max_value = 5.0
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 1.41859), 2.37603, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c5bav"]
+curve = SubResource("Curve_xjmtw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6rgoi"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, -98, 0)
+scale_curve = SubResource("CurveTexture_c5bav")
+color_ramp = SubResource("GradientTexture1D_hersj")
+
+[node name="BurnEffectComponent" type="Node2D"]
+script = ExtResource("1_ipev7")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_6rgoi")
+local_coords = true

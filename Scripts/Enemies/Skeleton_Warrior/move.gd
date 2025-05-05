@@ -26,7 +26,6 @@ func physics_process(_delta: float):
 	flip_sprite(sprite, direction)
 	
 	
-#	Flip sprite based on player direction
 func flip_sprite(sprite : Sprite2D, direction : Vector2):
 	if direction.x < 0:
 		sprite.scale.x = 1

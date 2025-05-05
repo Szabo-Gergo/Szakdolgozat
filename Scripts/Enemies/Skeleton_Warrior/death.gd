@@ -12,9 +12,6 @@ const EXPERIENCE = preload("res://Scenes/experience.tscn")
 
 var i = 0
 func enter(_inputs : Dictionary = {}):
-	if elite_crown.visible:
-		elite_crown.visible = false
-		
 	spawn_xp()
 
 func physics_process(_delta: float):

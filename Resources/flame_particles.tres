@@ -1,0 +1,43 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=9 format=3 uid="uid://im6ashi56h3p"]
+
+[sub_resource type="Curve" id="12"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="11"]
+curve = SubResource("12")
+
+[sub_resource type="Gradient" id="3"]
+offsets = PackedFloat32Array(0.0936455, 0.377926, 0.792642)
+colors = PackedColorArray(1, 0.348755, 0.242188, 1, 0.987305, 0.86353, 0.377953, 1, 0.105469, 0.0707912, 0.0251312, 1)
+
+[sub_resource type="GradientTexture1D" id="4"]
+gradient = SubResource("3")
+
+[sub_resource type="Curve" id="7"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="5"]
+curve = SubResource("7")
+
+[sub_resource type="Curve" id="8"]
+_data = [Vector2(0, 0.384091), 0.0, 0.0, 0, 0, Vector2(1, 0.490909), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="9"]
+curve = SubResource("8")
+
+[resource]
+direction = Vector3(0, 1, 0)
+spread = 180.0
+angular_velocity_curve = SubResource("11")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 0.0
+scale_curve = SubResource("9")
+color_ramp = SubResource("4")
+hue_variation_curve = SubResource("5")

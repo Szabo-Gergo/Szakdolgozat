@@ -1,12 +1,11 @@
-extends BaseStats
+extends Resource
 class_name PlayerStats
 
 
 @export var upgrade_currency : int = 2000
 @export_enum("Sword", "Hammer","Spear") var melee_weapon_type : int 
-@export var ranged_weapon_type : int
-@export var outfit_index : int
-@export var max_dash : int 
+@export_enum("Pistol", "Shotgun", "FlameThrower", "Rocket") var ranged_weapon_type : int
+@export_enum("Red", "Blue", "Green", "Purple") var outfit_type : int
 
 
 func use_currency(amount) -> bool:

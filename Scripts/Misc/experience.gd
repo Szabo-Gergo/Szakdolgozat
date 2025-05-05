@@ -21,7 +21,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if entered_range:
 		var direction = (player.global_position - global_position).normalized()
-		position += direction * (player.base_stats.speed+25) * delta
+		position += direction * (player.speed+25) * delta
 		
 func _on_pickup_range_entered(area: Area2D) -> void:
 	if area.is_in_group("Player_Pickup_Area"):

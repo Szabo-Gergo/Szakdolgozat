@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0ameyji1x5wb"]
+
+[ext_resource type="Script" path="res://Scripts/Components/doom_effect_component.gd" id="1_jwp2m"]
+
+[sub_resource type="Gradient" id="Gradient_8f0ev"]
+offsets = PackedFloat32Array(0, 0.652174, 1)
+colors = PackedColorArray(0.200562, 0, 0.242188, 1, 0.447328, 0.0617981, 0.527344, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h0wo0"]
+gradient = SubResource("Gradient_8f0ev")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_07uiy"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 10.0
+emission_ring_radius = 10.0
+emission_ring_inner_radius = 15.0
+angle_min = -136.1
+angle_max = 171.5
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+scale_min = 0.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_h0wo0")
+
+[sub_resource type="CurveTexture" id="CurveTexture_7uomm"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jy6cn"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+angle_min = -136.1
+angle_max = 171.5
+spread = 180.0
+initial_velocity_min = 27.55
+initial_velocity_max = 35.79
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+scale_curve = SubResource("CurveTexture_7uomm")
+color_ramp = SubResource("GradientTexture1D_h0wo0")
+
+[node name="DoomEffectComponent" type="Node2D"]
+z_index = -1
+y_sort_enabled = true
+script = ExtResource("1_jwp2m")
+
+[node name="DoomCharge" type="GPUParticles2D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_07uiy")
+lifetime = 0.9
+explosiveness = 0.75
+local_coords = true
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_jy6cn")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+
+[connection signal="finished" from="Explosion" to="." method="_on_explosion_finished"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dljkouq4d322j"]
+
+[ext_resource type="Script" path="res://Scripts/Components/electric_effect_component.gd" id="1_rwkcf"]
+[ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="2_06xsg"]
+[ext_resource type="Texture2D" uid="uid://cfa6edqdk328x" path="res://Spritesheets/Misc/EffectSprites/Electric/lightning_sprite.png" id="2_g446k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dmpgv"]
+resource_local_to_scene = true
+radius = 100.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_akexv"]
+shader = ExtResource("2_06xsg")
+shader_parameter/outline_color = Color(0, 0.547485, 0.761719, 1)
+shader_parameter/pixel_size = 1.0
+
+[sub_resource type="Gradient" id="Gradient_kl2gp"]
+offsets = PackedFloat32Array(0, 0.789634)
+colors = PackedColorArray(0.765839, 0.804992, 0.820313, 1, 0.203579, 0.288071, 0.665039, 1)
+
+[node name="electric_effect_component" type="Area2D"]
+z_index = -1
+y_sort_enabled = true
+collision_layer = 31
+collision_mask = 31
+priority = 1
+script = ExtResource("1_rwkcf")
+damage = 5
+chain_amount = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_dmpgv")
+debug_color = Color(0.851563, 0.65863, 0, 0.42)
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_akexv")
+gradient = SubResource("Gradient_kl2gp")
+texture = ExtResource("2_g446k")
+texture_mode = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

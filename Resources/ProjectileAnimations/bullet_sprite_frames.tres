@@ -1,26 +1,60 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://bxwsdyag0dikg"]
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://bxwsdyag0dikg"]
 
 [ext_resource type="Texture2D" uid="uid://cjl2ym7askgjq" path="res://Spritesheets/Weapon/Bullet.png" id="1_f1vmx"]
+[ext_resource type="Texture2D" uid="uid://dnk3u8047gpk4" path="res://Spritesheets/Weapon/BigFirework.png" id="2_bxmjt"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_toq02"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pn7eb"]
 atlas = ExtResource("1_f1vmx")
 region = Rect2(0, 0, 12, 7)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wfoaw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmk0i"]
 atlas = ExtResource("1_f1vmx")
 region = Rect2(12, 0, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwxim"]
+atlas = ExtResource("2_bxmjt")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8egvf"]
+atlas = ExtResource("2_bxmjt")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wktak"]
+atlas = ExtResource("2_bxmjt")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5gdo"]
+atlas = ExtResource("2_bxmjt")
+region = Rect2(48, 0, 16, 16)
 
 [resource]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_toq02")
+"texture": SubResource("AtlasTexture_pn7eb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wfoaw")
+"texture": SubResource("AtlasTexture_mmk0i")
 }],
 "loop": true,
-"name": &"default",
+"name": &"bullet",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwxim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8egvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wktak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5gdo")
+}],
+"loop": true,
+"name": &"firework",
 "speed": 5.0
 }]

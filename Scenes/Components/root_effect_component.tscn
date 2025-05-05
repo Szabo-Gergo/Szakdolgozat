@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://mov6xo5qacn2"]
+
+[ext_resource type="Script" path="res://Scripts/Components/root_effect_component.gd" id="1_icdxb"]
+[ext_resource type="Texture2D" uid="uid://dv6d04yw763wg" path="res://Spritesheets/Misc/EffectSprites/rooted_effect_sprites.png" id="2_6yh4k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo331"]
+atlas = ExtResource("2_6yh4k")
+region = Rect2(0, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68xen"]
+atlas = ExtResource("2_6yh4k")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6n2x"]
+atlas = ExtResource("2_6yh4k")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vx11"]
+atlas = ExtResource("2_6yh4k")
+region = Rect2(216, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guj5p"]
+atlas = ExtResource("2_6yh4k")
+region = Rect2(288, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yqbx"]
+atlas = ExtResource("2_6yh4k")
+region = Rect2(360, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebhtr"]
+atlas = ExtResource("2_6yh4k")
+region = Rect2(432, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6goy"]
+atlas = ExtResource("2_6yh4k")
+region = Rect2(504, 0, 72, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e2iqa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo331")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68xen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6n2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vx11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guj5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yqbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebhtr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6goy")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="RootEffectComponent" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_icdxb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -18)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_e2iqa")
+frame = 7
+frame_progress = 1.0
+speed_scale = 2.0

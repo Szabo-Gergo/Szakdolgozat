@@ -15,14 +15,18 @@ const CHALLANGE_POINT = preload("res://Scenes/UI/challange_point.tscn")
 var current_value : int = 0
 
 func _increase_point(value : int):
-	for i in range(0,value):
-		get_child(current_value).get_child(0).visible = true
-		current_value += 1
+	for i in range(value):
+		print(current_value)
+		if current_value <= max_point:
+			get_child(current_value).get_child(0).visible = true
+			current_value += 1
+	
 	
 func _decrease_point(value : int):
-	for i in range(0,value):
-		current_value -= 1
-		get_child(current_value).get_child(0).visible = false
+	for i in range(value):
+		if current_value > 0:
+			current_value -= 1
+			get_child(current_value).get_child(0).visible = false
 	
 func _generate_points():
 	for i in range(0, max_point):
@@ -36,7 +40,6 @@ func _generate_points():
 		increase_box_style.set("border_color", point_color)
 		increase_box_style.set_border_width_all(border_width)
 		var increase_point : Panel = increase_box.get_child(0)
-		
 		
 		var point_style = increase_point.get_theme_stylebox("panel")
 		point_style.set("bg_color", point_color)

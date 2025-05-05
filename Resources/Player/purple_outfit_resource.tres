@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="OutfitResource" load_steps=6 format=3 uid="uid://cbrkypg2tamq"]
+
+[ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="1_qoniv"]
+[ext_resource type="Script" path="res://Scripts/Resources/upgrade_resource.gd" id="2_54ysr"]
+[ext_resource type="Script" path="res://Scripts/Resources/outfit_resource.gd" id="3_0lpno"]
+
+[sub_resource type="Resource" id="Resource_qofv1"]
+script = ExtResource("2_54ysr")
+stat_type = "damage_multiplier"
+is_multiplier = false
+value = 2.0
+
+[sub_resource type="Resource" id="Resource_2wpod"]
+script = ExtResource("1_qoniv")
+upgrades = Array[ExtResource("2_54ysr")]([SubResource("Resource_qofv1")])
+is_skill_node = false
+
+[resource]
+script = ExtResource("3_0lpno")
+armor_regen_rate = 5.0
+armor_regen_wait_time = 5.0
+max_dash = 5
+dash_recharge_speed = 1.0
+melee_upgrades = SubResource("Resource_2wpod")
+damage = 0
+max_health = 20
+max_armor = 30
+speed = 125

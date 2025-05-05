@@ -41,5 +41,4 @@ func _on_attack_finished(anim_name: StringName) -> void:
 	transition.emit(self, "Move")
 	
 func exit():
-	print("Attacking while damaged: "+str(attacking))
 	attacking = false

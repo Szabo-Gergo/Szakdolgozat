@@ -1,7 +1,7 @@
 extends Resource
-class_name Spawn_Info
+class_name SpawnInfo
 
 @export var enemy: PackedScene
 @export_range(0,1) var elite_chance: float
-@export var spawn_amount: int  # Total enemies in this wave
-@export var elite_type: EliteModifiers.ELITE_TYPES 
+@export var spawn_amount: int
+@export_enum("NONE","STRONG","FAST","HEALER","TANK") var elite_type : String

@@ -16,7 +16,6 @@ func _ready() -> void:
 		
 
 func health_setup():
-	
 	var max_value = health_component.stat_sheet.max_health+health_component.stat_sheet.max_armor
 	health_bar.max_value = max_value
 	shield_bar.max_value = max_value

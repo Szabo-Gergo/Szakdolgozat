@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://choqfalihjao"]
+
+[ext_resource type="Script" path="res://Scripts/Components/explosion_effect.gd" id="1_p1ojt"]
+[ext_resource type="Material" uid="uid://dtte6b2mt7bns" path="res://Scenes/Components/explosion_particle_material.tres" id="2_hale2"]
+
+[sub_resource type="Gradient" id="Gradient_cjhcj"]
+offsets = PackedFloat32Array(0, 0.5, 0.813953)
+colors = PackedColorArray(0.785156, 0, 0, 1, 1, 0.539063, 0, 1, 0.125, 0.125, 0.125, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_343qk"]
+gradient = SubResource("Gradient_cjhcj")
+
+[node name="ExplosionEffect" type="Node2D"]
+position = Vector2(76, 57)
+script = ExtResource("1_p1ojt")
+color_ramp = SubResource("GradientTexture1D_343qk")
+speed = 100.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 64
+process_material = ExtResource("2_hale2")
+one_shot = true
+explosiveness = 1.0

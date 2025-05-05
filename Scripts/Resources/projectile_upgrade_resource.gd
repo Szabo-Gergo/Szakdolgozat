@@ -3,26 +3,27 @@ class_name ProjectileUpgradeResource
 
 @export_enum("damage","speed", "range", "piercing",
 			 "multishot","bullet_spread","ammo_cost", "chain") var stat_type : String
-
+			
+@export var is_multiplier : bool
 @export var value : float
 
+const LABELS = {
+	"damage": "projectile damage",
+	"speed": "projectile speed",
+	"range": "range",
+	"piercing": "piercing",
+	"multishot" : "multishot",
+	"bullet_spread" : "projectile spread",
+	"ammo_cost" : "ammo cost",
+	"chain" : "projectiles bounce between enemies"
+}
+
 func _to_string() -> String:
-	var stat_str : String = ""
-	match stat_type:
-		"damage":
-			stat_str = "+ " + str(value) + " projectile damage"
-		"speed":
-			stat_str = "+ " + str(int(value * 100)) + "% projectile speed"
-		"range":
-			stat_str = "+ " + str(int(value * 100)) + "% projectile range"
-		"piercing":
-			stat_str = "+ " + str(value) + " piercing"
-		"multishot":
-			stat_str = "+ " + str(value) + " multishot"
-		"bullet_spread":
-			stat_str = "+ " + str(int(value * 100)) + "% bullet spread"
-		"ammo_cost":
-			stat_str = "+ " + str(value) + " ammo cost"
-		"chain":
-			stat_str = "Bounces between enemies "+str(value)+" times"
-	return stat_str
+	return format_stat(LABELS.get(stat_type, "Invalid stat type"))
+
+func format_stat(label: String) -> String:
+	if is_multiplier:
+		var percent = int((value - 1.0) * 100)
+		return "%s%d%% %s" % ["+" if percent >= 0 else "", percent, label]
+	else:
+		return "%s%.2f %s" % ["+" if value >= 0 else "", value, label]

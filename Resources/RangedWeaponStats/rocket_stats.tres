@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ProjectileStatResource" load_steps=3 format=3 uid="uid://cgywvsou3x850"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_stat_resource.gd" id="1_jjn0x"]
+[ext_resource type="SpriteFrames" uid="uid://bxwsdyag0dikg" path="res://Resources/ProjectileAnimations/bullet_sprite_frames.tres" id="2_vawv4"]
+
+[resource]
+script = ExtResource("1_jjn0x")
+sprite_frames = ExtResource("2_vawv4")
+animation_name = "firework"
+speed = 200.0
+damage = 5
+range = 200.0
+piercing = 2
+multishot = 1.0
+bullet_spread = 0.0
+ammo_cost = 5.0
+chain = 2
+can_explode = true
+explosion_damage_multipler = 1.0
+explosion_range = 100

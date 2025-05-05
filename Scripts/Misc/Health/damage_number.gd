@@ -21,17 +21,15 @@ func display_damage(damage : int, is_healing : bool):
 	label.label_settings.outline_size = 1;
 	label.label_settings.font_size = 10
 		
-	add_child(label)
-		
+	if get_child(0):
+		label = get_child(0)
+		label.text = str(int(label.text) + damage)
+	else:
+		add_child(label)
+		start_animation()
+	
+
+func start_animation():
 	var anim = get_tree().create_tween()
-	var rng = RandomNumberGenerator.new()
-	var rand : int = rng.randi_range(-10,10)
-
-	anim.tween_property(label, "position:y", label.position.y - label.size.y*2, 0.2).set_ease(Tween.EASE_IN)
-	anim.parallel().tween_property(label, "position:x", label.position.x + rand, 0.5).set_ease(Tween.EASE_OUT)
-	
-	anim.tween_property(label, "position:y", label.position.y + label.size.y, 0.5).set_ease(Tween.EASE_IN)
-	anim.parallel().tween_property(label, "position:x", label.position.x + rand, 0.5).set_ease(Tween.EASE_OUT)
-
-	anim.finished.connect(label.queue_free)
-	
+	label.position = position
+	anim.tween_property(label, "position:y", label.position.y - label.size.y*2, 1).set_ease(Tween.EASE_IN)

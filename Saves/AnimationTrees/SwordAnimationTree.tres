@@ -57,9 +57,6 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_tnt6l")
 blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nwfu4"]
-animation = &"LeftCharge"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6gb1m"]
 animation = &"RightCharge"
 
@@ -69,15 +66,18 @@ animation = &"DownCharge"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fx28r"]
 animation = &"UpCharge"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vun1m"]
+animation = &"LeftCharge"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_5cogg"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_nwfu4")
-blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_6gb1m")
-blend_point_1/pos = Vector2(1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_r0hw3")
-blend_point_2/pos = Vector2(0, 1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_fx28r")
-blend_point_3/pos = Vector2(0, -1)
+blend_point_0/node = SubResource("AnimationNodeAnimation_6gb1m")
+blend_point_0/pos = Vector2(1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_r0hw3")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_fx28r")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_vun1m")
+blend_point_3/pos = Vector2(-1, 0)
 blend_mode = 2
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_oexji"]
@@ -344,7 +344,7 @@ graph_offset = Vector2(78, -250)
 
 [resource]
 resource_local_to_scene = true
-graph_offset = Vector2(-293.307, -125.211)
+graph_offset = Vector2(-188.942, 26.8197)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_pkb6g")
 nodes/StateMachine/position = Vector2(-20, 80)
 node_connections = [&"output", 0, &"StateMachine"]

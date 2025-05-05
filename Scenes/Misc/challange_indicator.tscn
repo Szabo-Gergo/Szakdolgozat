@@ -45,6 +45,7 @@ text = "Elite spawn rate"
 [node name="PointContainer" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_gsjjb")]
 unique_name_in_owner = true
 layout_mode = 2
+max_point = 10
 
 [node name="ChallangeValueLabel" type="Label" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://b1p0vdrkfuneh"]
+[gd_scene load_steps=59 format=3 uid="uid://b1p0vdrkfuneh"]
 
 [ext_resource type="Script" path="res://Scripts/UI/upgrade_menu.gd" id="1_08eut"]
 [ext_resource type="Texture2D" uid="uid://dwi3hdps8axm7" path="res://Spritesheets/Weapon/UI_hammer_texture_atlas.tres" id="2_6a5rq"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dthkeod2lbbcy" path="res://Spritesheets/Misc/Skillicon_Charge.png" id="7_4u75c"]
 [ext_resource type="Texture2D" uid="uid://b4r5is2xuryix" path="res://Spritesheets/Misc/Skillicon_Ammo.png" id="9_dd3o8"]
 [ext_resource type="Texture2D" uid="uid://dm2k6hx6gmgif" path="res://Spritesheets/Misc/Skillicon_Precision_Charge.png" id="11_swrl7"]
+[ext_resource type="Texture2D" uid="uid://dne1l10wupr1b" path="res://Spritesheets/Weapon/Pistol_Sprite.png" id="13_qduf1"]
+[ext_resource type="Texture2D" uid="uid://b2aem5ofa17mu" path="res://Spritesheets/Player/UI_purple_outfit_atlas.tres" id="14_ddvmf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x33k4"]
 bg_color = Color(0.180392, 0.180392, 0.180392, 1)
@@ -377,9 +379,10 @@ theme_override_constants/margin_bottom = 10
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_x33k4")
-current_tab = 0
+current_tab = 1
 
 [node name="Melee Weapons" type="TabBar" parent="MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -640,7 +643,6 @@ skill_resource = SubResource("Resource_ebscy")
 skill_tree_handler = NodePath("../../..")
 
 [node name="Secondary Weapons" type="TabBar" parent="MarginContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -667,12 +669,12 @@ layout_mode = 2
 size_flags_horizontal = 2
 text = "<-"
 
-[node name="SecondaryTextureButton" type="TextureButton" parent="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
+[node name="RangedTextureButton" type="TextureButton" parent="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_stretch_ratio = 20.0
-texture_normal = ExtResource("2_6a5rq")
+texture_normal = ExtResource("13_qduf1")
 stretch_mode = 5
 
 [node name="RightButton" type="Button" parent="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer"]
@@ -687,5 +689,97 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[connection signal="pressed" from="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/LeftButton" to="." method="_on_melee_switch_left_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/RightButton" to="." method="_on_melee_switch_right_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Outfits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PickerContainer" type="PanelContainer" parent="MarginContainer/TabContainer/Outfits/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="OutfitPickerContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/PickerContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="LeftButton" type="Button" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/PickerContainer/OutfitPickerContainer"]
+z_index = 1
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "<-"
+
+[node name="OutfitTextureButton" type="TextureButton" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/PickerContainer/OutfitPickerContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 20.0
+texture_normal = ExtResource("14_ddvmf")
+stretch_mode = 5
+
+[node name="RightButton" type="Button" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/PickerContainer/OutfitPickerContainer"]
+z_index = 1
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "->"
+
+[node name="StatContainer" type="PanelContainer" parent="MarginContainer/TabContainer/Outfits/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Base Stats"
+horizontal_alignment = 1
+
+[node name="StatsLabel" type="Label" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "asdfasf
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MeleeWeaponBuffs" type="VBoxContainer" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer/VBoxContainer/HBoxContainer/MeleeWeaponBuffs"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Melee buffs"
+horizontal_alignment = 1
+
+[node name="MeleeBuffLabel" type="Label" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer/VBoxContainer/HBoxContainer/MeleeWeaponBuffs"]
+layout_mode = 2
+
+[node name="RangedWeaponBuffs" type="VBoxContainer" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer/VBoxContainer/HBoxContainer/RangedWeaponBuffs"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Ranged buffs"
+horizontal_alignment = 1
+
+[node name="RangedBuffLabel" type="Label" parent="MarginContainer/TabContainer/Outfits/HBoxContainer/StatContainer/VBoxContainer/HBoxContainer/RangedWeaponBuffs"]
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/LeftButton" to="." method="_on_switch_left_pressed" binds= ["Melee"]]
+[connection signal="pressed" from="MarginContainer/TabContainer/Melee Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/RightButton" to="." method="_on_switch_right_pressed" binds= ["Melee"]]
+[connection signal="pressed" from="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/LeftButton" to="." method="_on_switch_left_pressed" binds= ["Ranged"]]
+[connection signal="pressed" from="MarginContainer/TabContainer/Secondary Weapons/HBoxContainer/PanelContainer/WeaponPickerContainer/RightButton" to="." method="_on_switch_right_pressed" binds= ["Ranged"]]
+[connection signal="pressed" from="MarginContainer/TabContainer/Outfits/HBoxContainer/PickerContainer/OutfitPickerContainer/LeftButton" to="." method="_on_switch_left_pressed" binds= ["Outfit"]]
+[connection signal="pressed" from="MarginContainer/TabContainer/Outfits/HBoxContainer/PickerContainer/OutfitPickerContainer/RightButton" to="." method="_on_switch_right_pressed" binds= ["Outfit"]]

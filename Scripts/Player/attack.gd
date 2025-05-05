@@ -4,6 +4,7 @@ class_name Attack
 @export var slow_percent : float
 @export var charged_attack : bool
 @onready var melee_weapon: MeleeWeapon = %MeleeWeapon
+@onready var outfit: Outfit = %Outfit
 
 @onready var animation_tree = %AnimationTree
 @onready var player: CharacterBody2D = $"../.."
@@ -15,10 +16,10 @@ class_name Attack
 var mouse_position : Vector2
 var trail_direction
 var camera_original_position
-var stats : BaseStats
 
 func enter(_inputs : Dictionary = {}):
 	update_trail_position()
+	
 	player.speed *= 1.0 - (slow_percent / 100)
 	camera_original_position = player_camera.position
 	
@@ -43,8 +44,11 @@ func animation_update():
 	animation_tree.set("parameters/"+player._get_animation_tree_name()+"/StateMachine/Attack/BlendSpace2D/blend_position", mouse_position)
 	
 	
-func _on_enemy_hit(_area: Area2D) -> void:
-	if _area.is_in_group("Enemy_HurtBox"):
+func _on_enemy_hit(area: Area2D) -> void:
+	if area.is_in_group("Enemy_HurtBox"):	
+		var status_effects : StatusEffects = melee_weapon.melee_resource.status_effect
+		if status_effects:
+			status_effects.apply_effect(area.get_parent(), melee_weapon.melee_resource.damage)
 		player._add_ammo() 
 
 
@@ -58,15 +62,9 @@ func update_trail_position():
 	melee_weapon.trail.look_at(player.get_global_mouse_position())
 	animation_tree.set("parameters/Attack/BlendSpace2D/blend_position", mouse_position)
 
-
-func camera_snap():
-	player_camera.position += mouse_position*15
-	await get_tree().create_timer(0.075).timeout
-	player_camera.position = camera_original_position
-	
 	
 func exit():
-	player.speed = player.base_stats.speed
+	player.speed = outfit.outfit_resource.speed
 	player.can_combo = true
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://cikpw46qjjxsf"]
+[gd_scene load_steps=45 format=4 uid="uid://cikpw46qjjxsf"]
 
 [ext_resource type="Texture2D" uid="uid://db4ruf1ayj4wx" path="res://Spritesheets/Enviroment/Tileset-Terrain2.png" id="1_rklo1"]
 [ext_resource type="Texture2D" uid="uid://d1prhhghnpvut" path="res://Spritesheets/Enviroment/Summer_Plains_Decoration.png" id="2_ecm2o"]
@@ -10,8 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://bv4t8vlc0b24x" path="res://Scenes/Misc/teleport_shrine.tscn" id="6_j8mqy"]
 [ext_resource type="PackedScene" uid="uid://bvicg58gitoue" path="res://Scenes/Player/Player.tscn" id="7_khhdo"]
 [ext_resource type="Texture2D" uid="uid://ccwt6yg5f5yn7" path="res://Spritesheets/Enviroment/shrine or fountain 160x128-on grass.png" id="7_vwt2r"]
-[ext_resource type="Script" path="res://Scripts/Resources/entity_resources.gd" id="8_vntfd"]
 [ext_resource type="PackedScene" uid="uid://c45xdbbrs17f5" path="res://Scenes/Misc/merchant.tscn" id="10_wfryy"]
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_stat_resource.gd" id="12_5a1fq"]
+[ext_resource type="Script" path="res://Scripts/Globals/StatusEffects.gd" id="13_7qb16"]
 [ext_resource type="PackedScene" uid="uid://b1p0vdrkfuneh" path="res://Scenes/UI/upgrade_menu.tscn" id="13_ecwo3"]
 [ext_resource type="PackedScene" uid="uid://b54g5hu4nquhy" path="res://Scenes/UI/RoundStarterUI.tscn" id="14_r3q11"]
 [ext_resource type="PackedScene" uid="uid://uxdf7rf5w0do" path="res://Scenes/Enemies/TrainingDummy.tscn" id="15_hb07a"]
@@ -1734,21 +1735,32 @@ shader_parameter/speed = Vector2(0.001, 0.001)
 shader_parameter/fluffiness = 0.275
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_aefar")
 
-[sub_resource type="Resource" id="Resource_grokw"]
-resource_local_to_scene = true
-script = ExtResource("8_vntfd")
-damage = 2
-max_health = 100
-max_armor = 0
-speed = 125
+[sub_resource type="Resource" id="Resource_dl8s2"]
+script = ExtResource("13_7qb16")
+status_type = "Burn"
+status_chance = 80.0
 
-[sub_resource type="Resource" id="Resource_1236q"]
+[sub_resource type="Resource" id="Resource_kux00"]
 resource_local_to_scene = true
-script = ExtResource("8_vntfd")
+script = ExtResource("12_5a1fq")
+is_flamethrower = true
+status_effect = SubResource("Resource_dl8s2")
+animation_name = ""
+speed = 150.0
 damage = 2
-max_health = 100
-max_armor = 0
-speed = 0
+range = 100.0
+piercing = 100
+multishot = 1.0
+bullet_spread = 0.0
+ammo_cost = 0.1
+chain = 0
+can_explode = false
+explosion_damage_multipler = 0.0
+explosion_range = 0
+has_force_field = false
+force_range = 0
+force_strength = 0
+force_is_pulling = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yrncc"]
 resource_local_to_scene = true
@@ -1837,13 +1849,18 @@ area_range = 40
 menu = NodePath("../../UpgradeLayer/UpgradeMenu")
 
 [node name="Player" parent="." instance=ExtResource("7_khhdo")]
-base_stats = SubResource("Resource_grokw")
 
-[node name="HealthComponent" parent="Player" index="6"]
-stat_sheet = SubResource("Resource_1236q")
+[node name="RangedWeapon" parent="Player" index="3"]
+projectile_resource = SubResource("Resource_kux00")
 
 [node name="AnimationTree" parent="Player" index="9"]
 parameters/Combo/BlendSpace2D/blend_position = Vector2(0, 0)
+
+[node name="DashContainer" parent="Player/Hud/VBoxContainer" index="2"]
+border_width = 0
+
+[node name="XpContainer" parent="Player/Hud" index="1"]
+visible = false
 
 [node name="UpgradeLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -1874,7 +1891,12 @@ material = SubResource("ShaderMaterial_4io2w")
 position = Vector2(106, -98)
 
 [connection signal="visibility_changed" from="UpgradeLayer" to="UpgradeLayer/UpgradeMenu/MarginContainer/TabContainer/Melee Weapons/HBoxContainer/SkillTrees" method="_on_upgrade_menu_closed"]
-[connection signal="weapon_change" from="UpgradeLayer/UpgradeMenu" to="Player/MeleeWeapon" method="_on_weapon_change"]
+[connection signal="melee_weapon_change" from="UpgradeLayer/UpgradeMenu" to="Player" method="_set_melee_weapon"]
+[connection signal="melee_weapon_change" from="UpgradeLayer/UpgradeMenu" to="Player/MeleeWeapon" method="_on_weapon_change"]
+[connection signal="player_outfit_change" from="UpgradeLayer/UpgradeMenu" to="Player" method="_outfit_change"]
+[connection signal="player_outfit_change" from="UpgradeLayer/UpgradeMenu" to="Player" method="_set_outfit"]
+[connection signal="ranged_weapon_change" from="UpgradeLayer/UpgradeMenu" to="Player" method="_set_ranged_weapon"]
+[connection signal="ranged_weapon_change" from="UpgradeLayer/UpgradeMenu" to="Player/RangedWeapon" method="_on_weapon_change"]
 
 [editable path="TeleportShrine"]
 [editable path="TeleportShrine/InteractionComponent"]

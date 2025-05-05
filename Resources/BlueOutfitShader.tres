@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cjh2as5fdptk8"]
+
+[ext_resource type="Shader" path="res://Shaders/Colour_Switch.gdshader" id="1_4lcj2"]
+
+[resource]
+shader = ExtResource("1_4lcj2")
+shader_parameter/number_of_colors = 6
+shader_parameter/target_color = PackedColorArray(0.611765, 0.352941, 0.235294, 1, 0.411765, 0.239216, 0.168627, 1, 0.6, 0, 0.188235, 1, 0.388235, 0.00392157, 0.12549, 1, 0.929412, 0.109804, 0.141176, 1)
+shader_parameter/replace_color = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+shader_parameter/tolerance = 0.0

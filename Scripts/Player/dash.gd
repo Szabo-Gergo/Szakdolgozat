@@ -7,9 +7,8 @@ class_name Dash
 @onready var player: CharacterBody2D = $"../.."
 
 @export var dash_particle: GPUParticles2D 
-@export var collision: CollisionShape2D
-@export var hurt_box: CollisionShape2D
-@export var hit_box: CollisionPolygon2D 
+@export var hurt_box: Area2D
+@export var hit_box: Area2D
 
 var dash_timer: Timer 
 const character_width = 32
@@ -35,26 +34,18 @@ func enter(inputs : Dictionary = {}):
 	
 	sprite.material.set("shader_parameter/pixel_size", 1)
 	
-	collision.disabled = true
-	hurt_box.disabled = true
+	hurt_box.set_collision_mask_value(2, false)
+	hit_box.set_collision_mask_value(2, false)
 	attack_buffered = false
-
-	if player.speed != player.base_stats.speed:
-		player.speed = player.base_stats.speed
-		dash_velocity = player.input_direction * player.speed	* player.reversed * dash_speed
-	else:
-		dash_velocity = player.velocity * dash_speed
 	
 	dash_velocity = player.input_direction * player.speed	* player.reversed * dash_speed
 	dash_timer.start()
 	
 func end_dash():
-	
 	sprite.material.set("shader_parameter/pixel_size", 0)
 	
-	collision.disabled = false
-	hurt_box.disabled = false
-	hit_box.disabled = false
+	hurt_box.set_collision_mask_value(2, true)
+	hit_box.set_collision_mask_value(2, true)
 	trail.visible = true
 	dash_particle.emitting = false
 	

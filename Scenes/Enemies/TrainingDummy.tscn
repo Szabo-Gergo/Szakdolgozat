@@ -238,6 +238,11 @@ health_component = NodePath("../../HealthComponent")
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("12_bs7d5")
 
+[node name="Reset" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
 [connection signal="transition" from="StateMachine/Damaged" to="StateMachine" method="on_state_transition"]
 [connection signal="transition" from="StateMachine/Idle" to="StateMachine" method="on_state_transition"]
+[connection signal="timeout" from="Reset" to="." method="_on_reset_timeout"]

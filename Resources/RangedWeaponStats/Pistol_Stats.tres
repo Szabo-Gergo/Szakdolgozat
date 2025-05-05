@@ -1,16 +1,24 @@
 [gd_resource type="Resource" script_class="ProjectileStatResource" load_steps=3 format=3 uid="uid://cjk8te1h38qup"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/projectile_stat_resource.gd" id="1_544eu"]
-[ext_resource type="SpriteFrames" uid="uid://bxwsdyag0dikg" path="res://Resources/ProjectileAnimations/bullet_sprite_frames.tres" id="2_3hx02"]
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_stat_resource.gd" id="1_oedfd"]
+[ext_resource type="SpriteFrames" uid="uid://bxwsdyag0dikg" path="res://Resources/ProjectileAnimations/bullet_sprite_frames.tres" id="2_tkeei"]
 
 [resource]
-script = ExtResource("1_544eu")
-sprite_frames = ExtResource("2_3hx02")
+script = ExtResource("1_oedfd")
+sprite_frames = ExtResource("2_tkeei")
+animation_name = "bullet"
 speed = 350.0
 damage = 2
 range = 250.0
-piercing = 4
-multishot = 1.0
-bullet_spread = 0.0
+piercing = 5
+multishot = 5.0
+bullet_spread = 20.0
 ammo_cost = 1.0
-chain = 4
+chain = 5
+can_explode = false
+explosion_damage_multipler = 1.0
+explosion_range = 100
+has_force_field = false
+force_range = 0
+force_strength = 0
+force_is_pulling = false

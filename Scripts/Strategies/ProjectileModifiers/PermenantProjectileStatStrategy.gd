@@ -4,8 +4,11 @@ class_name PermenantProjectileStatStrategy
 @export var upgrades: Array[ProjectileUpgradeResource]
 
 func apply_stat(projectile: Node):
+	var resource = projectile.projectile_resource
 	for upgrade in upgrades:
-		projectile.projectile_stats_resource._apply_stat(upgrade.stat_type, upgrade.value)
+		var current_value = resource.get(upgrade.stat_type)
+		var upgraded_value = current_value * upgrade.value if upgrade.is_multiplier else current_value + upgrade.value
+		resource.set(upgrade.stat_type, upgraded_value)
 
 func _get_upgrades_string() -> String:
 	if upgrades.size() == 1:

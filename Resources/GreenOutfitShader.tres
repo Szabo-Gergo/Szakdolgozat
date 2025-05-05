@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d06g8ctajvdjr"]
+
+[ext_resource type="Shader" path="res://Shaders/Colour_Switch.gdshader" id="1_w5hvo"]
+
+[resource]
+shader = ExtResource("1_w5hvo")
+shader_parameter/number_of_colors = 6
+shader_parameter/target_color = PackedColorArray(0.611765, 0.352941, 0.235294, 1, 0.411765, 0.239216, 0.168627, 1, 0.6, 0, 0.188235, 1, 0.388235, 0.00392157, 0.12549, 1, 0.929412, 0.109804, 0.141176, 1)
+shader_parameter/replace_color = PackedColorArray(0.423529, 0.482353, 0.376471, 1, 0.266667, 0.313726, 0.227451, 1, 0.160784, 0.317647, 0.207843, 1, 0.121569, 0.235294, 0.152941, 1, 0.136719, 0.136719, 0.136719, 1)
+shader_parameter/tolerance = 0.044

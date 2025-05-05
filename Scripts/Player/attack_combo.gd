@@ -30,5 +30,6 @@ func _on_enemy_hit(_area: Area2D) -> void:
 	pass
 	
 func exit():
-	player.speed = player.base_stats.speed
+	player.speed = player.outfit_node.outfit_resource.speed
+	print()
 	player.can_combo = false

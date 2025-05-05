@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbjievyo1a8oo"]
+
+[ext_resource type="Script" path="res://Scripts/Components/explosion_component.gd" id="1_45ecy"]
+[ext_resource type="PackedScene" uid="uid://choqfalihjao" path="res://Scenes/Misc/explosion_effect.tscn" id="2_5bgux"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k61li"]
+
+[node name="ExplosionComponent" type="Area2D"]
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_45ecy")
+range = 140
+explosion_effect_scene = ExtResource("2_5bgux")
+
+[node name="ExplosionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k61li")
+debug_color = Color(1, 0.492188, 0, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

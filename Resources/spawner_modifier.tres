@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="SpawnerModifierStrategy" load_steps=10 format=3 uid="uid://bm2qc7jbmjodv"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/challange_effect_resource.gd" id="1_rhl34"]
+[ext_resource type="Script" path="res://Scripts/Strategies/SpawnerModifiers/SpawnerModifierStrategy.gd" id="2_kdf8p"]
+
+[sub_resource type="Resource" id="Resource_dakus"]
+script = ExtResource("1_rhl34")
+effect_type = "enemy_armor"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_41a5e"]
+script = ExtResource("1_rhl34")
+effect_type = "enemy_health"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_0whfb"]
+script = ExtResource("1_rhl34")
+effect_type = "enemy_speed"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_aljcs"]
+script = ExtResource("1_rhl34")
+effect_type = "elite_chance"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_31k1t"]
+script = ExtResource("1_rhl34")
+effect_type = "enemy_spawn"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_ke72s"]
+script = ExtResource("1_rhl34")
+effect_type = "player_glass_cannon"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_k3wy1"]
+script = ExtResource("1_rhl34")
+effect_type = "player_player_tank"
+value = 0.0
+
+[resource]
+script = ExtResource("2_kdf8p")
+challange_effects = Array[ExtResource("1_rhl34")]([SubResource("Resource_dakus"), SubResource("Resource_41a5e"), SubResource("Resource_0whfb"), SubResource("Resource_aljcs"), SubResource("Resource_31k1t"), SubResource("Resource_ke72s"), SubResource("Resource_k3wy1")])

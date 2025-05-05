@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="OutfitResource" load_steps=3 format=3 uid="uid://kdsgavbuylba"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/outfit_resource.gd" id="1_4kuag"]
+[ext_resource type="Texture2D" uid="uid://bb24k6ts2eg4k" path="res://Spritesheets/Player/Player_Palette_2.png" id="2_ka4s1"]
+
+[resource]
+script = ExtResource("1_4kuag")
+sprite = ExtResource("2_ka4s1")
+armor_regen_rate = 10.0
+armor_regen_wait_time = 4.0
+max_dash = 4
+dash_recharge_speed = 1.0
+damage = 0
+max_health = 50
+max_armor = 100
+speed = 120

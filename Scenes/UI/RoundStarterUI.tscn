@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_6347o"]
 script = ExtResource("3_32jkn")
 effect_type = "elite_chance"
-current_value = 0.0
+value = 0.0
 
 [node name="RoundStarterUI" type="Control"]
 custom_minimum_size = Vector2(300, 0)

@@ -6,10 +6,5 @@
 script = ExtResource("1_jslpe")
 upgrade_currency = 2000
 melee_weapon_type = 0
-ranged_weapon_type = 0
-outfit_index = 0
-max_dash = 10
-damage = 0
-max_health = 100
-max_armor = 0
-speed = 100
+ranged_weapon_type = 2
+outfit_type = 2

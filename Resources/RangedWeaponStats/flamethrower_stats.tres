@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ProjectileStatResource" load_steps=4 format=3 uid="uid://bdsxpqd4tdt3s"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_stat_resource.gd" id="1_y2qxc"]
+[ext_resource type="Script" path="res://Scripts/Globals/StatusEffects.gd" id="2_wn47m"]
+
+[sub_resource type="Resource" id="Resource_dl8s2"]
+script = ExtResource("2_wn47m")
+status_type = "Burn"
+status_chance = 80.0
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_y2qxc")
+is_flamethrower = true
+status_effect = SubResource("Resource_dl8s2")
+animation_name = ""
+speed = 150.0
+damage = 2
+range = 100.0
+piercing = 100
+multishot = 1.0
+bullet_spread = 0.0
+ammo_cost = 0.1
+chain = 0
+can_explode = false
+explosion_damage_multipler = 0.0
+explosion_range = 0
+has_force_field = false
+force_range = 0
+force_strength = 0
+force_is_pulling = false
