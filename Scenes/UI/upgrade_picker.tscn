@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwvry3bifctem"]
+[gd_scene load_steps=3 format=3 uid="uid://cwvry3bifctem"]
 
 [ext_resource type="Script" path="res://Scenes/UI/upgrade_picker.gd" id="1_ykr8n"]
-[ext_resource type="Texture2D" uid="uid://bsur6qqpbehgq" path="res://Spritesheets/Misc/OutfitUpgradeIcon.png" id="2_6pudl"]
-[ext_resource type="Texture2D" uid="uid://dveu6j6g4vdev" path="res://Spritesheets/Misc/RangedUpgradeIcon.png" id="3_dwbig"]
+[ext_resource type="PackedScene" uid="uid://yi2dvis00sqp" path="res://Scenes/UI/upgrade_option.tscn" id="2_qaul7"]
 
 [node name="UpgradePicker" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,14 +30,22 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="MeleeUpgradeOption" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_qaul7")]
+unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("2_6pudl")
+target_type = 0
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="RangedUpgradeOption" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_qaul7")]
+unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("3_dwbig")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="OutfitUpgradeOption" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_qaul7")]
+unique_name_in_owner = true
 layout_mode = 2
+target_type = 2
+
+[connection signal="close_menu" from="VBoxContainer/HBoxContainer/MeleeUpgradeOption" to="." method="_on_close_menu"]
+[connection signal="close_menu" from="VBoxContainer/HBoxContainer/RangedUpgradeOption" to="." method="_on_close_menu"]
+[connection signal="close_menu" from="VBoxContainer/HBoxContainer/OutfitUpgradeOption" to="." method="_on_close_menu"]

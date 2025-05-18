@@ -5,7 +5,9 @@
 
 [resource]
 script = ExtResource("1_oedfd")
+weapon_name = "Revolver"
 sprite_frames = ExtResource("2_tkeei")
+is_flamethrower = false
 animation_name = "bullet"
 speed = 350.0
 damage = 2

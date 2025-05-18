@@ -11,6 +11,7 @@ status_chance = 80.0
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_y2qxc")
+weapon_name = "Flamethrower"
 is_flamethrower = true
 status_effect = SubResource("Resource_dl8s2")
 animation_name = ""

@@ -1,186 +1,153 @@
-[gd_resource type="Resource" script_class="SkillTreeResource" load_steps=36 format=3]
+[gd_resource type="Resource" script_class="SkillTreeResource" load_steps=29 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Resources/skill_tree_resource.gd" id="1_abo2r"]
-[ext_resource type="Script" path="res://Scripts/Resources/skill_node_resource.gd" id="2_ur7d4"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Damage.png" id="3_io21j"]
-[ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="4_shbxu"]
-[ext_resource type="Script" path="res://Scripts/Resources/upgrade_resource.gd" id="5_8smxh"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Range.png" id="6_oursl"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Ammo.png" id="7_66a55"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Precision_Charge.png" id="8_py808"]
-[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Charge.png" id="9_bcm7e"]
+[ext_resource type="Script" path="res://Scripts/Resources/skill_tree_resource.gd" id="1_wc2d6"]
+[ext_resource type="Script" path="res://Scripts/Resources/skill_node_resource.gd" id="2_u563e"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Damage.png" id="3_0qnoo"]
+[ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="4_80rds"]
+[ext_resource type="Script" path="res://Scripts/Resources/melee_upgrade_resource.gd" id="5_7y0p5"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Range.png" id="6_ilyo8"]
+[ext_resource type="Texture2D" path="res://Spritesheets/Misc/Skillicon_Ammo.png" id="7_ij707"]
 
 [sub_resource type="Resource" id="Resource_rsbqr"]
-script = ExtResource("5_8smxh")
-stat_type = "base_damage"
+script = ExtResource("5_7y0p5")
+stat_type = "damage"
 value = 5.0
+is_multiplier = false
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_f0ur6"]
-script = ExtResource("4_shbxu")
-upgrades = Array[ExtResource("5_8smxh")]([SubResource("Resource_rsbqr")])
-is_skill_node = false
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_rsbqr")])
+is_skill_node = true
 
 [sub_resource type="Resource" id="Resource_6kcbx"]
-script = ExtResource("2_ur7d4")
-texture = ExtResource("3_io21j")
-upgrade_cost = 1280
-current_level = 7
+script = ExtResource("2_u563e")
+texture = ExtResource("3_0qnoo")
+upgrade_cost = 10
+current_level = 0
 max_level = 10
 is_locked = false
 is_finished = false
-upgrades_per_level = Array[ExtResource("4_shbxu")]([SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6")])
+upgrades_per_level = Array[ExtResource("4_80rds")]([SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6"), SubResource("Resource_f0ur6")])
 ui_node_id = "sw1"
 
 [sub_resource type="Resource" id="Resource_gdw7w"]
-script = ExtResource("5_8smxh")
-stat_type = "range_multiplier"
-value = 0.5
+script = ExtResource("5_7y0p5")
+stat_type = "range"
+value = 0.05
+is_multiplier = true
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_adlov"]
-script = ExtResource("4_shbxu")
-upgrades = Array[ExtResource("5_8smxh")]([SubResource("Resource_gdw7w")])
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_gdw7w")])
 is_skill_node = true
 
-[sub_resource type="Resource" id="Resource_o1hdi"]
-script = ExtResource("2_ur7d4")
-texture = ExtResource("6_oursl")
+[sub_resource type="Resource" id="Resource_tl0q4"]
+script = ExtResource("2_u563e")
+texture = ExtResource("6_ilyo8")
 upgrade_cost = 10
 current_level = 0
 max_level = 5
-is_locked = false
+is_locked = true
 is_finished = false
-upgrades_per_level = Array[ExtResource("4_shbxu")]([SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov")])
+upgrades_per_level = Array[ExtResource("4_80rds")]([SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov"), SubResource("Resource_adlov")])
 ui_node_id = "sw11"
 
 [sub_resource type="Resource" id="Resource_suxjg"]
-script = ExtResource("5_8smxh")
+script = ExtResource("5_7y0p5")
 stat_type = "ammo_gained"
 value = 1.0
+is_multiplier = false
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_l8ukq"]
-script = ExtResource("4_shbxu")
-upgrades = Array[ExtResource("5_8smxh")]([SubResource("Resource_suxjg")])
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_suxjg")])
 is_skill_node = true
 
 [sub_resource type="Resource" id="Resource_4anje"]
-script = ExtResource("5_8smxh")
+script = ExtResource("5_7y0p5")
 stat_type = "ammo_gained"
 value = 1.0
+is_multiplier = false
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_28nvr"]
-script = ExtResource("4_shbxu")
-upgrades = Array[ExtResource("5_8smxh")]([SubResource("Resource_4anje")])
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_4anje")])
 is_skill_node = true
 
 [sub_resource type="Resource" id="Resource_8e6dj"]
-script = ExtResource("5_8smxh")
+script = ExtResource("5_7y0p5")
 stat_type = "ammo_gained"
 value = 2.0
+is_multiplier = false
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_ktnlc"]
-script = ExtResource("4_shbxu")
-upgrades = Array[ExtResource("5_8smxh")]([SubResource("Resource_8e6dj")])
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_8e6dj")])
 is_skill_node = true
 
 [sub_resource type="Resource" id="Resource_d6eti"]
-script = ExtResource("2_ur7d4")
-texture = ExtResource("7_66a55")
+script = ExtResource("2_u563e")
+texture = ExtResource("7_ij707")
 upgrade_cost = 10
 current_level = 0
 max_level = 3
-is_locked = false
+is_locked = true
 is_finished = false
-upgrades_per_level = Array[ExtResource("4_shbxu")]([SubResource("Resource_l8ukq"), SubResource("Resource_28nvr"), SubResource("Resource_ktnlc")])
+upgrades_per_level = Array[ExtResource("4_80rds")]([SubResource("Resource_l8ukq"), SubResource("Resource_28nvr"), SubResource("Resource_ktnlc")])
 ui_node_id = "sw111"
-
-[sub_resource type="Resource" id="Resource_2564k"]
-script = ExtResource("5_8smxh")
-stat_type = "can_charge"
-value = 1.0
-
-[sub_resource type="Resource" id="Resource_1a0iw"]
-script = ExtResource("4_shbxu")
-upgrades = Array[ExtResource("5_8smxh")]([SubResource("Resource_2564k")])
-is_skill_node = true
-
-[sub_resource type="Resource" id="Resource_culcm"]
-script = ExtResource("2_ur7d4")
-texture = ExtResource("8_py808")
-upgrade_cost = 10
-current_level = 0
-max_level = 1
-is_locked = false
-is_finished = false
-upgrades_per_level = Array[ExtResource("4_shbxu")]([SubResource("Resource_1a0iw")])
-ui_node_id = "sw2"
-
-[sub_resource type="Resource" id="Resource_cvhsh"]
-script = ExtResource("5_8smxh")
-stat_type = "charge_damage_multiplier"
-value = 0.1
-
-[sub_resource type="Resource" id="Resource_mnw47"]
-script = ExtResource("4_shbxu")
-upgrades = Array[ExtResource("5_8smxh")]([SubResource("Resource_cvhsh")])
-is_skill_node = true
-
-[sub_resource type="Resource" id="Resource_hfhl2"]
-script = ExtResource("2_ur7d4")
-texture = ExtResource("3_io21j")
-upgrade_cost = 20
-current_level = 0
-max_level = 5
-is_locked = true
-is_finished = false
-upgrades_per_level = Array[ExtResource("4_shbxu")]([SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47"), SubResource("Resource_mnw47")])
-ui_node_id = "sw21"
-
-[sub_resource type="Resource" id="Resource_7f1ix"]
-script = ExtResource("5_8smxh")
-stat_type = "can_precision_charge"
-value = 1.0
-
-[sub_resource type="Resource" id="Resource_7hlp8"]
-script = ExtResource("4_shbxu")
-upgrades = Array[ExtResource("5_8smxh")]([SubResource("Resource_7f1ix")])
-is_skill_node = true
-
-[sub_resource type="Resource" id="Resource_xd7kj"]
-script = ExtResource("2_ur7d4")
-texture = ExtResource("9_bcm7e")
-upgrade_cost = 10
-current_level = 0
-max_level = 1
-is_locked = true
-is_finished = false
-upgrades_per_level = Array[ExtResource("4_shbxu")]([SubResource("Resource_7hlp8")])
-ui_node_id = "sw211"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yrvg6"]
 load_path = "res://.godot/imported/Skillicon_Speed.png-3eefb6595b784456f82db5a195d1b086.ctex"
 
 [sub_resource type="Resource" id="Resource_h2rkq"]
-script = ExtResource("5_8smxh")
-stat_type = "attack_speed_multiplier"
+script = ExtResource("5_7y0p5")
+stat_type = "attack_speed"
 value = 0.05
+is_multiplier = true
+rarity = 0
 
-[sub_resource type="Resource" id="Resource_mew32"]
-script = ExtResource("4_shbxu")
-upgrades = Array[ExtResource("5_8smxh")]([SubResource("Resource_h2rkq")])
+[sub_resource type="Resource" id="Resource_s3kpu"]
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_h2rkq")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_hwu07"]
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_h2rkq")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_uq2ct"]
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_h2rkq")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_x48ba"]
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_h2rkq")])
+is_skill_node = true
+
+[sub_resource type="Resource" id="Resource_vp2x3"]
+script = ExtResource("4_80rds")
+upgrades = Array[ExtResource("5_7y0p5")]([SubResource("Resource_h2rkq")])
 is_skill_node = true
 
 [sub_resource type="Resource" id="Resource_5uk6h"]
-script = ExtResource("2_ur7d4")
+script = ExtResource("2_u563e")
 texture = SubResource("CompressedTexture2D_yrvg6")
 upgrade_cost = 10
 current_level = 0
 max_level = 5
-is_locked = false
+is_locked = true
 is_finished = false
-upgrades_per_level = Array[ExtResource("4_shbxu")]([SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32"), SubResource("Resource_mew32")])
+upgrades_per_level = Array[ExtResource("4_80rds")]([SubResource("Resource_s3kpu"), SubResource("Resource_hwu07"), SubResource("Resource_uq2ct"), SubResource("Resource_x48ba"), SubResource("Resource_vp2x3")])
 ui_node_id = "sw3"
 
 [resource]
-script = ExtResource("1_abo2r")
+script = ExtResource("1_wc2d6")
 tree_name = "SwordTree"
-skill_nodes = Array[ExtResource("2_ur7d4")]([SubResource("Resource_6kcbx"), SubResource("Resource_o1hdi"), SubResource("Resource_d6eti"), SubResource("Resource_culcm"), SubResource("Resource_hfhl2"), SubResource("Resource_xd7kj"), SubResource("Resource_5uk6h")])
+skill_nodes = Array[ExtResource("2_u563e")]([SubResource("Resource_6kcbx"), SubResource("Resource_tl0q4"), SubResource("Resource_d6eti"), SubResource("Resource_5uk6h")])

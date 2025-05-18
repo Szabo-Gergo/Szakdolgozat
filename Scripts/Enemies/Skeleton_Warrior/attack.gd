@@ -1,7 +1,7 @@
 extends State
 class_name Basic_Enemy_Attack
 
-@export var root: CharacterBody2D
+@export var root: Base_Enemy
 @export var hitbox: Area2D 
 @export var health_component : Health_Component
 @export var attacking : bool
@@ -9,12 +9,7 @@ class_name Basic_Enemy_Attack
 @export var slide_speed : float
 
 var player_direction : Vector2
-var hit_shape
-
-func _ready() -> void:
-	hit_shape = hitbox.get_child(0)
 	
-
 func enter(_inputs : Dictionary = {}):
 	player_direction = root.global_position.direction_to(Vector2i(root.player.position))
 

@@ -2,6 +2,7 @@ extends Resource
 class_name SpawnerModifierStrategy
 
 @export var challange_effects : Array[ChallangeEffectResource]
+@export var upgrade_material_boost : float = 0
 
 func apply_to_enemy(enemy: Base_Enemy) -> void:
 	var enemy_stats = enemy.base_stats

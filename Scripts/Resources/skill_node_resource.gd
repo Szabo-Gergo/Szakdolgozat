@@ -7,5 +7,5 @@ class_name SkillNodeResource
 @export var max_level : int
 @export var is_locked : bool
 @export var is_finished : bool
-@export var upgrades_per_level : Array[PermanentStatStrategy]
+@export var upgrades_per_level : Array[PermanentMeleeStatStrategy]
 @export var ui_node_id : String

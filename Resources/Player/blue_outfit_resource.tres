@@ -1,15 +1,51 @@
-[gd_resource type="Resource" script_class="OutfitResource" load_steps=3 format=3 uid="uid://kdsgavbuylba"]
+[gd_resource type="Resource" script_class="OutfitResource" load_steps=11 format=3 uid="uid://kdsgavbuylba"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/outfit_resource.gd" id="1_4kuag"]
-[ext_resource type="Texture2D" uid="uid://bb24k6ts2eg4k" path="res://Spritesheets/Player/Player_Palette_2.png" id="2_ka4s1"]
+[ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="1_erjnh"]
+[ext_resource type="Script" path="res://Scripts/Resources/melee_upgrade_resource.gd" id="2_u4w53"]
+[ext_resource type="Script" path="res://Scripts/Strategies/ProjectileModifiers/PermenantProjectileStatStrategy.gd" id="3_byu3u"]
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_upgrade_resource.gd" id="4_lwkbn"]
+
+[sub_resource type="Resource" id="Resource_23blw"]
+script = ExtResource("2_u4w53")
+stat_type = "attack_speed"
+value = 0.5
+is_multiplier = true
+rarity = 0
+
+[sub_resource type="Resource" id="Resource_x1tqs"]
+script = ExtResource("2_u4w53")
+stat_type = "damage"
+value = 2.0
+is_multiplier = true
+rarity = 0
+
+[sub_resource type="Resource" id="Resource_lnia2"]
+script = ExtResource("2_u4w53")
+stat_type = "range"
+value = 1.5
+is_multiplier = true
+rarity = 0
+
+[sub_resource type="Resource" id="Resource_gjuyp"]
+script = ExtResource("1_erjnh")
+upgrades = Array[ExtResource("2_u4w53")]([SubResource("Resource_23blw"), SubResource("Resource_x1tqs"), SubResource("Resource_lnia2")])
+is_skill_node = false
+
+[sub_resource type="Resource" id="Resource_dst0m"]
+script = ExtResource("3_byu3u")
+upgrades = Array[ExtResource("4_lwkbn")]([])
 
 [resource]
 script = ExtResource("1_4kuag")
-sprite = ExtResource("2_ka4s1")
+outfit_name = "Blue Outfit"
 armor_regen_rate = 10.0
 armor_regen_wait_time = 4.0
 max_dash = 4
 dash_recharge_speed = 1.0
+max_ammo = 10
+melee_upgrades = SubResource("Resource_gjuyp")
+ranged_upgrades = SubResource("Resource_dst0m")
 damage = 0
 max_health = 50
 max_armor = 100

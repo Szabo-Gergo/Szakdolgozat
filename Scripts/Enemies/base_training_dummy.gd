@@ -1,11 +1,9 @@
-extends CharacterBody2D
+extends Base_Enemy
+class_name TargetDummy
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var sprite: Sprite2D = $DummySprite
 @onready var flash_timer: Timer = $FlashTimer
-@onready var player : CharacterBody2D
 var base_position : Vector2
-@onready var health_component: Health_Component = $HealthComponent
 
 func _ready() -> void:
 	player = get_tree().get_root().find_child("Player", true, false)

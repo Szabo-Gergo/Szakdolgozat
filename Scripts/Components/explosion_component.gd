@@ -21,5 +21,5 @@ func explode():
 	
 	
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):		
+	if body.is_in_group("Enemy"):	
 		body.health_component.deal_damage(damage)

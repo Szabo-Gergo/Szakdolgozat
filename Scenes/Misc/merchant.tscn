@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://3bb1mdag6qgt" path="res://Spritesheets/Misc/NPC_Merchant.png" id="1_mxb8t"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="1_vdx3s"]
-[ext_resource type="PackedScene" uid="uid://bp83uc6sodr51" path="res://Scenes/Components/interaction_component.tscn" id="2_c45kb"]
+[ext_resource type="PackedScene" uid="uid://bp83uc6sodr51" path="res://Scenes/Components/menu_interaction_component.tscn" id="2_c45kb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_btpm1"]
 shader = ExtResource("1_vdx3s")

@@ -1,11 +1,11 @@
 extends Resource
 class_name ProjectileStatResource
 
+@export var weapon_name : String
 @export var sprite_frames : SpriteFrames
 @export var is_flamethrower : bool
 @export var status_effect : StatusEffects
 @export_enum("bullet","firework") var animation_name : String
- 
 @export_range(100,1000) var speed: float 
 @export var damage : int
 @export var range : float
@@ -24,32 +24,33 @@ class_name ProjectileStatResource
 @export var force_strength : int
 @export var force_is_pulling : bool
 
-func _apply_stat(stat_type : String, value):
-	match stat_type:
-		"damage":
-			damage += value
-		"speed":
-			speed += value
-		"range":
-			range += value
-		"piercing":
-			piercing += value
-		"multishot":
-			multishot += value
-			bullet_spread += 5
-		"bullet_spread":
-			bullet_spread += value
-		"ammo_cost":
-			ammo_cost += value
-		"chain":
-			chain += value
-			piercing += value
-		"can_explode":
-			can_explode = true
-			explosion_range = 50
-			explosion_damage_multipler = 1
-		"explosion_damage_multipler":
-			explosion_damage_multipler += value
-		"explosion_range":
-			explosion_range += value
-			
+
+func get_weapon_string() -> Dictionary:
+	var output : Dictionary = {
+		"name" : weapon_name,
+		"base_stats" : _get_base_stat_string(),
+		"effects" : _get_effects_string(),
+	}
+	return output
+	
+func _get_base_stat_string() -> String:
+	return "Damage: %d\nSpeed: %d\nRange: %d\nAmmo Cost: %.1f\nBullet Spread: %d°" % [
+		damage,
+		speed,
+		range,
+		ammo_cost,
+		bullet_spread,
+	]
+	
+func _get_effects_string() -> String:
+	var exp_string : String = ""
+	if can_explode:
+		exp_string = "Explosive bullets\nExplosion Range: "+str(explosion_range)
+	
+	return "Piercing: %d\nMultishot: %d\nBullet bounce: %d\nBullet Spread: %.2f°\n%s" %[
+	piercing,
+	multishot,
+	chain,
+	bullet_spread,
+	exp_string
+	]

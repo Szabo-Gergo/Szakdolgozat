@@ -13,11 +13,16 @@ const FLAMETHROWER_STATS = preload("res://Resources/RangedWeaponStats/flamethrow
 const ROCKET_SPRITE = preload("res://Spritesheets/Weapon/Rocket_Sprite.png")
 const ROCKET_STATS = preload("res://Resources/RangedWeaponStats/rocket_stats.tres")
 
+
 @export var max_ammo : int = 1
 @export var projectile_resource : ProjectileStatResource
+@export var player : Player
 @onready var weapon_sprite: Sprite2D = $Weapon
 @onready var shoot_component: ShootComponent = $"../State Machine/Shoot/ShootComponent"
 
+func _ready() -> void:
+	_on_weapon_change(player.base_stats.ranged_weapon_type)
+	
 func _on_weapon_change(weapon_index : int):
 	match weapon_index:
 		0:
@@ -36,8 +41,19 @@ func _on_weapon_change(weapon_index : int):
 			weapon_sprite.texture = ROCKET_SPRITE
 			projectile_resource = ROCKET_STATS
 			shoot_component.is_aoe = false
-		
 			
+	RuntimeSaves.player_stats.ranged_weapon_type = weapon_index
+	RuntimeSaves.save_resources()
+	print(weapon_sprite.texture.resource_path)
+
 func _get_projectile_resource():
 	return projectile_resource
 	
+
+func get_weapon_string() -> Dictionary:
+	var out = {
+		"name" : "",
+		"base_stats" : "",
+		"effects" : ""
+	}
+	return out

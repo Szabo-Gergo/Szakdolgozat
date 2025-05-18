@@ -1,4 +1,5 @@
 extends Basic_Enemy_Move
+class_name  FleeState
 
 @export var randomness_strength: float = 0.6
 var timer : Timer
@@ -17,7 +18,7 @@ func enter(_inputs : Dictionary = {}):
 func exit():
 	super()
 
-func update_movement():
+func update_movement(delta : float):
 	var direction = (root.global_position - root.player.global_position).normalized() 
 	var random_offset = Vector2( randi_range(-randomness_strength, randomness_strength), randi_range(-randomness_strength, randomness_strength) ) 
 	var randomized_direction = (direction + random_offset).normalized()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://uxdf7rf5w0do"]
+[gd_scene load_steps=30 format=3 uid="uid://uxdf7rf5w0do"]
 
 [ext_resource type="Shader" path="res://Shaders/Flash.gdshader" id="1_qf4w4"]
 [ext_resource type="Material" uid="uid://cqqne3pxiytgm" path="res://Resources/FlashShaderResource.tres" id="1_qm53s"]
@@ -12,6 +12,13 @@
 [ext_resource type="Script" path="res://Scripts/Misc/StateMachine/state_machine.gd" id="8_7p3eu"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/damaged.gd" id="9_nl0a5"]
 [ext_resource type="Script" path="res://Scripts/Enemies/base_idle_state.gd" id="12_bs7d5"]
+
+[sub_resource type="Resource" id="Resource_a7qh1"]
+script = ExtResource("4_2d2lb")
+damage = 0
+max_health = 10000
+max_armor = 0
+speed = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lcd8b"]
 
@@ -163,12 +170,18 @@ states/Start/position = Vector2(129, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kjp0e"), "Idle", "GotHit", SubResource("AnimationNodeStateMachineTransition_tqi7m"), "GotHit", "Idle", SubResource("AnimationNodeStateMachineTransition_7ay8j")]
 graph_offset = Vector2(-8, -76)
 
-[node name="Training Dummy" type="CharacterBody2D" groups=["Enemy"]]
+[node name="Training Dummy" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "sprite", "animation_tree", "hurt_box", "collision_shape") groups=["Enemy"]]
 z_index = 1
 material = ExtResource("1_qm53s")
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_qqh32")
+base_stats = SubResource("Resource_a7qh1")
+health_component = NodePath("HealthComponent")
+sprite = NodePath("DummySprite")
+animation_tree = NodePath("AnimationTree")
+hurt_box = NodePath("Hurtbox")
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

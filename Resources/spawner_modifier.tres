@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpawnerModifierStrategy" load_steps=10 format=3 uid="uid://bm2qc7jbmjodv"]
+[gd_resource type="Resource" script_class="SpawnerModifierStrategy" load_steps=10 format=3 uid="uid://5gjsomjm1cpp"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/challange_effect_resource.gd" id="1_rhl34"]
 [ext_resource type="Script" path="res://Scripts/Strategies/SpawnerModifiers/SpawnerModifierStrategy.gd" id="2_kdf8p"]
@@ -41,3 +41,4 @@ value = 0.0
 [resource]
 script = ExtResource("2_kdf8p")
 challange_effects = Array[ExtResource("1_rhl34")]([SubResource("Resource_dakus"), SubResource("Resource_41a5e"), SubResource("Resource_0whfb"), SubResource("Resource_aljcs"), SubResource("Resource_31k1t"), SubResource("Resource_ke72s"), SubResource("Resource_k3wy1")])
+upgrade_material_boost = 0.0

@@ -6,5 +6,6 @@
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_m40g1")
+max_enemies = 100
 
 [node name="Timer GUI" type="CanvasLayer" parent="."]

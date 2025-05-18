@@ -43,15 +43,17 @@ var weapon_setup_data = {
 @export var melee_resource : Resource
 @export var animation_tree : AnimationTree
 @onready var player: CharacterBody2D = $".."
-@onready var cooldown_timer: Timer = $"../State Machine/Attack/CooldownTimer"
-@onready var combo_timer: Timer = $"../State Machine/AttackCombo/ComboTimer"
+@export var cooldown_timer: Timer
+@export var combo_timer: Timer
 
 func _ready() -> void:
-	_on_weapon_change(current_weapon_index)
+	_on_weapon_change(player.base_stats.melee_weapon_type)
 
 #0 -> SWORD, 1 -> Hammer, 2 -> Spear
 func _on_weapon_change(weapon_index : int):
 	if weapon_index in weapon_setup_data:
+		RuntimeSaves.player_stats.melee_weapon_type = weapon_index
+		RuntimeSaves.save_resources()
 		var data = weapon_setup_data[weapon_index]
 		current_weapon_index = weapon_index
 		melee_resource = data["stats"]
@@ -59,17 +61,19 @@ func _on_weapon_change(weapon_index : int):
 		trail.texture = data["trail_texture"]
 		trail.offset = data["offset"]
 		hitbox.polygon = data["stats"].collision_polygon
-		_update_range(trail)
-		_update_attack_speed(animation_tree, cooldown_timer, combo_timer)
+		_update_range()
+		_update_attack_speed()
 
 
-func _update_range(target : Sprite2D):
-	target.scale = Vector2(melee_resource.range,melee_resource.range)
+func _update_range():
+	trail.scale = Vector2(melee_resource.range,melee_resource.range)
 	
-func _update_attack_speed(animation_tree : AnimationTree, attack_cooldown_timer : Timer, combo_timer : Timer):
+func _update_attack_speed():
+	var animation_tree_name = $".."._get_animation_tree_name()
 	var base_duration = animation_tree.get_animation("DownAttack").length
 	var attack_cooldown = base_duration/melee_resource.attack_speed * (1.2)
-	animation_tree.set("parameters/Attack/TimeScale/scale", melee_resource.attack_speed)
-	animation_tree.set("parameters/Combo/TimeScale/scale", melee_resource.attack_speed)
-	attack_cooldown_timer.wait_time = attack_cooldown
-	combo_timer.wait_time = attack_cooldown_timer.wait_time * 1.5
+	animation_tree.set("parameters/"+animation_tree_name+"/StateMachine/Attack/TimeScale/scale", melee_resource.attack_speed)
+	animation_tree.set("parameters/"+animation_tree_name+"/StateMachine/Combo/TimeScale/scale", melee_resource.attack_speed)
+	cooldown_timer.wait_time = attack_cooldown
+	combo_timer.wait_time = cooldown_timer.wait_time * 1.5
+	print(str(animation_tree.get("parameters/Combo/TimeScale/scale")))

@@ -28,13 +28,8 @@ func physics_process(_delta: float):
 	if Input.is_action_just_released("shoot"):
 		set_projectile()
 	
-func camera_knockback():
-	player_camera.position += mouse_position*-25
-	await get_tree().create_timer(0.025).timeout
-	player_camera.position = Vector2(0,0) 
 
 func animation_update():
-	print(	animation_tree.get("parameters/"+player._get_animation_tree_name()+"/StateMachine/Shoot/blend_position"))
 	mouse_position = (ranged_weapon.global_position - ranged_weapon.get_global_mouse_position()).normalized()*-1
 	animation_tree.set("parameters/"+player._get_animation_tree_name()+"/StateMachine/Shoot/blend_position", mouse_position)
 
@@ -48,7 +43,6 @@ func set_projectile():
 			else:
 				player.main_ammo_point_container._decrease_point(projectile_resource.ammo_cost)
 		
-		camera_knockback()
 	transition.emit(self, "idle")
 
 

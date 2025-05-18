@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://c8saaqfm137mm"]
+[gd_scene load_steps=19 format=4 uid="uid://c8saaqfm137mm"]
 
 [ext_resource type="Script" path="res://Scripts/Map_Enviroment/map_generation.gd" id="1_n2jkw"]
 [ext_resource type="Texture2D" uid="uid://db4ruf1ayj4wx" path="res://Spritesheets/Enviroment/Tileset-Terrain2.png" id="4_k112b"]
+[ext_resource type="PackedScene" uid="uid://x8m1aykf62jx" path="res://Scripts/Map_Enviroment/rune_stone.tscn" id="4_vw152"]
 [ext_resource type="Texture2D" uid="uid://d1prhhghnpvut" path="res://Spritesheets/Enviroment/Summer_Plains_Decoration.png" id="5_wcgvu"]
 [ext_resource type="Shader" path="res://Shaders/Cloud_Shadow.gdshader" id="7_xmyn7"]
 
@@ -211,6 +212,12 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_j0agv")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_k2qyx"]
+scenes/1/scene = ExtResource("4_vw152")
+
+[sub_resource type="TileSet" id="TileSet_ib0cp"]
+sources/0 = SubResource("TileSetScenesCollectionSource_k2qyx")
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_d0eck"]
 noise_type = 0
 frequency = 0.004
@@ -232,11 +239,11 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_kl0ei")
 y_sort_enabled = true
 script = ExtResource("1_n2jkw")
 generation_noise = SubResource("NoiseTexture2D_agryi")
-generation_size = Vector2(5, 5)
-delete_distance = 16
-generation_radius = 1
-decor_range = 0.48
-tree_range = 0.55
+generation_size = Vector2i(15, 15)
+delete_distance = 1
+decor_range = Vector2(0.3, 0.45)
+tree_range = Vector2(0.45, 0.6)
+interact_range = Vector2(0.6, 1)
 metadata/_edit_horizontal_guides_ = [82.0]
 
 [node name="Ground" type="TileMapLayer" parent="."]
@@ -254,6 +261,11 @@ z_index = 1
 y_sort_enabled = true
 tile_set = SubResource("TileSet_terty")
 x_draw_order_reversed = true
+
+[node name="InteractiveTiles" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_ib0cp")
+
+[node name="InteractablesContainer" type="Node2D" parent="."]
 
 [node name="Cloud_Shadow" type="ParallaxBackground" parent="."]
 layer = 2

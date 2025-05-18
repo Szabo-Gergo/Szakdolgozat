@@ -17,7 +17,7 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 [autoload]
 
 ConfigHandler="*res://Scripts/Misc/ConfigHandler.gd"
-PlayerSkillStatHandler="*res://Scripts/Misc/player_skill_stats_handler.gd"
+RuntimeSaves="*res://runtime_saves.gd"
 
 [display]
 
@@ -35,6 +35,7 @@ Enemy_HurtBox=""
 Enemy=""
 XP=""
 Player_Pickup_Area=""
+Player=""
 
 [gui]
 

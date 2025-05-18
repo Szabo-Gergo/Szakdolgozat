@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://x8m1aykf62jx"]
+
+[ext_resource type="Script" path="res://Scripts/Map_Enviroment/rune_stone.gd" id="1_lcs8k"]
+[ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="2_qglel"]
+[ext_resource type="Texture2D" uid="uid://cris2nbn4qyq1" path="res://Spritesheets/Enviroment/RuneStones.png" id="3_tvvme"]
+[ext_resource type="Texture2D" uid="uid://d0cs82ofyttyy" path="res://Spritesheets/Enviroment/WhiteRunes.png" id="4_b72lf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4gay"]
+resource_local_to_scene = true
+shader = ExtResource("2_qglel")
+shader_parameter/outline_color = Color(0.757813, 0.757813, 0.757813, 1)
+shader_parameter/pixel_size = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tntxw"]
+resource_local_to_scene = true
+atlas = ExtResource("3_tvvme")
+region = Rect2(256, 0, 64, 64)
+margin = Rect2(5, 0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eemc"]
+atlas = ExtResource("4_b72lf")
+region = Rect2(16, 0, 0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2d03l"]
+radius = 38.0
+
+[node name="RuneStone" type="Node2D"]
+script = ExtResource("1_lcs8k")
+
+[node name="Stone" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_n4gay")
+position = Vector2(7, -7)
+texture = SubResource("AtlasTexture_tntxw")
+
+[node name="Rune" type="Sprite2D" parent="Stone"]
+unique_name_in_owner = true
+modulate = Color(0.945313, 0.945313, 0.945313, 1)
+position = Vector2(-9, -1)
+texture = SubResource("AtlasTexture_4eemc")
+hframes = 8
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_2d03l")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -34.0
+offset_top = -45.0
+offset_right = 35.0
+offset_bottom = -34.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "aidsuhfu9dshfi
+"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]

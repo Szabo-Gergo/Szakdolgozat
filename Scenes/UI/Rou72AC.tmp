@@ -1,0 +1,151 @@
+[gd_scene load_steps=11 format=3 uid="uid://b54g5hu4nquhy"]
+
+[ext_resource type="Script" path="res://Scenes/UI/RoundStartUI.gd" id="1_d8iqv"]
+[ext_resource type="PackedScene" uid="uid://c185n760rf7hi" path="res://Scenes/Misc/challange_setter.tscn" id="2_a6wfa"]
+[ext_resource type="Script" path="res://Scripts/Resources/challange_effect_resource.gd" id="3_32jkn"]
+
+[sub_resource type="Resource" id="Resource_6kh0r"]
+script = ExtResource("3_32jkn")
+effect_type = "elite_chance"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_bqg75"]
+script = ExtResource("3_32jkn")
+effect_type = "enemy_armor"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_aeayb"]
+script = ExtResource("3_32jkn")
+effect_type = "enemy_health"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_uduwb"]
+script = ExtResource("3_32jkn")
+effect_type = "enemy_speed"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_r77f7"]
+script = ExtResource("3_32jkn")
+effect_type = "enemy_spawn"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_j7s3g"]
+script = ExtResource("3_32jkn")
+effect_type = "player_glass_cannon"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_rw5c0"]
+script = ExtResource("3_32jkn")
+effect_type = "player_player_tank"
+value = 0.0
+
+[node name="RoundStarterUI" type="Control"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d8iqv")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="TitlePanel" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TitlePanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Set Challanges"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChallangeContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ChallangeSetter" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_effect = SubResource("Resource_6kh0r")
+challange_increase_per_level = 0.1
+
+[node name="ChallangeSetter2" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Enemy Armor"
+challange_effect = SubResource("Resource_bqg75")
+challange_increase_per_level = 0.2
+
+[node name="ChallangeSetter3" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Enemy Health"
+challange_effect = SubResource("Resource_aeayb")
+challange_increase_per_level = 0.2
+
+[node name="ChallangeSetter4" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Enemy Speed"
+challange_effect = SubResource("Resource_uduwb")
+challange_increase_per_level = 0.2
+
+[node name="ChallangeSetter5" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Enemy Spawn Rate"
+challange_effect = SubResource("Resource_r77f7")
+challange_increase_per_level = 0.2
+
+[node name="ChallangeSetter6" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Player Glass Cannon"
+max_challange_amount = 1
+challange_effect = SubResource("Resource_j7s3g")
+challange_increase_per_level = 1.0
+
+[node name="ChallangeSetter7" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Player Tank"
+max_challange_amount = 1
+challange_effect = SubResource("Resource_rw5c0")
+challange_increase_per_level = 1.0
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 27
+text = "Teleport"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_teleport_pressed"]

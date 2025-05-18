@@ -1,15 +1,36 @@
-[gd_resource type="Resource" script_class="OutfitResource" load_steps=3 format=3 uid="uid://dlcqb2xppuap"]
+[gd_resource type="Resource" script_class="OutfitResource" load_steps=9 format=3 uid="uid://dlcqb2xppuap"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/outfit_resource.gd" id="1_simq1"]
-[ext_resource type="Texture2D" uid="uid://xx5u1kybrffs" path="res://Spritesheets/Player/Player_Palette_3.png" id="2_qjwkb"]
+[ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="1_xoeio"]
+[ext_resource type="Script" path="res://Scripts/Resources/melee_upgrade_resource.gd" id="2_qn07p"]
+[ext_resource type="Script" path="res://Scripts/Strategies/ProjectileModifiers/PermenantProjectileStatStrategy.gd" id="3_8oows"]
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_upgrade_resource.gd" id="4_r7dh2"]
+
+[sub_resource type="Resource" id="Resource_an7co"]
+script = ExtResource("2_qn07p")
+stat_type = "range"
+is_multiplier = true
+value = 0.5
+
+[sub_resource type="Resource" id="Resource_0kpsy"]
+script = ExtResource("1_xoeio")
+upgrades = Array[ExtResource("2_qn07p")]([SubResource("Resource_an7co")])
+is_skill_node = false
+
+[sub_resource type="Resource" id="Resource_t4tbr"]
+script = ExtResource("3_8oows")
+upgrades = Array[ExtResource("4_r7dh2")]([])
 
 [resource]
 script = ExtResource("1_simq1")
-sprite = ExtResource("2_qjwkb")
+outfit_name = "Green Outfit"
 armor_regen_rate = 2.0
 armor_regen_wait_time = 5.0
 max_dash = 4
 dash_recharge_speed = 1.0
+max_ammo = 10
+melee_upgrades = SubResource("Resource_0kpsy")
+ranged_upgrades = SubResource("Resource_t4tbr")
 damage = 0
 max_health = 200
 max_armor = 0

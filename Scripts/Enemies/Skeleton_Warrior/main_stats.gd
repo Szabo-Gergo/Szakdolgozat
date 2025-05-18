@@ -20,7 +20,6 @@ var attach_break = 0 #(DO LATER) Should be on the Brain dog only
 
 
 func _on_screen_entered() -> void:
-	print("ENTERED")
 	is_on_screen = true
 	sprite.visible = true
 	hit_box.monitoring = true
@@ -28,7 +27,6 @@ func _on_screen_entered() -> void:
 	collision_shape.disabled = false
 
 func _on_screen_exited() -> void:
-	print("EXITED")
 	is_on_screen = false
 	sprite.visible = false
 	hit_box.monitoring = false

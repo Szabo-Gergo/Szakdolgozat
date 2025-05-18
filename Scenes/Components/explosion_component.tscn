@@ -7,7 +7,6 @@
 
 [node name="ExplosionComponent" type="Area2D"]
 collision_mask = 2
-monitorable = false
 script = ExtResource("1_45ecy")
 range = 140
 explosion_effect_scene = ExtResource("2_5bgux")

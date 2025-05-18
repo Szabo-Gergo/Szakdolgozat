@@ -12,8 +12,8 @@ signal level_up
 @onready var ranged_weapon_node: RangedWeapon = $RangedWeapon
 @onready var outfit_node: Outfit = $Outfit
 
-@onready var main_dash_point_container: PointContainer = $Hud/VBoxContainer/DashContainer
-@onready var main_ammo_point_container: PointContainer = $Hud/VBoxContainer/AmmoContainer
+@onready var main_dash_point_container: PointContainer = %DashContainer
+@onready var main_ammo_point_container: PointContainer = %AmmoContainer
 @onready var xp_bar: ProgressBar = $Hud/XpContainer/XpBar
 @onready var xp_label: Label = $Hud/XpContainer/XpLabel
 @onready var character_sprite: Sprite2D = %CharacterSprite
@@ -38,7 +38,7 @@ var speed : float
 const ACTION_STATES = ["Attack", "Idle", "AttackCombo", "Shoot"]
 
 func _ready() -> void:
-	_set_outfit(base_stats.outfit_type)
+	base_stats = RuntimeSaves.player_stats
 	_set_melee_weapon(base_stats.melee_weapon_type)
 	_set_ranged_weapon(base_stats.ranged_weapon_type)
 	_ui_setup()
@@ -65,7 +65,6 @@ func _physics_process(delta: float) -> void:
 	handle_transitions(delta)
 	animation_update()
 		
-
 
 func _add_ammo():
 	if ammo < ranged_weapon_node.max_ammo:
@@ -122,7 +121,6 @@ func xp_gained(amount: int) -> void:
 	while current_xp >= required_xp:
 		current_xp -= required_xp
 		level += 1
-		print("LEVEL UP! New Level: %d" % level)
 		level_up.emit()
 		required_xp = ceil(required_xp * 1.5)
 		xp_bar.max_value = required_xp
@@ -142,6 +140,7 @@ func _set_ranged_weapon(value : int) -> void:
 
 func _set_outfit(value : int) -> void:
 	outfit_node._on_outfit_change(value)
+	
 
 func _get_player_resource() -> PlayerStats:
 	return base_stats
@@ -157,15 +156,6 @@ func _get_animation_tree_name() -> String:
 	return ""
 
 func _ui_setup():
-	var outfit_resource = outfit_node.outfit_resource as OutfitResource
-	
-	%DashPointContainer.max_point = outfit_resource.max_dash
-	main_dash_point_container.max_point = outfit_resource.max_dash
-	main_ammo_point_container.max_point = ranged_weapon_node.max_ammo
-
-	%DashPointContainer._generate_points()
-	main_dash_point_container._generate_points()
-	main_ammo_point_container._generate_points()
 	xp_bar.max_value = required_xp
 	xp_bar.value = current_xp
 	xp_label.text = "Level "+str(level)

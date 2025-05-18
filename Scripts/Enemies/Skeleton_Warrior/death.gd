@@ -1,7 +1,7 @@
 extends State
 class_name Basic_Enemy_Death
 
-@export var root: CharacterBody2D 
+@export var root: Base_Enemy 
 @export var sprite: Sprite2D
 @export var health_bar : ProgressBar 
 @onready var spawner = get_node("/root/Main/Enemy_Spawner")
@@ -22,6 +22,7 @@ func physics_process(_delta: float):
 	else:
 		sprite.modulate.a -= _delta
 		if sprite.modulate.a <= 0:
+			RuntimeSaves.enemies_defeated += 1
 			root.queue_free()
 
 func spawn_xp():

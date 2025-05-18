@@ -21,7 +21,7 @@ func _ready() -> void:
 	parent = get_parent()
 	if !skill_resource.is_finished:
 		var current_level_upgrade = skill_resource.upgrades_per_level[skill_resource.current_level]
-		button.tooltip_text = current_level_upgrade._get_upgrades_string()
+		button.tooltip_text = current_level_upgrade.to_string()
 	parent_setup()
 	
 	update_labels()
@@ -37,7 +37,7 @@ func load_resource(saved_skill_resource : SkillNodeResource):
 
 
 func _on_button_pressed() -> void:
-	if PlayerSkillStatHandler.use_currency(skill_resource.upgrade_cost) and !skill_resource.is_locked and !skill_resource.is_finished:
+	if RuntimeSaves.player_stats.use_currency(skill_resource.upgrade_cost) and !skill_resource.is_locked and !skill_resource.is_finished:
 		skill_resource.upgrade_cost *= 2
 		skill_resource.upgrades_per_level[skill_resource.current_level].apply_stat(upgrade_menu.player._get_melee_weapon())
 		skill_resource.current_level += 1
@@ -47,7 +47,7 @@ func _on_button_pressed() -> void:
 		if skill_resource.current_level == skill_resource.max_level:
 			change_to_finished()
 	
-	if !PlayerSkillStatHandler.use_currency(skill_resource.upgrade_cost):
+	if !RuntimeSaves.player_stats.use_currency(skill_resource.upgrade_cost):
 		cost_label.set("theme_override_colors/font_color", Color(0.71, 0.094, 0.094))
 		await get_tree().create_timer(0.25).timeout
 		cost_label.set("theme_override_colors/font_color", Color(1, 1, 1))

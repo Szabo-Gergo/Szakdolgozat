@@ -1,12 +1,43 @@
-[gd_scene load_steps=5 format=3 uid="uid://b54g5hu4nquhy"]
+[gd_scene load_steps=12 format=3 uid="uid://b54g5hu4nquhy"]
 
 [ext_resource type="Script" path="res://Scenes/UI/RoundStartUI.gd" id="1_d8iqv"]
-[ext_resource type="PackedScene" uid="uid://c185n760rf7hi" path="res://Scenes/Misc/challange_indicator.tscn" id="2_a6wfa"]
+[ext_resource type="PackedScene" uid="uid://c185n760rf7hi" path="res://Scenes/Misc/challange_setter.tscn" id="2_a6wfa"]
 [ext_resource type="Script" path="res://Scripts/Resources/challange_effect_resource.gd" id="3_32jkn"]
+[ext_resource type="Texture2D" uid="uid://b077kykmptpfb" path="res://Spritesheets/Misc/material.png" id="4_vr61c"]
 
-[sub_resource type="Resource" id="Resource_6347o"]
+[sub_resource type="Resource" id="Resource_6kh0r"]
 script = ExtResource("3_32jkn")
 effect_type = "elite_chance"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_bqg75"]
+script = ExtResource("3_32jkn")
+effect_type = "enemy_armor"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_aeayb"]
+script = ExtResource("3_32jkn")
+effect_type = "enemy_health"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_uduwb"]
+script = ExtResource("3_32jkn")
+effect_type = "enemy_speed"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_r77f7"]
+script = ExtResource("3_32jkn")
+effect_type = "enemy_spawn"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_j7s3g"]
+script = ExtResource("3_32jkn")
+effect_type = "player_glass_cannon"
+value = 0.0
+
+[sub_resource type="Resource" id="Resource_rw5c0"]
+script = ExtResource("3_32jkn")
+effect_type = "player_player_tank"
 value = 0.0
 
 [node name="RoundStarterUI" type="Control"]
@@ -55,9 +86,85 @@ layout_mode = 2
 [node name="ChallangeSetter" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
 layout_mode = 2
 size_flags_horizontal = 1
-challange_title = "Elite Chance"
-max_challange_amount = 20
-challange_effect = SubResource("Resource_6347o")
+size_flags_vertical = 1
+challange_effect = SubResource("Resource_6kh0r")
+challange_increase_per_level = 0.1
+material_gain_buff_per_level = 0.05
+
+[node name="ChallangeSetter2" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Enemy Armor"
+challange_effect = SubResource("Resource_bqg75")
+challange_increase_per_level = 0.2
+material_gain_buff_per_level = 0.05
+
+[node name="ChallangeSetter3" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Enemy Health"
+challange_effect = SubResource("Resource_aeayb")
+challange_increase_per_level = 0.2
+material_gain_buff_per_level = 0.05
+
+[node name="ChallangeSetter4" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Enemy Speed"
+challange_effect = SubResource("Resource_uduwb")
+challange_increase_per_level = 0.2
+material_gain_buff_per_level = 0.05
+
+[node name="ChallangeSetter5" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Enemy Spawn Rate"
+challange_effect = SubResource("Resource_r77f7")
+challange_increase_per_level = 0.2
+material_gain_buff_per_level = 0.05
+
+[node name="ChallangeSetter6" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Player Glass Cannon"
+max_challange_amount = 1
+challange_effect = SubResource("Resource_j7s3g")
+challange_increase_per_level = 1.0
+material_gain_buff_per_level = 0.5
+
+[node name="ChallangeSetter7" parent="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer" instance=ExtResource("2_a6wfa")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+challange_title = "Player Tank"
+max_challange_amount = 1
+challange_effect = SubResource("Resource_rw5c0")
+challange_increase_per_level = 1.0
+material_gain_buff_per_level = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="MaterialBuffLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "% Material gain"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("4_vr61c")
 
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 process_mode = 3
@@ -68,4 +175,11 @@ size_flags_vertical = 10
 theme_override_font_sizes/font_size = 27
 text = "Teleport"
 
+[connection signal="update_buff_label" from="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer/ChallangeSetter" to="." method="_on_update_buff_label"]
+[connection signal="update_buff_label" from="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer/ChallangeSetter2" to="." method="_on_update_buff_label"]
+[connection signal="update_buff_label" from="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer/ChallangeSetter3" to="." method="_on_update_buff_label"]
+[connection signal="update_buff_label" from="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer/ChallangeSetter4" to="." method="_on_update_buff_label"]
+[connection signal="update_buff_label" from="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer/ChallangeSetter5" to="." method="_on_update_buff_label"]
+[connection signal="update_buff_label" from="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer/ChallangeSetter6" to="." method="_on_update_buff_label"]
+[connection signal="update_buff_label" from="PanelContainer/MarginContainer/VBoxContainer/ChallangeContainer/ChallangeSetter7" to="." method="_on_update_buff_label"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_teleport_pressed"]

@@ -5,6 +5,7 @@ class_name ChallangeEffectResource
 			 "elite_chance","enemy_spawn","player_glass_cannon",
 			 "player_player_tank") var effect_type : String
 			
+		
 @export var value : float
 
 func _to_string() -> String:
@@ -27,3 +28,21 @@ func _to_string() -> String:
 
 	
 	return effect_str
+
+func get_title():
+	var title : String = ""
+	match effect_type:
+		"enemy_armor":
+			title = "Enemy Armor"
+		"enemy_health":
+			title = "Enemy Health"
+		"enemy_speed":
+			title = "Enemy Speed"
+		"elite_chance":
+			title = "Elite Chance"
+		"enemy_spawn":
+			title = "Spawn Rate"
+		"player_glass_cannon":
+			title = "Player Glass Cannon"
+		"player_tank":
+			title = "Player Tank"

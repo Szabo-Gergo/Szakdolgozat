@@ -72,6 +72,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_5w4rs"]
 resource_name = "Damaged"
@@ -144,6 +156,18 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_dnhqe"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5858r"]
 _data = {
@@ -249,11 +273,14 @@ hit_box = NodePath("HitBox")
 hurt_box = NodePath("Sprite/HurtBox")
 collision_shape = NodePath("CollisionShape2D")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("sprite", "damage_number_component") instance=ExtResource("3_6kvhi")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "damage_number_component", "state_machine") instance=ExtResource("3_6kvhi")]
 visible = false
 stat_sheet = SubResource("Resource_70tu8")
+health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../Sprite")
 damage_number_component = NodePath("../DamageNumberComponent")
+state_machine = NodePath("../State Machine")
+armor_regen_rate = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -261,19 +288,21 @@ visible = false
 [node name="Sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_67b5r")
 
-[node name="HurtBox" type="Area2D" parent="Sprite" groups=["Enemy_HurtBox"]]
+[node name="HurtBox" type="Area2D" parent="Sprite" node_paths=PackedStringArray("root", "health_component", "state_machine", "animation_tree") groups=["Enemy_HurtBox"]]
 visible = false
 script = ExtResource("5_6jurj")
+root = NodePath("../..")
+health_component = NodePath("../../HealthComponent")
+state_machine = NodePath("../../State Machine")
+animation_tree = NodePath("../../AnimationTree")
 
 [node name="Hurt_shape" type="CollisionShape2D" parent="Sprite/HurtBox"]
 debug_color = Color(0, 0.647059, 0.192157, 0.419608)
 
 [node name="HitBox" type="Area2D" parent="."]
-visible = false
 
 [node name="Hit_shape" type="CollisionShape2D" parent="HitBox"]
-modulate = Color(0, 0, 0, 1)
-disabled = true
+modulate = Color(1, 1, 1, 0)
 debug_color = Color(0.764706, 0, 0.203922, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -283,7 +312,7 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_qb3ob")
-advance_expression_base_node = NodePath("")
+advance_expression_base_node = NodePath("../State Machine")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Attack/TimeScale/scale = 1.0
 
@@ -325,6 +354,12 @@ root = NodePath("../..")
 hitbox = NodePath("../../HitBox")
 sprite = NodePath("../../Sprite")
 health_component = NodePath("../../HealthComponent")
+separation_radius = 75.0
+separation_strength = 500.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.769231, 2.30769)
+scale = Vector2(0.615385, 1.30769)
 
 [connection signal="area_entered" from="Sprite/HurtBox" to="Sprite/HurtBox" method="_on_area_entered"]
 [connection signal="transition" from="State Machine/Damaged" to="State Machine" method="on_state_transition"]

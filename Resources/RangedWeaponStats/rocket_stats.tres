@@ -5,7 +5,9 @@
 
 [resource]
 script = ExtResource("1_jjn0x")
+weapon_name = "Firework Launcher"
 sprite_frames = ExtResource("2_vawv4")
+is_flamethrower = false
 animation_name = "firework"
 speed = 200.0
 damage = 5
@@ -18,3 +20,7 @@ chain = 2
 can_explode = true
 explosion_damage_multipler = 1.0
 explosion_range = 100
+has_force_field = false
+force_range = 0
+force_strength = 0
+force_is_pulling = false

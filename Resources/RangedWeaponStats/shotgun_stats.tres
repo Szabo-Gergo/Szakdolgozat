@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_ca5ar")
+weapon_name = "Shotgun"
 sprite_frames = ExtResource("2_t5wmb")
 is_flamethrower = false
 animation_name = "bullet"

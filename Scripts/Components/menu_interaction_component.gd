@@ -1,13 +1,15 @@
 extends Node2D
-class_name InteractionComponent
-#Used for interactable objects that open menu
-@export var sprite : Sprite2D
+class_name MenuInteractionComponent
+
+
+@export var is_interactive_tile : bool = false
 @export var area_range : int
+@export var menu: Control
+@export var sprite : Sprite2D
+
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var label: Label = $Label
 var check_for_input : bool
-
-@export var menu: Control
 
 
 
@@ -23,7 +25,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		label.visible = true
 		sprite.material.set("shader_parameter/pixel_size", 1)
 		check_for_input = true
-		print("Player Entered!")
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:

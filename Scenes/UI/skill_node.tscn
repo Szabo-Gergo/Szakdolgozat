@@ -1,15 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2jltl06io3uu"]
+[gd_scene load_steps=9 format=3 uid="uid://b2jltl06io3uu"]
 
 [ext_resource type="Script" path="res://Scripts/Misc/skill_node.gd" id="1_6ncbr"]
 [ext_resource type="Script" path="res://Scripts/Resources/skill_node_resource.gd" id="2_sj4sv"]
 [ext_resource type="Script" path="res://Scripts/Strategies/StatModifiers/PermanentMeleeStatStrategy.gd" id="3_f6qk6"]
-[ext_resource type="Script" path="res://Scripts/Resources/upgrade_resource.gd" id="4_1mq5w"]
 [ext_resource type="Texture2D" uid="uid://5nlf6h23yj6r" path="res://Spritesheets/Misc/Skill_Icons/Skillicon7_25.png" id="4_wcoi3"]
-
-[sub_resource type="Resource" id="Resource_fqjib"]
-script = ExtResource("3_f6qk6")
-upgrades = Array[ExtResource("4_1mq5w")]([])
-is_skill_node = false
 
 [sub_resource type="Resource" id="Resource_vj7ir"]
 script = ExtResource("2_sj4sv")
@@ -18,7 +12,7 @@ current_level = 0
 max_level = 0
 is_locked = false
 is_finished = false
-upgrades_per_level = Array[ExtResource("3_f6qk6")]([SubResource("Resource_fqjib")])
+upgrades_per_level = Array[ExtResource("3_f6qk6")]([])
 ui_node_id = ""
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_536f5"]
