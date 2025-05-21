@@ -9,8 +9,9 @@
 [sub_resource type="Resource" id="Resource_d843w"]
 script = ExtResource("2_grxxh")
 stat_type = "damage"
-is_multiplier = null
 value = 100.0
+is_multiplier = null
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_v2in0"]
 script = ExtResource("1_7gdup")

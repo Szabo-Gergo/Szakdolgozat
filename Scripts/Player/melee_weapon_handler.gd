@@ -3,16 +3,15 @@ class_name MeleeWeapon
 
 const SWORD_SPRITES = preload("res://Spritesheets/Weapon/Sword_With_Charge.png")
 const SWORD_TRAIL = preload("res://Spritesheets/Weapon/Sword_Trail.png")
-const SWORD_STATS = preload("uid://dyt03vnejfiyb")
+const SWORD_STATS = preload("res://Resources/MeleeWeaponStats/Sword_Stats.tres")
 
 const SPEAR_SPRITES = preload("res://Spritesheets/Weapon/Spear_sprites.png")
 const SPEAR_TRAIL = preload("res://Spritesheets/Weapon/Spear_Trail.png")
-const SPEAR_STATS = preload("uid://bjdl2kn8pe6ek")
+const SPEAR_STATS = preload("res://Resources/MeleeWeaponStats/Spear_Stats.tres")
 
 const HAMMER_SPRITES = preload("res://Spritesheets/Weapon/Hammer_sprites.png")
 const HAMMER_TRAIL = preload("res://Spritesheets/Weapon/Hammer_Trail.png")
-const HAMMER_STATS = preload("uid://nclhsmcpabc7")
-
+const HAMMER_STATS = preload("res://Resources/MeleeWeaponStats/Hammer_Stats.tres")
 
 var weapon_setup_data = {
 	0: {

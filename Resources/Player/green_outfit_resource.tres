@@ -9,8 +9,9 @@
 [sub_resource type="Resource" id="Resource_an7co"]
 script = ExtResource("2_qn07p")
 stat_type = "range"
-is_multiplier = true
 value = 0.5
+is_multiplier = true
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_0kpsy"]
 script = ExtResource("1_xoeio")

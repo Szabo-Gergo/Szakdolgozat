@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SpawnerModifierStrategy" load_steps=10 format=3 uid="uid://5gjsomjm1cpp"]
+[gd_resource type="Resource" script_class="SpawnerModifierStrategy" load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://Scripts/Resources/challange_effect_resource.gd" id="1_rhl34"]
 [ext_resource type="Script" path="res://Scripts/Strategies/SpawnerModifiers/SpawnerModifierStrategy.gd" id="2_kdf8p"]

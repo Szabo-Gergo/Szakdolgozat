@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3 uid="uid://3akmvid3ldxg"]
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_stat_resource.gd" id="1_jslpe"]
 

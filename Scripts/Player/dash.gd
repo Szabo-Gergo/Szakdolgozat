@@ -38,7 +38,7 @@ func enter(inputs : Dictionary = {}):
 	hit_box.set_collision_mask_value(2, false)
 	attack_buffered = false
 	
-	dash_velocity = player.input_direction * player.speed	* player.reversed * dash_speed
+	dash_velocity = player.input_direction * player.speed	* player.direction_multiplier * dash_speed
 	dash_timer.start()
 	
 func end_dash():

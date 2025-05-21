@@ -3076,7 +3076,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 unique_name_in_owner = true
-zoom = Vector2(0.1, 0.1)
 position_smoothing_speed = 15.0
 
 [node name="PickupArea" type="Area2D" parent="." groups=["Player_Pickup_Area"]]
