@@ -15,7 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/Skeleton_Warrior/attack.gd" id="7_3mr68"]
 [ext_resource type="PackedScene" uid="uid://dlbc4k4o4iwv3" path="res://Scenes/Misc/basic_health_bar.tscn" id="8_aasmt"]
 
-[sub_resource type="Resource" id="Resource_da01b"]
+[sub_resource type="Resource" id="Resource_q20o4"]
 resource_local_to_scene = true
 script = ExtResource("4_dan6o")
 damage = 10
@@ -393,7 +393,7 @@ droped_xp_amount = 5
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar", "sprite", "damage_number_component", "state_machine") instance=ExtResource("3_iu5ss")]
 visible = false
-stat_sheet = SubResource("Resource_da01b")
+stat_sheet = SubResource("Resource_q20o4")
 health_bar = NodePath("../BasicHealthBar")
 sprite = NodePath("../Sprite2D")
 damage_number_component = NodePath("../DamageNumberComponent")

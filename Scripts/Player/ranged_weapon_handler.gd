@@ -44,11 +44,9 @@ func _on_weapon_change(weapon_index : int):
 			
 	RuntimeSaves.player_stats.ranged_weapon_type = weapon_index
 	RuntimeSaves.save_resources()
-	print(weapon_sprite.texture.resource_path)
 
 func _get_projectile_resource():
 	return projectile_resource
-	
 
 func get_weapon_string() -> Dictionary:
 	var out = {

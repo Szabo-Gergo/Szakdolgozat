@@ -300,9 +300,10 @@ animation_tree = NodePath("../../AnimationTree")
 debug_color = Color(0, 0.647059, 0.192157, 0.419608)
 
 [node name="HitBox" type="Area2D" parent="."]
+visible = false
 
 [node name="Hit_shape" type="CollisionShape2D" parent="HitBox"]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(0, 0, 0, 1)
 debug_color = Color(0.764706, 0, 0.203922, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

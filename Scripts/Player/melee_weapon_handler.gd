@@ -66,7 +66,7 @@ func _on_weapon_change(weapon_index : int):
 
 func _update_range():
 	trail.scale = Vector2(melee_resource.range,melee_resource.range)
-	
+
 func _update_attack_speed():
 	var animation_tree_name = $".."._get_animation_tree_name()
 	var base_duration = animation_tree.get_animation("DownAttack").length

@@ -16,19 +16,20 @@ var spawner_modifier: SpawnerModifierStrategy
 
 func _ready() -> void:
 	_init_spawner_modifier()
-	start_next_wave()
+	_start_next_wave()
+
 
 func _process(delta: float) -> void:
-	if !active_wave:
+	if !active_wave or !On:
 		return
 
 	wave_timer += delta
 
-	if On:
-		if _should_activate_filler_wave():
-			activate_filler_wave()
-		elif _should_start_next_wave():
-			start_next_wave()
+	if _should_activate_filler_wave():
+		_activate_filler_wave()
+	elif _should_start_next_wave():
+		_start_next_wave()
+
 
 # Initialization
 func _init_spawner_modifier() -> void:
@@ -41,15 +42,17 @@ func _init_spawner_modifier() -> void:
 	if filler_wave:
 		spawner_modifier.apply_to_wave(filler_wave)
 
-# Conditions
+
+# Condition Checks
 func _should_activate_filler_wave() -> bool:
 	return enemies.is_empty() and wave_timer < active_wave.duration and !active_wave.is_filler_wave
 
 func _should_start_next_wave() -> bool:
 	return wave_timer >= active_wave.duration and enemies.is_empty()
 
-# Wave control
-func start_next_wave() -> void:
+
+# Wave Control
+func _start_next_wave() -> void:
 	if current_wave_index >= waves.size():
 		return
 
@@ -57,49 +60,58 @@ func start_next_wave() -> void:
 	wave_timer = 0.0
 	current_wave_index += 1
 
-	spawn_enemies(active_wave)
+	_spawn_wave_enemies(active_wave)
 
-func activate_filler_wave() -> void:
-	print("Activating filler wave...")
+
+func _activate_filler_wave() -> void:
 	active_wave = filler_wave
-	spawn_enemies(active_wave)
+	_spawn_wave_enemies(active_wave)
 
-# Spawning
-func spawn_enemies(wave: WaveResource) -> void:
+
+# -----------------------------
+# Enemy Spawning
+# -----------------------------
+func _spawn_wave_enemies(wave: WaveResource) -> void:
 	for spawn_info in wave.enemy_info:
-		var enemies_to_spawn: int = min(spawn_info.spawn_amount, max_enemies - enemies.size())
+		var remaining_capacity = max_enemies - enemies.size()
+		var enemies_to_spawn = min(spawn_info.spawn_amount, remaining_capacity)
 
-		for i in range(enemies_to_spawn):
-			spawn_enemy(spawn_info)
+		for i in enemies_to_spawn:
+			await _spawn_single_enemy(spawn_info)
 			await get_tree().create_timer(0.2).timeout
 
-func spawn_enemy(spawn_info: SpawnInfo) -> void:
+
+func _spawn_single_enemy(spawn_info: SpawnInfo) -> void:
 	if enemies.size() >= max_enemies:
 		return
 
-	var is_elite: bool = randf() <= spawn_info.elite_chance
-	var enemy_scene = spawn_info.enemy.instantiate()
-	spawner_modifier.apply_to_enemy(enemy_scene)
+	var enemy = spawn_info.enemy.instantiate()
+	spawner_modifier.apply_to_enemy(enemy)
 
+	var is_elite = randf() <= spawn_info.elite_chance
 	if is_elite:
-		apply_elite_strategy(enemy_scene, spawn_info.elite_type)
+		_apply_elite_strategy(enemy, spawn_info.elite_type)
 
-	enemy_scene.global_position = get_spawn_position()
-	add_child(enemy_scene)
-	enemies.append(enemy_scene)
-	enemy_scene.connect("tree_exited", func(): on_enemy_removed(enemy_scene))
+	enemy.global_position = _get_spawn_position()
+	add_child(enemy)
+	enemies.append(enemy)
 
-func get_spawn_position() -> Vector2:
+	# Remove from list when killed
+	enemy.connect("tree_exited", func(): enemies.erase(enemy))
+
+
+func _get_spawn_position() -> Vector2:
 	var angle = randf() * TAU
 	var distance = randf_range(min_spawn_distance, spawn_radius)
 	return player.global_position + Vector2(cos(angle), sin(angle)) * distance
 
-func on_enemy_removed(enemy: Node2D) -> void:
-	enemies.erase(enemy)
 
-# Elite handling
-func apply_elite_strategy(enemy_scene: Node2D, elite_type: String) -> void:
-	var elite_strategy
+# -----------------------------
+# Elite Handling
+# -----------------------------
+func _apply_elite_strategy(enemy: Node2D, elite_type: String) -> void:
+	var elite_strategy: BaseEliteStrategy
+
 	match elite_type:
 		"FAST":
 			elite_strategy = FastEliteStrategy.new()
@@ -110,6 +122,6 @@ func apply_elite_strategy(enemy_scene: Node2D, elite_type: String) -> void:
 		"TANK":
 			elite_strategy = TankEliteStrategy.new()
 		_:
-			return  # Unknown type; skip
+			return  # Unknown type
 
-	elite_strategy.apply_modifier(enemy_scene)
+	elite_strategy.apply_modifier(enemy)

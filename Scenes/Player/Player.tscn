@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dbn2mklyayrpf" path="res://Spritesheets/Player/Player_Palette_1.png" id="1_ksx3q"]
 [ext_resource type="Script" path="res://Scripts/Player/main_stats.gd" id="1_tssnm"]
 [ext_resource type="PackedScene" uid="uid://b66ssmufcj31d" path="res://Scenes/Player/RangedWeapon.tscn" id="2_7og2s"]
-[ext_resource type="Resource" uid="uid://3akmvid3ldxg" path="res://Resources/Player.tres" id="2_076ji"]
+[ext_resource type="Resource" uid="uid://06e0xvjwqnd4" path="res://Resources/Player.tres" id="2_076ji"]
 [ext_resource type="PackedScene" uid="uid://bfkytxsm004ni" path="res://Scenes/StateMachine.tscn" id="3_cv635"]
 [ext_resource type="Script" path="res://Scripts/Player/outfit_handler.gd" id="3_tqu58"]
 [ext_resource type="Resource" uid="uid://kdsgavbuylba" path="res://Resources/Player/blue_outfit_resource.tres" id="4_4ouk8"]

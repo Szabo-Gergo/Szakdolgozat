@@ -4,7 +4,6 @@ class_name StateMachine
 var states : Dictionary = {}
 var current_state : State
 @export var base_state : State
-@onready var label: Label = $"../Label"
 @onready var player: CharacterBody2D = $".."
 
 

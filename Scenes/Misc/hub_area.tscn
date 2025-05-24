@@ -1812,6 +1812,9 @@ position = Vector2(-108, -556)
 [node name="InteractionComponent" parent="TeleportShrine" index="2" node_paths=PackedStringArray("menu")]
 menu = NodePath("../../RoundStartLayer/RoundStarterUI")
 
+[node name="CollisionShape2D" parent="TeleportShrine/InteractionComponent/Area2D" index="0"]
+visible = false
+
 [node name="Merchant" parent="." instance=ExtResource("10_wfryy")]
 position = Vector2(-89, -234)
 
@@ -1819,7 +1822,16 @@ position = Vector2(-89, -234)
 area_range = 40
 menu = NodePath("../../UpgradeLayer/UpgradeMenu")
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("7_khhdo")]
+[node name="Player" parent="." instance=ExtResource("7_khhdo")]
+
+[node name="MeleeWeapon" parent="Player" index="2"]
+visible = false
+
+[node name="VBoxContainer" parent="Player" index="11"]
+visible = false
+
+[node name="Hud" parent="Player" index="14"]
+visible = false
 
 [node name="UpgradeLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -1861,4 +1873,5 @@ position = Vector2(106, -98)
 [editable path="TeleportShrine/InteractionComponent"]
 [editable path="Merchant"]
 [editable path="Merchant/InteractionComponent"]
+[editable path="Player"]
 [editable path="UpgradeLayer/UpgradeMenu"]

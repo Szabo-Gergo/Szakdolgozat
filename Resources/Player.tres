@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_jslpe")
-upgrade_currency = 1360
+upgrade_currency = 820
 melee_weapon_type = 2
 ranged_weapon_type = 0
-outfit_type = 2
+outfit_type = 1

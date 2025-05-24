@@ -7,7 +7,6 @@ var spawner_modifier
 
 func _ready() -> void:
 	spawner_modifier = RuntimeSaves.spawner_modifiers
-	print(spawner_modifier.upgrade_material_boost)
 	
 func _on_teleport_pressed() -> void:
 	get_tree().paused = false
@@ -20,7 +19,6 @@ func _on_teleport_pressed() -> void:
 	
 	get_tree().change_scene_to_file("res://Scenes/Main.tscn")
 	
-
 
 func _on_update_buff_label(value) -> void:
 	spawner_modifier.upgrade_material_boost += value

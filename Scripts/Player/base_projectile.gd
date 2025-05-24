@@ -73,7 +73,7 @@ func _on_damage_area_entered(area: Area2D) -> void:
 			chain_component.chain(enemy)
 			traveled_distance = 0
 		
-		if stats_resource.can_explode and explosion_component:
+		if stats_resource.can_explode and explosion_component != null:
 			explosion_component.global_position = global_position
 			explosion_component.explode()
 	

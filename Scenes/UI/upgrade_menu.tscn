@@ -26,8 +26,9 @@ bg_color = Color(0.129412, 0.14902, 0.180392, 1)
 [sub_resource type="Resource" id="Resource_rsbqr"]
 script = ExtResource("6_xmrs2")
 stat_type = "damage"
-is_multiplier = false
 value = 5.0
+is_multiplier = false
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_f0ur6"]
 script = ExtResource("5_i8d43")
@@ -48,8 +49,9 @@ ui_node_id = "sw1"
 [sub_resource type="Resource" id="Resource_gdw7w"]
 script = ExtResource("6_xmrs2")
 stat_type = "range"
-is_multiplier = true
 value = 0.05
+is_multiplier = true
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_adlov"]
 script = ExtResource("5_i8d43")
@@ -70,8 +72,9 @@ ui_node_id = "sw11"
 [sub_resource type="Resource" id="Resource_suxjg"]
 script = ExtResource("6_xmrs2")
 stat_type = "ammo_gained"
-is_multiplier = false
 value = 1.0
+is_multiplier = false
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_l8ukq"]
 script = ExtResource("5_i8d43")
@@ -81,8 +84,9 @@ is_skill_node = true
 [sub_resource type="Resource" id="Resource_4anje"]
 script = ExtResource("6_xmrs2")
 stat_type = "ammo_gained"
-is_multiplier = false
 value = 1.0
+is_multiplier = false
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_28nvr"]
 script = ExtResource("5_i8d43")
@@ -92,8 +96,9 @@ is_skill_node = true
 [sub_resource type="Resource" id="Resource_8e6dj"]
 script = ExtResource("6_xmrs2")
 stat_type = "ammo_gained"
-is_multiplier = false
 value = 2.0
+is_multiplier = false
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_ktnlc"]
 script = ExtResource("5_i8d43")
@@ -117,8 +122,9 @@ load_path = "res://.godot/imported/Skillicon_Speed.png-3eefb6595b784456f82db5a19
 [sub_resource type="Resource" id="Resource_h2rkq"]
 script = ExtResource("6_xmrs2")
 stat_type = "attack_speed"
-is_multiplier = true
 value = 0.05
+is_multiplier = true
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_s3kpu"]
 script = ExtResource("5_i8d43")
@@ -159,8 +165,9 @@ ui_node_id = "sw3"
 [sub_resource type="Resource" id="Resource_hwhv8"]
 script = ExtResource("6_xmrs2")
 stat_type = "damage"
-is_multiplier = true
 value = 0.05
+is_multiplier = true
+rarity = 0
 
 [sub_resource type="Resource" id="Resource_tg0m1"]
 script = ExtResource("5_i8d43")

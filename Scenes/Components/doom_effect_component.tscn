@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0ameyji1x5wb"]
+[gd_scene load_steps=8 format=3 uid="uid://d0ameyji1x5wb"]
 
 [ext_resource type="Script" path="res://Scripts/Components/doom_effect_component.gd" id="1_jwp2m"]
 
@@ -26,7 +26,12 @@ scale_min = 0.0
 scale_max = 4.0
 color_ramp = SubResource("GradientTexture1D_h0wo0")
 
+[sub_resource type="Curve" id="Curve_ygn68"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveTexture" id="CurveTexture_7uomm"]
+curve = SubResource("Curve_ygn68")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jy6cn"]
 resource_local_to_scene = true
